@@ -1,0 +1,243 @@
+{
+  "url": "https://docs.base.org/get-started/base",
+  "title": "Base - Base Documentation",
+  "scraped_at": "2026-02-04T10:26:21.504620",
+  "headings": [
+    {
+      "level": "h3",
+      "text": "​Payments"
+    },
+    {
+      "level": "h3",
+      "text": "​Apps"
+    },
+    {
+      "level": "h3",
+      "text": "​Tokens"
+    },
+    {
+      "level": "h3",
+      "text": "​Products"
+    },
+    {
+      "level": "h2",
+      "text": "Base Chain"
+    },
+    {
+      "level": "h2",
+      "text": "Base Account"
+    },
+    {
+      "level": "h2",
+      "text": "Mini Apps"
+    },
+    {
+      "level": "h2",
+      "text": "Solana Bridge"
+    },
+    {
+      "level": "h3",
+      "text": "​Resources"
+    },
+    {
+      "level": "h4",
+      "text": "​Funding"
+    },
+    {
+      "level": "h4",
+      "text": "​Growth"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationIntroductionBaseGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnStatusFaucetBridgeBlogIntroductionBaseQuickstartBuild an AppLaunch a TokenDeploy Smart ContractsBuilder SupportGet FundedBase Services HubBase Mentorship ProgramCountry Leads & AmbassadorsBuild with AIMCP ServerStatic Docs FilesPrompt Library​PaymentsAccept Payments\nUnderstand Network Fees\nIntegrate Base Accounts​AppsCreate a Mini App\nSponsor Transactions\nAccept Recurring Payments​TokensLaunch a Token\nBridge from Solana\nBridge from Ethereum\n​Products\nBase ChainNetwork, nodes, and infrastructureBase AccountAuthentication, payments, BasenamesMini AppsBuild in-app social experiencesSolana BridgeCross-chain asset transfers\n​Resources​Funding Builder Rewards Grants Base Batches Retroactive Funding​Growth Join the Base Ecosystem Find a Base MentorWas this page helpful?YesNoSuggest editsRaise issueBuild an AppNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/get-started/base#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Bridge",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet"
+    },
+    {
+      "text": "Base",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Build an App",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Deploy Smart Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "text": "Get Funded",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "text": "Base Services Hub",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "text": "Base Mentorship Program",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Country Leads & Ambassadors",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "text": "MCP Server",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Static Docs Files",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#payments"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Understand Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Integrate Base Accounts",
+      "url": "https://docs.base.org/base-account/quickstart/web"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#apps"
+    },
+    {
+      "text": "Create a Mini App",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "Sponsor Transactions",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/paymasters"
+    },
+    {
+      "text": "Accept Recurring Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#tokens"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Bridge from Solana",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Bridge from Ethereum",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#products"
+    },
+    {
+      "text": "Base ChainNetwork, nodes, and infrastructure",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base AccountAuthentication, payments, Basenames",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Mini AppsBuild in-app social experiences",
+      "url": "https://docs.base.org/mini-apps/introduction/overview"
+    },
+    {
+      "text": "Solana BridgeCross-chain asset transfers",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#resources"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#funding"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/base#growth"
+    },
+    {
+      "text": "Find a Base Mentor",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Build an AppNext",
+      "url": "https://docs.base.org/get-started/build-app"
+    }
+  ]
+}

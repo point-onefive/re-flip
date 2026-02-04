@@ -1,0 +1,424 @@
+{
+  "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions",
+  "title": "Troubleshooting Transactions - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:16.221775",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Transaction Not Being Included"
+    },
+    {
+      "level": "h3",
+      "text": "​Max Fee Too Low"
+    },
+    {
+      "level": "h3",
+      "text": "​Priority Fee Too Low"
+    },
+    {
+      "level": "h3",
+      "text": "​Nonce Gap"
+    },
+    {
+      "level": "h3",
+      "text": "​Nonce Too Low"
+    },
+    {
+      "level": "h2",
+      "text": "​Transaction Rejected"
+    },
+    {
+      "level": "h3",
+      "text": "​Gas Limit Exceeds Maximum"
+    },
+    {
+      "level": "h2",
+      "text": "​Transaction Included But Failed"
+    },
+    {
+      "level": "h3",
+      "text": "​Out of Gas"
+    },
+    {
+      "level": "h3",
+      "text": "​Reverted by Contract"
+    },
+    {
+      "level": "h2",
+      "text": "​Slow Confirmation"
+    },
+    {
+      "level": "h3",
+      "text": "​Understanding Confirmation Times"
+    },
+    {
+      "level": "h3",
+      "text": "​Using Flashblocks for Faster Confirmations"
+    },
+    {
+      "level": "h2",
+      "text": "​Debugging Tools"
+    },
+    {
+      "level": "h2",
+      "text": "​Getting Help"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationNetwork InformationTroubleshooting TransactionsGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageTransaction Not Being IncludedMax Fee Too LowPriority Fee Too LowNonce GapNonce Too LowTransaction RejectedGas Limit Exceeds MaximumTransaction Included But FailedOut of GasReverted by ContractSlow ConfirmationUnderstanding Confirmation TimesUsing Flashblocks for Faster ConfirmationsDebugging ToolsGetting Help​Transaction Not Being Included\nIf your transaction is pending for longer than expected, check the following:\n​Max Fee Too Low\nIf your maxFeePerGas is lower than the current base fee, your transaction will remain pending until the base fee drops to your specified level.\nSolution: The maxFeePerGas must cover both the base fee and your priority fee. Since the base fee can change with each block, set maxFeePerGas high enough to remain valid even if the base fee rises while your transaction is pending. A common approach is:\nReport incorrect codeCopyAsk AImaxFeePerGas = baseFee * 2 + maxPriorityFeePerGas\n\nThis formula (used by ethers.js) provides headroom for the base fee to double before your transaction becomes unexecutable. You only pay the actual base fee at inclusion time, not the maximum.\nBase has a minimum base fee. Transactions with maxFeePerGas below this value will never be included, since the base fee cannot drop below the minimum.\n​Priority Fee Too Low\nDuring periods of high demand, transactions compete for block space through priority fees. If your priority fee is too low relative to other transactions, yours may be delayed.\nSolution: Most users simply wait for congestion to subside. For time-sensitive transactions, use eth_maxPriorityFeePerGas to get a priority fee estimate that can outbid enough recent transactions to be included.\nIf DA throttling is currently in effect, there’s no RPC endpoint that calculates priority fee estimates with throttling in mind. During DA throttling, even transactions with high priority fees may be delayed as the sequencer limits L2 transactions to manage its L1 data availability throughput.\n​Nonce Gap\nIf you have a pending transaction with nonce N, all transactions with nonce N+1 or higher will queue behind it, regardless of their fees.\nSolution: Either wait for the pending transaction to be included, or replace it by submitting a new transaction with the same nonce and a higher fee (at least 10% higher maxPriorityFeePerGas and maxFeePerGas).\n​Nonce Too Low\nIf you submit a transaction with a nonce that has already been used, it will be rejected.\nSolution: Query your current nonce using eth_getTransactionCount with the pending tag to get the next available nonce.\n​Transaction Rejected\n​Gas Limit Exceeds Maximum\nEthereum enforces a transaction gas limit cap of 16,777,216 gas. Base plans to match this limit in a future upgrade, but currently enforces a per-transaction gas maximum of 25,000,000 gas. Transactions specifying a higher gas limit are rejected by the mempool before inclusion.\nError: exceeds maximum per-transaction gas limit\nSolution: Reduce the gas limit to 16,777,216 or below. If your transaction genuinely requires more gas, you’ll need to break it into multiple transactions.\n​Transaction Included But Failed\nIf your transaction was included in a block but shows a failed status:\n​Out of Gas\nThe transaction ran out of gas during execution.\nSolution: Increase the gas limit. Use eth_estimateGas to get a gas estimate, then add a buffer (e.g., 20%) to account for variability.\n​Reverted by Contract\nThe contract execution encountered a revert condition.\nSolution: Check the transaction on Basescan to see the revert reason. Common causes include failed require statements, arithmetic errors, or invalid state transitions.\n​Slow Confirmation\n​Understanding Confirmation Times\nBase produces blocks every 2 seconds, but Flashblocks provide preconfirmations every 200ms.\nConfirmation LevelTimeDescriptionFlashblock preconfirmation~200msTransaction included in a preconfirmationL2 block inclusion~2sTransaction included in a sealed L2 blockL1 batch inclusion~2mTransaction posted to EthereumL1 finality~20mEthereum batch is finalized\nSee Transaction Finality for more details.\n​Using Flashblocks for Faster Confirmations\nTo get the fastest possible confirmation, use a Flashblocks-aware RPC endpoint:\nNetworkFlashblocks RPCMainnethttps://mainnet-preconf.base.orgSepoliahttps://sepolia-preconf.base.org\nThese endpoints return transaction receipts as soon as a transaction is included in a Flashblock, rather than waiting for the full L2 block.\n​Debugging Tools\n\nBasescan: View transaction status, logs, and revert reasons\nTenderly: Simulate and debug transactions\neth_call: Test contract calls without submitting a transaction\neth_estimateGas: Estimate gas usage before submitting\n\n​Getting Help\nIf you’re still experiencing issues, reach out in the #developer-chat channel in the Base Discord.Was this page helpful?YesNoSuggest editsRaise issueDifferences between Ethereum and BasePreviousConfiguration ChangelogNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "maxFeePerGas = baseFee * 2 + maxPriorityFeePerGas"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Transaction Not Being Included",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#transaction-not-being-included"
+    },
+    {
+      "text": "Max Fee Too Low",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#max-fee-too-low"
+    },
+    {
+      "text": "Priority Fee Too Low",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#priority-fee-too-low"
+    },
+    {
+      "text": "Nonce Gap",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#nonce-gap"
+    },
+    {
+      "text": "Nonce Too Low",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#nonce-too-low"
+    },
+    {
+      "text": "Transaction Rejected",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#transaction-rejected"
+    },
+    {
+      "text": "Gas Limit Exceeds Maximum",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#gas-limit-exceeds-maximum"
+    },
+    {
+      "text": "Transaction Included But Failed",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#transaction-included-but-failed"
+    },
+    {
+      "text": "Out of Gas",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#out-of-gas"
+    },
+    {
+      "text": "Reverted by Contract",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#reverted-by-contract"
+    },
+    {
+      "text": "Slow Confirmation",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#slow-confirmation"
+    },
+    {
+      "text": "Understanding Confirmation Times",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#understanding-confirmation-times"
+    },
+    {
+      "text": "Using Flashblocks for Faster Confirmations",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#using-flashblocks-for-faster-confirmations"
+    },
+    {
+      "text": "Debugging Tools",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#debugging-tools"
+    },
+    {
+      "text": "Getting Help",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#getting-help"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#transaction-not-being-included"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#max-fee-too-low"
+    },
+    {
+      "text": "minimum base fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#priority-fee-too-low"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#nonce-gap"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#nonce-too-low"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#transaction-rejected"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#gas-limit-exceeds-maximum"
+    },
+    {
+      "text": "per-transaction gas maximum",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#transaction-included-but-failed"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#out-of-gas"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#reverted-by-contract"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#slow-confirmation"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#understanding-confirmation-times"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#using-flashblocks-for-faster-confirmations"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#debugging-tools"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions#getting-help"
+    },
+    {
+      "text": "Base Discord",
+      "url": "https://base.org/discord"
+    },
+    {
+      "text": "Differences between Ethereum and BasePrevious",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Configuration ChangelogNext",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "url": "https://docs.base.org/base-chain/tools/cross-chain",
+  "title": "Cross-chain - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:26.640668",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Axelar"
+    },
+    {
+      "level": "h4",
+      "text": "​Axelarscan"
+    },
+    {
+      "level": "h2",
+      "text": "​Crossmint"
+    },
+    {
+      "level": "h2",
+      "text": "​Chainlink CCIP"
+    },
+    {
+      "level": "h2",
+      "text": "​LayerZero"
+    },
+    {
+      "level": "h2",
+      "text": "​Wormhole"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationToolsCross-chainGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageAxelarAxelarscanCrossmintChainlink CCIPLayerZeroWormhole​Axelar\nAxelar is an interchain platform that connects blockchains to enable universal web3 transactions. By integrating with Axelar, applications built on Base can now easily send messages and assets between the 49+ blockchains connected via Axelar.\nTo learn more about Axelar visit our docs. For complete end-to-end examples demonstrating various Axelar use cases please visit the available code examples.\nSupported Networks\n\nBase Mainnet\nBase Testnet\n\n​Axelarscan\nTo view current transactions and live stats about the Axelar network, please visit the Axelarscan block explorer\n​Crossmint\nCrossmint allows you to create and deploy NFT Collections and enable cross-chain payments. This enables your users and customers to purchase an NFT from a collection deployed on Base using Ethereum or Solana tokens.\nCheck out Crossmint Docs to learn more about NFT Checkout with Crossmint. To power cross-chain payments, click here to get started.\nSupported Networks\n\nBase Mainnet\nBase Sepolia\n\n​Chainlink CCIP\nChainlink CCIP is a secure interoperability protocol that allows for securely sending messages, transferring tokens, and initiating actions across different blockchains.\nTo get started with integrating Chainlink CCIP in your Base project, visit the Chainlink CCIP documentation.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​LayerZero\nLayerZero is an omnichain interoperability protocol that enables cross-chain messaging. Applications built on Base can use the LayerZero protocol to connect to 35+ supported blockchains seamlessly.\nTo get started with integrating LayerZero, visit the LayerZero documentation and provided examples on GitHub.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Wormhole\nWormhole is a generic messaging protocol that provides secure communication between blockchains.\nBy integrating Wormhole, a Base application can access users and liquidity on > 30 chains and > 7 different platforms.\nSee this quickstart to get started with integrating Wormhole in your Base project.\nFor more information on integrating Wormhole, visit their documentation and the provided GitHub examples.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\nWas this page helpful?YesNoSuggest editsRaise issueData IndexersPreviousAccount AbstractionNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Axelar",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#axelar"
+    },
+    {
+      "text": "Axelarscan",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#axelarscan"
+    },
+    {
+      "text": "Crossmint",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#crossmint"
+    },
+    {
+      "text": "Chainlink CCIP",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#chainlink-ccip"
+    },
+    {
+      "text": "LayerZero",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#layerzero"
+    },
+    {
+      "text": "Wormhole",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#wormhole"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#axelar"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#axelarscan"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#crossmint"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#chainlink-ccip"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#layerzero"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain#wormhole"
+    },
+    {
+      "text": "Data IndexersPrevious",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Account AbstractionNext",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    }
+  ]
+}

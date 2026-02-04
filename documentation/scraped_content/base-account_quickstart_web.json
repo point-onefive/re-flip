@@ -1,0 +1,288 @@
+{
+  "url": "https://docs.base.org/base-account/quickstart/web",
+  "title": "Web (HTML + JS) - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:16.942887",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​1. Install the SDK (Optional)"
+    },
+    {
+      "level": "h3",
+      "text": "​Option A: CDN (No installation required)"
+    },
+    {
+      "level": "h3",
+      "text": "​Option B: NPM Package"
+    },
+    {
+      "level": "h2",
+      "text": "​2. Copy-paste this HTML file"
+    },
+    {
+      "level": "h2",
+      "text": "​3. Serve the file"
+    },
+    {
+      "level": "h2",
+      "text": "​Next steps"
+    },
+    {
+      "level": "h2",
+      "text": "​Video Guide"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartWeb (HTML + JS)Get StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubSupportIntroductionBase Account OverviewQuickstartWeb (HTML + JS)Web (Next.js)Mobile (React Native)GuidesAuthenticate UsersAccept PaymentsAccept Recurring PaymentsBatch TransactionsSponsor GasUse Sub AccountsUse Spend PermissionsUse Coinbase Balances OnchainSign and Verify Typed DataPay Gas in ERC20 tokensFramework IntegrationsWagmi/ViemPrivyCoinbase Developer PlatformRainbowKitReownThirdwebReferenceAccount SDKProviderUI ElementsOnchain ContractsMoreTroubleshootingBase Gasless CampaignTelemetryMigrate from Coinbase Wallet SDKBasenamesBasenames FAQBasename Transfer GuideContributeContribute to the Base Account DocsSecurity and Bug BountyOn this page1. Install the SDK (Optional)Option A: CDN (No installation required)Option B: NPM Package2. Copy-paste this HTML file3. Serve the fileNext stepsVideo GuideThis quick-start shows the minimum code required to add Sign in with Base and Base Pay to any web page using nothing but the Base Account SDK. No frameworks, no additional libraries.\nInteractive Playground: Want to test the SDK functions before integrating?\nTry our Base Pay SDK\nPlayground to experiment\nwith pay() and getPaymentStatus() functions.\nDo you prefer video content?There is a video guide that covers the implementation in detail in the last section of this page.\n​1. Install the SDK (Optional)\nYou can use the Base Account SDK in two ways:\n​Option A: CDN (No installation required)\nJust include the script tag in your HTML - no build tools needed!\nindex.htmlReport incorrect codeCopyAsk AI[...rest of your code]\n<script src=\"https://unpkg.com/@base-org/account/dist/base-account.min.js\"></script>\n[...rest of your code]\n\nFor a full example, see example below.\n​Option B: NPM Package\nIf you prefer to install locally:\nnpmpnpmyarnbunReport incorrect codeCopyAsk AInpm install @base-org/account\n\nThen use ES modules:\nindex.htmlReport incorrect codeCopyAsk AI<script type=\"module\">\n import {\n createBaseAccountSDK,\n pay,\n getPaymentStatus,\n } from \"@base-org/account\";\n // ... rest of your code\n</script>\n\nThis guide uses the CDN approach for simplicity.\n​2. Copy-paste this HTML file\nindex.htmlReport incorrect codeCopyAsk AI<!DOCTYPE html>\n<html>\n <head>\n <meta charset=\"utf-8\" />\n <title>Base Account Quick-start</title>\n </head>\n <body>\n <h1>Base Account Demo</h1>\n\n <button id=\"signin\">Sign in with Base</button>\n <button id=\"pay\">Pay with Base</button>\n\n <div id=\"status\"></div>\n\n <!-- Load Base Account SDK via CDN -->\n <script src=\"https://unpkg.com/@base-org/account/dist/base-account.min.js\"></script>\n\n <script>\n // Initialize Base Account SDK with app configuration\n const provider = window\n .createBaseAccountSDK({\n appName: \"Base Account Quick-start\",\n appLogoUrl: \"https://base.org/logo.png\",\n })\n .getProvider();\n const statusDiv = document.getElementById(\"status\");\n let userAddress = null;\n\n function showStatus(message, type = \"success\") {\n statusDiv.innerHTML = message;\n }\n\n // Generate a fresh nonce for authentication\n function generateNonce() {\n return window.crypto.randomUUID().replace(/-/g, \"\");\n }\n\n // Sign in with Base using wallet_connect method\n document.getElementById(\"signin\").onclick = async () => {\n try {\n showStatus(\"Connecting to Base Account...\", \"success\");\n\n // Generate a fresh nonce\n const nonce = generateNonce();\n\n // Connect and authenticate using the new wallet_connect method\n const { accounts } = await provider.request({\n method: \"wallet_connect\",\n params: [\n {\n version: \"1\",\n capabilities: {\n signInWithEthereum: {\n nonce,\n chainId: \"0x2105\", // Base Mainnet - 8453\n },\n },\n },\n ],\n });\n\n const { address } = accounts[0];\n const { message, signature } =\n accounts[0].capabilities.signInWithEthereum;\n\n userAddress = address;\n\n showStatus(\n `✅ Successfully signed in! Address: ${address.slice(\n 0,\n 6\n )}...${address.slice(-4)}`\n );\n\n // In a real app, you would send the message and signature to your backend for verification\n console.log(\"Authentication data:\", { address, message, signature });\n } catch (error) {\n console.error(\"Sign-in error:\", error);\n showStatus(`❌ Sign-in failed: ${error.message}`, \"error\");\n }\n };\n\n // One-tap USDC payment using window.base API (works with or without sign-in)\n document.getElementById(\"pay\").onclick = async () => {\n try {\n showStatus(\"Processing payment...\", \"success\");\n\n const result = await window.base.pay({\n amount: \"5.00\", // USD – SDK quotes equivalent USDC\n to: \"0x2211d1D0020DAEA8039E46Cf1367962070d77DA9\",\n testnet: true, // set to false or omit for Mainnet\n });\n\n const status = await window.base.getPaymentStatus({\n id: result.id,\n testnet: true,\n });\n\n showStatus(`🎉 Payment completed! Status: ${status.status}`);\n } catch (error) {\n showStatus(`❌ Payment failed: ${error.message}`, \"error\");\n }\n };\n </script>\n </body>\n</html>\nSee all 106 lines\n​3. Serve the file\nAny static server will work:\nReport incorrect codeCopyAsk AInpx serve .\n# or\npython -m http.server\n\nOpen http://localhost:3000, click Sign in with Base (optional) and then Pay with Base, approve the transaction, and you’ve sent 5 USDC on Base Sepolia—done! 🎉\n​Next steps\n\nAdd Sign In With Base Button – implement full SIWE authentication with backend verification\nAdd Base Pay Button – collect user information during payment flow\n\nPlease Follow the Brand GuidelinesIf you intend on using the SignInWithBaseButton or BasePayButton, please follow the Brand Guidelines to ensure consistency across your application.\n​Video Guide\nWas this page helpful?YesNoSuggest editsRaise issueBase Account OverviewPreviousWeb (Next.js)Next⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "[...rest of your code]\n<script src=\"https://unpkg.com/@base-org/account/dist/base-account.min.js\"></script>\n[...rest of your code]"
+    },
+    {
+      "language": "unknown",
+      "code": "npm install @base-org/account"
+    },
+    {
+      "language": "unknown",
+      "code": "<script type=\"module\">\n  import {\n    createBaseAccountSDK,\n    pay,\n    getPaymentStatus,\n  } from \"@base-org/account\";\n  // ... rest of your code\n</script>"
+    },
+    {
+      "language": "unknown",
+      "code": "<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>Base Account Quick-start</title>\n  </head>\n  <body>\n    <h1>Base Account Demo</h1>\n\n    <button id=\"signin\">Sign in with Base</button>\n    <button id=\"pay\">Pay with Base</button>\n\n    <div id=\"status\"></div>\n\n    <!-- Load Base Account SDK via CDN -->\n    <script src=\"https://unpkg.com/@base-org/account/dist/base-account.min.js\"></script>\n\n    <script>\n      // Initialize Base Account SDK with app configuration\n      const provider = window\n        .createBaseAccountSDK({\n          appName: \"Base Account Quick-start\",\n          appLogoUrl: \"https://base.org/logo.png\",\n        })\n        .getProvider();\n      const statusDiv = document.getElementById(\"status\");\n      let userAddress = null;\n\n      function showStatus(message, type = \"success\") {\n        statusDiv.innerHTML = message;\n      }\n\n      // Generate a fresh nonce for authentication\n      function generateNonce() {\n        return window.crypto.randomUUID().replace(/-/g, \"\");\n      }\n\n      // Sign in with Base using wallet_connect method\n      document.getElementById(\"signin\").onclick = async () => {\n        try {\n          showStatus(\"Connecting to Base Account...\", \"success\");\n\n          // Generate a fresh nonce\n          const nonce = generateNonce();\n\n          // Connect and authenticate using the new wallet_connect method\n          const { accounts } = await provider.request({\n            method: \"wallet_connect\",\n            params: [\n              {\n                version: \"1\",\n                capabilities: {\n                  signInWithEthereum: {\n                    nonce,\n                    chainId: \"0x2105\", // Base Mainnet - 8453\n                  },\n                },\n              },\n            ],\n          });\n\n          const { address } = accounts[0];\n          const { message, signature } =\n            accounts[0].capabilities.signInWithEthereum;\n\n          userAddress = address;\n\n          showStatus(\n            `✅ Successfully signed in! Address: ${address.slice(\n              0,\n              6\n            )}...${address.slice(-4)}`\n          );\n\n          // In a real app, you would send the message and signature to your backend for verification\n          console.log(\"Authentication data:\", { address, message, signature });\n        } catch (error) {\n          console.error(\"Sign-in error:\", error);\n          showStatus(`❌ Sign-in failed: ${error.message}`, \"error\");\n        }\n      };\n\n      // One-tap USDC payment using window.base API (works with or without sign-in)\n      document.getElementById(\"pay\").onclick = async () => {\n        try {\n          showStatus(\"Processing payment...\", \"success\");\n\n          const result = await window.base.pay({\n            amount: \"5.00\", // USD – SDK quotes equivalent USDC\n            to: \"0x2211d1D0020DAEA8039E46Cf1367962070d77DA9\",\n            testnet: true, // set to false or omit for Mainnet\n          });\n\n          const status = await window.base.getPaymentStatus({\n            id: result.id,\n            testnet: true,\n          });\n\n          showStatus(`🎉 Payment completed! Status: ${status.status}`);\n        } catch (error) {\n          showStatus(`❌ Payment failed: ${error.message}`, \"error\");\n        }\n      };\n    </script>\n  </body>\n</html>"
+    },
+    {
+      "language": "unknown",
+      "code": "npx serve .\n# or\npython -m http.server"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-account/quickstart/web#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Base Account Overview",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Web (HTML + JS)",
+      "url": "https://docs.base.org/base-account/quickstart/web"
+    },
+    {
+      "text": "Web (Next.js)",
+      "url": "https://docs.base.org/base-account/quickstart/web-react"
+    },
+    {
+      "text": "Mobile (React Native)",
+      "url": "https://docs.base.org/base-account/quickstart/mobile-integration"
+    },
+    {
+      "text": "Authenticate Users",
+      "url": "https://docs.base.org/base-account/guides/authenticate-users"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Accept Recurring Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "Batch Transactions",
+      "url": "https://docs.base.org/base-account/improve-ux/batch-transactions"
+    },
+    {
+      "text": "Sponsor Gas",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/paymasters"
+    },
+    {
+      "text": "Use Sub Accounts",
+      "url": "https://docs.base.org/base-account/improve-ux/sub-accounts"
+    },
+    {
+      "text": "Use Spend Permissions",
+      "url": "https://docs.base.org/base-account/improve-ux/spend-permissions"
+    },
+    {
+      "text": "Use Coinbase Balances Onchain",
+      "url": "https://docs.base.org/base-account/improve-ux/magic-spend"
+    },
+    {
+      "text": "Sign and Verify Typed Data",
+      "url": "https://docs.base.org/base-account/guides/sign-and-verify-typed-data"
+    },
+    {
+      "text": "Pay Gas in ERC20 tokens",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/erc20-paymasters"
+    },
+    {
+      "text": "Coinbase Developer Platform",
+      "url": "https://docs.base.org/base-account/framework-integrations/cdp"
+    },
+    {
+      "text": "RainbowKit",
+      "url": "https://docs.base.org/base-account/framework-integrations/rainbowkit"
+    },
+    {
+      "text": "Reown",
+      "url": "https://docs.base.org/base-account/framework-integrations/reown"
+    },
+    {
+      "text": "Thirdweb",
+      "url": "https://docs.base.org/base-account/framework-integrations/thirdweb"
+    },
+    {
+      "text": "Base Gasless Campaign",
+      "url": "https://docs.base.org/base-account/more/base-gasless-campaign"
+    },
+    {
+      "text": "Telemetry",
+      "url": "https://docs.base.org/base-account/more/telemetry"
+    },
+    {
+      "text": "Migrate from Coinbase Wallet SDK",
+      "url": "https://docs.base.org/base-account/guides/migration-guide"
+    },
+    {
+      "text": "Basenames FAQ",
+      "url": "https://docs.base.org/base-account/basenames/basenames-faq"
+    },
+    {
+      "text": "Basename Transfer Guide",
+      "url": "https://docs.base.org/base-account/basenames/basename-transfer"
+    },
+    {
+      "text": "Contribute to the Base Account Docs",
+      "url": "https://docs.base.org/base-account/contribute/contribute-to-base-account-docs"
+    },
+    {
+      "text": "Security and Bug Bounty",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty"
+    },
+    {
+      "text": "1. Install the SDK (Optional)",
+      "url": "https://docs.base.org/base-account/quickstart/web#1-install-the-sdk-optional"
+    },
+    {
+      "text": "Option A: CDN (No installation required)",
+      "url": "https://docs.base.org/base-account/quickstart/web#option-a-cdn-no-installation-required"
+    },
+    {
+      "text": "Option B: NPM Package",
+      "url": "https://docs.base.org/base-account/quickstart/web#option-b-npm-package"
+    },
+    {
+      "text": "2. Copy-paste this HTML file",
+      "url": "https://docs.base.org/base-account/quickstart/web#2-copy-paste-this-html-file"
+    },
+    {
+      "text": "3. Serve the file",
+      "url": "https://docs.base.org/base-account/quickstart/web#3-serve-the-file"
+    },
+    {
+      "text": "Next steps",
+      "url": "https://docs.base.org/base-account/quickstart/web#next-steps"
+    },
+    {
+      "text": "Video Guide",
+      "url": "https://docs.base.org/base-account/quickstart/web#video-guide"
+    },
+    {
+      "text": "last section of this page",
+      "url": "https://docs.base.org/base-account/quickstart/web#video-guide"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#1-install-the-sdk-optional"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#option-a-cdn-no-installation-required"
+    },
+    {
+      "text": "example",
+      "url": "https://docs.base.org/base-account/quickstart/web#2-copy-paste-this-html-file"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#option-b-npm-package"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#2-copy-paste-this-html-file"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#3-serve-the-file"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#next-steps"
+    },
+    {
+      "text": "Add Sign In With Base Button",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/sign-in-with-base-button"
+    },
+    {
+      "text": "Add Base Pay Button",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/base-pay-button"
+    },
+    {
+      "text": "Brand Guidelines",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/brand-guidelines"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/quickstart/web#video-guide"
+    },
+    {
+      "text": "Base Account OverviewPrevious",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Web (Next.js)Next",
+      "url": "https://docs.base.org/base-account/quickstart/web-react"
+    }
+  ]
+}

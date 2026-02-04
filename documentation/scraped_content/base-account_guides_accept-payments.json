@@ -1,0 +1,332 @@
+{
+  "url": "https://docs.base.org/base-account/guides/accept-payments",
+  "title": "Accept Payments - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:09.607767",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Why Base Pay?"
+    },
+    {
+      "level": "h2",
+      "text": "​Client-side (Browser SDK)"
+    },
+    {
+      "level": "h3",
+      "text": "​Collect user information (optional)"
+    },
+    {
+      "level": "h2",
+      "text": "​Server Side"
+    },
+    {
+      "level": "h3",
+      "text": "​Verify User Transaction"
+    },
+    {
+      "level": "h3",
+      "text": "​Validate User Info"
+    },
+    {
+      "level": "h2",
+      "text": "​Add the Base Pay Button"
+    },
+    {
+      "level": "h2",
+      "text": "​Test on Base Sepolia"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationGuidesAccept PaymentsGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubSupportIntroductionBase Account OverviewQuickstartWeb (HTML + JS)Web (Next.js)Mobile (React Native)GuidesAuthenticate UsersAccept PaymentsAccept Recurring PaymentsBatch TransactionsSponsor GasUse Sub AccountsUse Spend PermissionsUse Coinbase Balances OnchainSign and Verify Typed DataPay Gas in ERC20 tokensFramework IntegrationsWagmi/ViemPrivyCoinbase Developer PlatformRainbowKitReownThirdwebReferenceAccount SDKProviderUI ElementsOnchain ContractsMoreTroubleshootingBase Gasless CampaignTelemetryMigrate from Coinbase Wallet SDKBasenamesBasenames FAQBasename Transfer GuideContributeContribute to the Base Account DocsSecurity and Bug BountyOn this pageWhy Base Pay?Client-side (Browser SDK)Collect user information (optional)Server SideVerify User TransactionValidate User InfoAdd the Base Pay ButtonTest on Base Sepolia​Why Base Pay?\nUSDC on Base is a fully-backed digital dollar that settles in seconds and costs pennies in gas. Base Pay lets you accept those dollars with a single click—no cards, no FX fees, no chargebacks.\n\nAny user can pay – works with every Base Account (smart-wallet) out of the box.\nUSDC, not gas – you charge in dollars; gas sponsorship is handled automatically.\nFast – most payments confirm in <2 seconds on Base.\nFunded accounts – users pay with USDC from their Base Account or Coinbase Account.\nNo extra fees – you receive the full amount.\n\nPlease Follow the Brand GuidelinesIf you intend on using the BasePayButton, please follow the Brand Guidelines to ensure consistency across your application.\n​Client-side (Browser SDK)\nInteractive Playground: Try out the pay() and getPaymentStatus() functions in our Base Pay SDK Playground before integrating them into your app.\nBrowser (SDK)Report incorrect codeCopyAsk AI\nimport { pay, getPaymentStatus } from '@base-org/account';\n\n// Trigger a payment – user will see a popup from their wallet service\ntry {\n const payment = await pay({\n amount: '1.00', // USD amount (USDC used internally)\n to: '0xRecipient', // your address\n testnet: true // set false for Mainnet\n });\n\n // Option 1: Poll until mined\n const { status } = await getPaymentStatus({ \n id: payment.id,\n testnet: true // MUST match the testnet setting used in pay()\n });\n if (status === 'completed') console.log('🎉 payment settled');\n\n} catch (error) {\n console.error(`Payment failed: ${error.message}`);\n}\n\nImportant: The testnet parameter in getPaymentStatus() must match the value used in the original pay() call. If you initiated a payment on testnet with testnet: true, you must also pass testnet: true when checking its status.\nThis is what the user will see when prompted to pay:\n\n​Collect user information (optional)\nNeed an email, phone, or shipping address at checkout? Pass a payerInfo object:\nReport incorrect codeCopyAsk AItry {\n const payment = await pay({\n amount: '25.00',\n to: '0xRecipient',\n payerInfo: {\n requests: [\n { type: 'email' },\n { type: 'phoneNumber', optional: true },\n { type: 'physicalAddress', optional: true }\n ],\n callbackURL: 'https://your-api.com/validate' // Optional - for server-side validation\n }\n });\n\n console.log(`Payment sent! Transaction ID: ${payment.id}`);\n\n // Log the collected user information\n if (payment.payerInfoResponses) {\n if (payment.payerInfoResponses.email) {\n console.log(`Email: ${payment.payerInfoResponses.email}`);\n }\n if (payment.payerInfoResponses.phoneNumber) {\n console.log(`Phone: ${payment.payerInfoResponses.phoneNumber.number}`);\n console.log(`Country: ${payment.payerInfoResponses.phoneNumber.country}`);\n }\n if (payment.payerInfoResponses.physicalAddress) {\n const address = payment.payerInfoResponses.physicalAddress;\n console.log(`Shipping Address: ${address.name.firstName} ${address.name.familyName}, ${address.address1}, ${address.city}, ${address.state} ${address.postalCode}`);\n }\n }\n} catch (error) {\n console.error(`Payment failed: ${error.message}`);\n}\n\nSupported request types:\ntypereturnsemailstringname{ firstName, familyName }phoneNumber{ number, country }physicalAddressfull address objectonchainAddressstring\nRequired by default — set optional: true to avoid aborting the payment if the user declines.\nHow to validate the user’s information?You can use the callbackURL to validate the user’s information on the server side.Learn more about this in the callbackURL reference.\n​Server Side\nWhen accepting payments, your backend must validate transactions and user info received from the frontend. This section covers two critical aspects: verifying transaction completion and validating user information.\n​Verify User Transaction\nUse getPaymentStatus() on your backend to confirm that a payment has been completed before fulfilling orders. Never trust payment confirmations from the frontend alone.\nBackend (SDK)Report incorrect codeCopyAsk AIimport { getPaymentStatus } from '@base-org/account';\n\nexport async function checkPayment(txId: string, testnet = false) {\n const status = await getPaymentStatus({ \n id: txId,\n testnet // Must match the testnet setting from the original pay() call\n });\n if (status.status === 'completed') {\n // fulfill order\n }\n}\n\nPrevent Replay and Impersonation Attacks\nReplay attacks: A malicious user could submit the same valid transaction ID multiple times. Always track processed transaction IDs in your database.\nImpersonation attacks: A malicious user could submit someone else’s transaction ID to fulfill their own order. Always verify that the payment sender matches the authenticated user.\n\nHere’s an example that prevents both attack vectors:\nBackend (with replay protection)Report incorrect codeCopyAsk AIimport { getPaymentStatus } from '@base-org/account';\n\n// Example using a database to track processed transactions\n// Replace with your actual database implementation (PostgreSQL, MongoDB, etc.)\nconst processedTransactions = new Map<string, { \n orderId: string; \n sender: string; \n amount: string;\n timestamp: Date;\n}>(); // In production, use a persistent database\n\nexport async function verifyAndFulfillPayment(\n txId: string, \n orderId: string,\n payerAddress: string, // From authenticated user (SIWE, JWT, etc.)\n testnet = false\n) {\n // 1. Check if this transaction was already processed\n if (processedTransactions.has(txId)) {\n throw new Error('Transaction already processed');\n }\n\n // 2. Verify the payment status on-chain\n const { status, sender, amount, recipient } = await getPaymentStatus({ \n id: txId,\n testnet\n });\n\n if (status !== 'completed') {\n throw new Error(`Payment not completed. Status: ${status}`);\n }\n\n // 3. Verify the payment sender matches the authenticated user\n // This prevents a malicious user from claiming someone else's payment\n if (sender.toLowerCase() !== payerAddress.toLowerCase()) {\n throw new Error('Payment sender does not match authenticated user');\n }\n\n // 4. Validate the payment details match your order\n // This ensures the user paid the correct amount to the correct address\n const expectedAmount = await getOrderAmount(orderId);\n const expectedRecipient = process.env.PAYMENT_ADDRESS;\n\n if (amount !== expectedAmount) {\n throw new Error('Payment amount mismatch');\n }\n\n if (recipient.toLowerCase() !== expectedRecipient.toLowerCase()) {\n throw new Error('Payment recipient mismatch');\n }\n\n // 5. Mark transaction as processed BEFORE fulfilling\n // Store sender for easy lookup (e.g., to query all payments from a user)\n // In production, use a database transaction to ensure atomicity\n processedTransactions.set(txId, {\n orderId,\n sender,\n amount,\n timestamp: new Date()\n });\n\n // 6. Fulfill the order\n await fulfillOrder(orderId);\n\n return { success: true, orderId, sender };\n}\nSee all 66 lines\nDatabase recommendations for tracking transactions:\nStore the transaction ID, order ID, sender address, amount, timestamp, and fulfillment status\nUse a unique constraint on the transaction ID to prevent duplicates\nConsider adding an index on the transaction ID for fast lookups\n\n​Validate User Info\nIf you’re collecting user information (email, phone, shipping address) during checkout, use the callbackURL parameter to validate this data server-side before the transaction is submitted.\nYour callback endpoint receives the user’s information and must respond with either a success or error response:\nBackend (validation endpoint)Report incorrect codeCopyAsk AIexport async function POST(request: Request) {\n const requestData = await request.json();\n const { requestedInfo } = requestData.capabilities.dataCallback;\n const errors: Record<string, string> = {};\n\n // Validate email\n if (requestedInfo.email) {\n const blockedDomains = ['tempmail.com', 'throwaway.com'];\n const domain = requestedInfo.email.split('@')[1];\n if (blockedDomains.includes(domain)) {\n errors.email = 'Please use a valid email address';\n }\n }\n\n // Validate shipping address\n if (requestedInfo.physicalAddress) {\n const addr = requestedInfo.physicalAddress;\n const supportedCountries = ['US', 'CA', 'GB'];\n if (!supportedCountries.includes(addr.countryCode)) {\n errors.physicalAddress = { \n countryCode: 'We currently only ship to US, Canada, and UK' \n };\n }\n }\n\n // Return errors if validation failed\n if (Object.keys(errors).length > 0) {\n return Response.json({ errors });\n }\n\n // Success - return the request to proceed with the transaction\n return Response.json({ request: requestData });\n}\n\nThe callback is invoked before the transaction is submitted. If you return errors, the user is prompted to correct their information. If you return success, the transaction proceeds.\nFor complete details on the callback request/response format and all supported data types, see the dataCallback reference.\n​Add the Base Pay Button\nUse the pre-built component for a native look-and-feel:\nCheckout.tsxReport incorrect codeCopyAsk AIimport { BasePayButton } from '@base-org/account-ui/react';\nimport { pay } from '@base-org/account';\n\nexport function Checkout() {\n const handlePayment = async () => {\n try {\n const payment = await pay({ amount: '5.00', to: '0xRecipient' });\n console.log(`Payment sent! Transaction ID: ${payment.id}`);\n } catch (error) {\n console.error(`Payment failed: ${error.message}`);\n }\n };\n\n return (\n <BasePayButton\n colorScheme=\"light\"\n onClick={handlePayment}\n />\n );\n}\n\nSee full props and theming options in the Button Reference and Brand Guidelines.\nPlease Follow the Brand GuidelinesIf you intend on using the BasePayButton, please follow the Brand Guidelines to ensure consistency across your application.\n​Test on Base Sepolia\n\nGet test USDC from the Circle Faucet (select “Base Sepolia”).\n\nPass testnet: true in your pay() and getPaymentStatus() calls.\n\nUse Sepolia BaseScan to watch the transaction.\n\nWas this page helpful?YesNoSuggest editsRaise issueAuthenticate UsersPreviousAccept Recurring PaymentsNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "import { pay, getPaymentStatus } from '@base-org/account';\n\n// Trigger a payment – user will see a popup from their wallet service\ntry {\n  const payment = await pay({\n    amount: '1.00',           // USD amount (USDC used internally)\n    to:    '0xRecipient',     // your address\n    testnet: true            // set false for Mainnet\n  });\n  \n  // Option 1: Poll until mined\n  const { status } = await getPaymentStatus({ \n    id: payment.id,\n    testnet: true            // MUST match the testnet setting used in pay()\n  });\n  if (status === 'completed') console.log('🎉 payment settled');\n  \n} catch (error) {\n  console.error(`Payment failed: ${error.message}`);\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "try {\n  const payment = await pay({\n    amount: '25.00',\n    to: '0xRecipient',\n    payerInfo: {\n      requests: [\n        { type: 'email' },\n        { type: 'phoneNumber', optional: true },\n        { type: 'physicalAddress', optional: true }\n      ],\n      callbackURL: 'https://your-api.com/validate' // Optional - for server-side validation\n    }\n  });\n  \n  console.log(`Payment sent! Transaction ID: ${payment.id}`);\n  \n  // Log the collected user information\n  if (payment.payerInfoResponses) {\n    if (payment.payerInfoResponses.email) {\n      console.log(`Email: ${payment.payerInfoResponses.email}`);\n    }\n    if (payment.payerInfoResponses.phoneNumber) {\n      console.log(`Phone: ${payment.payerInfoResponses.phoneNumber.number}`);\n      console.log(`Country: ${payment.payerInfoResponses.phoneNumber.country}`);\n    }\n    if (payment.payerInfoResponses.physicalAddress) {\n      const address = payment.payerInfoResponses.physicalAddress;\n      console.log(`Shipping Address: ${address.name.firstName} ${address.name.familyName}, ${address.address1}, ${address.city}, ${address.state} ${address.postalCode}`);\n    }\n  }\n} catch (error) {\n  console.error(`Payment failed: ${error.message}`);\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "import { getPaymentStatus } from '@base-org/account';\n\nexport async function checkPayment(txId: string, testnet = false) {\n  const status = await getPaymentStatus({ \n    id: txId,\n    testnet  // Must match the testnet setting from the original pay() call\n  });\n  if (status.status === 'completed') {\n    // fulfill order\n  }\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "import { getPaymentStatus } from '@base-org/account';\n\n// Example using a database to track processed transactions\n// Replace with your actual database implementation (PostgreSQL, MongoDB, etc.)\nconst processedTransactions = new Map<string, { \n  orderId: string; \n  sender: string; \n  amount: string;\n  timestamp: Date;\n}>(); // In production, use a persistent database\n\nexport async function verifyAndFulfillPayment(\n  txId: string, \n  orderId: string,\n  payerAddress: string, // From authenticated user (SIWE, JWT, etc.)\n  testnet = false\n) {\n  // 1. Check if this transaction was already processed\n  if (processedTransactions.has(txId)) {\n    throw new Error('Transaction already processed');\n  }\n\n  // 2. Verify the payment status on-chain\n  const { status, sender, amount, recipient } = await getPaymentStatus({ \n    id: txId,\n    testnet\n  });\n\n  if (status !== 'completed') {\n    throw new Error(`Payment not completed. Status: ${status}`);\n  }\n\n  // 3. Verify the payment sender matches the authenticated user\n  // This prevents a malicious user from claiming someone else's payment\n  if (sender.toLowerCase() !== payerAddress.toLowerCase()) {\n    throw new Error('Payment sender does not match authenticated user');\n  }\n\n  // 4. Validate the payment details match your order\n  // This ensures the user paid the correct amount to the correct address\n  const expectedAmount = await getOrderAmount(orderId);\n  const expectedRecipient = process.env.PAYMENT_ADDRESS;\n  \n  if (amount !== expectedAmount) {\n    throw new Error('Payment amount mismatch');\n  }\n  \n  if (recipient.toLowerCase() !== expectedRecipient.toLowerCase()) {\n    throw new Error('Payment recipient mismatch');\n  }\n\n  // 5. Mark transaction as processed BEFORE fulfilling\n  // Store sender for easy lookup (e.g., to query all payments from a user)\n  // In production, use a database transaction to ensure atomicity\n  processedTransactions.set(txId, {\n    orderId,\n    sender,\n    amount,\n    timestamp: new Date()\n  });\n  \n  // 6. Fulfill the order\n  await fulfillOrder(orderId);\n  \n  return { success: true, orderId, sender };\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "export async function POST(request: Request) {\n  const requestData = await request.json();\n  const { requestedInfo } = requestData.capabilities.dataCallback;\n  const errors: Record<string, string> = {};\n\n  // Validate email\n  if (requestedInfo.email) {\n    const blockedDomains = ['tempmail.com', 'throwaway.com'];\n    const domain = requestedInfo.email.split('@')[1];\n    if (blockedDomains.includes(domain)) {\n      errors.email = 'Please use a valid email address';\n    }\n  }\n\n  // Validate shipping address\n  if (requestedInfo.physicalAddress) {\n    const addr = requestedInfo.physicalAddress;\n    const supportedCountries = ['US', 'CA', 'GB'];\n    if (!supportedCountries.includes(addr.countryCode)) {\n      errors.physicalAddress = { \n        countryCode: 'We currently only ship to US, Canada, and UK' \n      };\n    }\n  }\n\n  // Return errors if validation failed\n  if (Object.keys(errors).length > 0) {\n    return Response.json({ errors });\n  }\n\n  // Success - return the request to proceed with the transaction\n  return Response.json({ request: requestData });\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "import { BasePayButton } from '@base-org/account-ui/react';\nimport { pay } from '@base-org/account';\n\nexport function Checkout() {\n  const handlePayment = async () => {\n    try {\n      const payment = await pay({ amount: '5.00', to: '0xRecipient' });\n      console.log(`Payment sent! Transaction ID: ${payment.id}`);\n    } catch (error) {\n      console.error(`Payment failed: ${error.message}`);\n    }\n  };\n\n  return (\n    <BasePayButton\n      colorScheme=\"light\"\n      onClick={handlePayment}\n    />\n  );\n}"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Base Account Overview",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Web (HTML + JS)",
+      "url": "https://docs.base.org/base-account/quickstart/web"
+    },
+    {
+      "text": "Web (Next.js)",
+      "url": "https://docs.base.org/base-account/quickstart/web-react"
+    },
+    {
+      "text": "Mobile (React Native)",
+      "url": "https://docs.base.org/base-account/quickstart/mobile-integration"
+    },
+    {
+      "text": "Authenticate Users",
+      "url": "https://docs.base.org/base-account/guides/authenticate-users"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Accept Recurring Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "Batch Transactions",
+      "url": "https://docs.base.org/base-account/improve-ux/batch-transactions"
+    },
+    {
+      "text": "Sponsor Gas",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/paymasters"
+    },
+    {
+      "text": "Use Sub Accounts",
+      "url": "https://docs.base.org/base-account/improve-ux/sub-accounts"
+    },
+    {
+      "text": "Use Spend Permissions",
+      "url": "https://docs.base.org/base-account/improve-ux/spend-permissions"
+    },
+    {
+      "text": "Use Coinbase Balances Onchain",
+      "url": "https://docs.base.org/base-account/improve-ux/magic-spend"
+    },
+    {
+      "text": "Sign and Verify Typed Data",
+      "url": "https://docs.base.org/base-account/guides/sign-and-verify-typed-data"
+    },
+    {
+      "text": "Pay Gas in ERC20 tokens",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/erc20-paymasters"
+    },
+    {
+      "text": "Coinbase Developer Platform",
+      "url": "https://docs.base.org/base-account/framework-integrations/cdp"
+    },
+    {
+      "text": "RainbowKit",
+      "url": "https://docs.base.org/base-account/framework-integrations/rainbowkit"
+    },
+    {
+      "text": "Reown",
+      "url": "https://docs.base.org/base-account/framework-integrations/reown"
+    },
+    {
+      "text": "Thirdweb",
+      "url": "https://docs.base.org/base-account/framework-integrations/thirdweb"
+    },
+    {
+      "text": "Base Gasless Campaign",
+      "url": "https://docs.base.org/base-account/more/base-gasless-campaign"
+    },
+    {
+      "text": "Telemetry",
+      "url": "https://docs.base.org/base-account/more/telemetry"
+    },
+    {
+      "text": "Migrate from Coinbase Wallet SDK",
+      "url": "https://docs.base.org/base-account/guides/migration-guide"
+    },
+    {
+      "text": "Basenames FAQ",
+      "url": "https://docs.base.org/base-account/basenames/basenames-faq"
+    },
+    {
+      "text": "Basename Transfer Guide",
+      "url": "https://docs.base.org/base-account/basenames/basename-transfer"
+    },
+    {
+      "text": "Contribute to the Base Account Docs",
+      "url": "https://docs.base.org/base-account/contribute/contribute-to-base-account-docs"
+    },
+    {
+      "text": "Security and Bug Bounty",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty"
+    },
+    {
+      "text": "Why Base Pay?",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#why-base-pay"
+    },
+    {
+      "text": "Client-side (Browser SDK)",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#client-side-browser-sdk"
+    },
+    {
+      "text": "Collect user information (optional)",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#collect-user-information-optional"
+    },
+    {
+      "text": "Server Side",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#server-side"
+    },
+    {
+      "text": "Verify User Transaction",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#verify-user-transaction"
+    },
+    {
+      "text": "Validate User Info",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#validate-user-info"
+    },
+    {
+      "text": "Add the Base Pay Button",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#add-the-base-pay-button"
+    },
+    {
+      "text": "Test on Base Sepolia",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#test-on-base-sepolia"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#why-base-pay"
+    },
+    {
+      "text": "Brand Guidelines",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/brand-guidelines"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#client-side-browser-sdk"
+    },
+    {
+      "text": "pay()",
+      "url": "https://docs.base.org/base-account/reference/base-pay/pay"
+    },
+    {
+      "text": "getPaymentStatus()",
+      "url": "https://docs.base.org/base-account/reference/base-pay/getPaymentStatus"
+    },
+    {
+      "text": "getPaymentStatus()",
+      "url": "https://docs.base.org/base-account/reference/base-pay/getPaymentStatus"
+    },
+    {
+      "text": "pay()",
+      "url": "https://docs.base.org/base-account/reference/base-pay/pay"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#collect-user-information-optional"
+    },
+    {
+      "text": "full address object",
+      "url": "https://docs.base.org/base-account/reference/core/capabilities/datacallback#physical-address-object"
+    },
+    {
+      "text": "callbackURL reference",
+      "url": "https://docs.base.org/base-account/reference/core/capabilities/datacallback"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#server-side"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#verify-user-transaction"
+    },
+    {
+      "text": "getPaymentStatus()",
+      "url": "https://docs.base.org/base-account/reference/base-pay/getPaymentStatus"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#validate-user-info"
+    },
+    {
+      "text": "dataCallback reference",
+      "url": "https://docs.base.org/base-account/reference/core/capabilities/datacallback"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#add-the-base-pay-button"
+    },
+    {
+      "text": "Button Reference",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/base-pay-button"
+    },
+    {
+      "text": "Brand Guidelines",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/brand-guidelines"
+    },
+    {
+      "text": "Brand Guidelines",
+      "url": "https://docs.base.org/base-account/reference/ui-elements/brand-guidelines"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-payments#test-on-base-sepolia"
+    },
+    {
+      "text": "Authenticate UsersPrevious",
+      "url": "https://docs.base.org/base-account/guides/authenticate-users"
+    },
+    {
+      "text": "Accept Recurring PaymentsNext",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    }
+  ]
+}

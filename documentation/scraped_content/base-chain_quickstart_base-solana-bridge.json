@@ -1,0 +1,552 @@
+{
+  "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge",
+  "title": "Base-Solana Bridge - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:19.855505",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​How it works"
+    },
+    {
+      "level": "h3",
+      "text": "​On Base"
+    },
+    {
+      "level": "h3",
+      "text": "​On Solana"
+    },
+    {
+      "level": "h2",
+      "text": "​Bridging Flows"
+    },
+    {
+      "level": "h2",
+      "text": "Solana → Base"
+    },
+    {
+      "level": "h2",
+      "text": "Base → Solana"
+    },
+    {
+      "level": "h2",
+      "text": "Terminally Onchain"
+    },
+    {
+      "level": "h2",
+      "text": "​Solana to Base"
+    },
+    {
+      "level": "h3",
+      "text": "​Auto-Relay Example"
+    },
+    {
+      "level": "h3",
+      "text": "​Wrap Custom SPL Tokens"
+    },
+    {
+      "level": "h2",
+      "text": "​Base to Solana"
+    },
+    {
+      "level": "h2",
+      "text": "​Utilities"
+    },
+    {
+      "level": "h3",
+      "text": "​Address Conversion"
+    },
+    {
+      "level": "h3",
+      "text": "​Keypair Management"
+    },
+    {
+      "level": "h3",
+      "text": "​Transaction Building"
+    },
+    {
+      "level": "h2",
+      "text": "​Terminally Onchain Example"
+    },
+    {
+      "level": "h3",
+      "text": "​Running the Terminal"
+    },
+    {
+      "level": "h2",
+      "text": "​Contract Addresses"
+    },
+    {
+      "level": "h3",
+      "text": "​Base Mainnet"
+    },
+    {
+      "level": "h3",
+      "text": "​Solana Mainnet"
+    },
+    {
+      "level": "h3",
+      "text": "​Base Sepolia"
+    },
+    {
+      "level": "h3",
+      "text": "​Solana Devnet"
+    },
+    {
+      "level": "h2",
+      "text": "​Resources"
+    },
+    {
+      "level": "h2",
+      "text": "Base Bridge Repository"
+    },
+    {
+      "level": "h2",
+      "text": "Solana Explorer"
+    },
+    {
+      "level": "h2",
+      "text": "Base Explorer"
+    },
+    {
+      "level": "h2",
+      "text": "Discord Support"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartBase-Solana BridgeGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageHow it worksOn BaseOn SolanaBridging FlowsSolana to BaseAuto-Relay ExampleWrap Custom SPL TokensBase to SolanaUtilitiesAddress ConversionKeypair ManagementTransaction BuildingTerminally Onchain ExampleRunning the TerminalContract AddressesBase MainnetSolana MainnetBase SepoliaSolana DevnetResourcesThe Base-Solana bridge enables bidirectional token transfers and message passing between Base and\nSolana networks. This bridge allows you to:\n\nTransfer tokens between Base and Solana\nSend arbitrary cross-chain messages\nCombine both flows (transfer with arbitrary calls)\nDeploy wrapped tokens on either chain\n\nThis guide covers the bridge architecture, the production addresses, and practical implementation\npatterns.\n​How it works\n​On Base\nThe Base bridge contract locks or burns tokens when sending tokens to Solana, and mints or unlocks\ntokens when receiving tokens from Solana. The Bridge contract itself builds Merkle trees from\noutgoing messages. Validators verify the Merkle root every ~300 finalized blocks and relay it to\nSolana. You then prove your message exists in the tree to complete the transfer on Solana.\nTokens that are native to Base are locked and tokens that are native to Solana are burned when bridging to Solana.\nTokens that are native to Solana are minted and tokens that are native to Base are unlocked when bridging to Base.\nKey Smart contracts:\n\nBridge Contract: Handles outgoing transfers\nCrossChainERC20: Mintable/burnable tokens for cross-chain transfers\nBridgeValidator: Validates messages with oracle signatures\nTwin Contract: Your personal smart contract on Base for executing calls from Solana\n\nWhat is the Twin Contract?\nEach Solana wallet deterministically maps to a Twin contract on Base. When you attach a contract call\nto a bridge message, the call is executed from this Twin contract, ie. the Twin becomes msg.sender on Base.\n​On Solana\nThe Solana bridge program handles token transfers by locking or burning tokens and emitting events.\nFor messaging, validators relay these events to Base where they are executed through your Twin\ncontract.\nKey Programs (Solana Mainnet-Beta):\n\nBridge Program: Handles outgoing transfers and message commitments.\nBase Relayer Program: Optional relayer that can prepay gas on Base.\n\nThe relayer program is not part of the core bridge. It is an optional convenience layer that can pay\nBase gas fees on behalf of the Solana user in the Solana → Base direction.The user would still need to pay the gas fee by adding PayForRelay to the Solana transaction.\nIf the user does not add PayForRelay, the relayer program will not pay the gas fee.\nYou can access the full repository here:\nBase Bridge - Official Repositoryhttps://github.com/base/bridge\n​Bridging Flows\nSolana → BasePush-based with optional relayer for instant execution on BaseBase → SolanaProof-based burn and unlock with full custodyTerminally OnchainProduction terminal UI for bridging + contract calls\n​Solana to Base\nFlow: Lock SOL/SPL → (Optional) Pay for relay → Validators approve → Mint + execute on Base\nThe Solana to Base bridge uses a pull-based model that requires 3 steps:\n\nInitiate the bridge on Solana - Lock your SOL or native SPL token in a Solana vault\nWait for validators to pre-approve the message - Validators verify and approve your bridge message\nExecute the message on Base - The approved message is executed on Base to mint SOL and execute any additional arbitrary calls\n\nWhen bridging from Solana to Base, native SOL/SPL are locked and ERC20 SOL is minted on Base.\nIf your Solana → Base message includes a call to execute, you must ensure\nthe ABI-encoded call is executable on Base. A call that cannot be executed\non Base cannot be undone. If you bridge tokens in the same transaction,\nthose tokens will be locked.\nReference scripts (auto-relay, token wrapping, CLI utilities) live in the scripts/ directory of the official repository:\nSolana → Base CLI Scriptshttps://github.com/base/bridge/tree/main/scripts/src/commands/sol/bridge\n​Auto-Relay Example\nThis is a sample script that shows how to bridge SOL with auto-relay\nsolToBaseWithAutoRelay/index.tsReport incorrect codeCopyAsk AI// Configure\nconst TO = \"0x8c1a617bdb47342f9c17ac8750e0b070c372c721\"; // Base address\nconst AMOUNT = 0.001; // SOL amount\n\n// Bridge SOL with auto-relay\nconst ixs = [\n getBridgeSolInstruction({\n payer,\n from: payer,\n solVault: solVaultAddress,\n bridge: bridgeAccountAddress,\n outgoingMessage,\n to: toBytes(TO),\n remoteToken: toBytes(\"0xC5b9112382f3c87AFE8e1A28fa52452aF81085AD\"), // SOL on Base\n amount: BigInt(AMOUNT * 10**9),\n }),\n await buildPayForRelayIx(RELAYER_PROGRAM_ID, outgoingMessage, payer)\n];\n\nawait buildAndSendTransaction(SOLANA_RPC_URL, ixs, payer);\nSee all 20 lines\nFor more details, see the Solana to Base Relay Script.\n​Wrap Custom SPL Tokens\nThe example above shows how to bridge native SOL to Base.\nTo bridge custom SPL tokens,\nyou need to create wrapped ERC20 representations on Base using the CrossChainERC20Factory.\nToken Wrapping Examplehttps://github.com/base/bridge/blob/main/scripts/src/commands/sol/bridge/solana-to-base/wrap-token.handler.ts\nwrapSolTokenOnBase/index.tsReport incorrect codeCopyAsk AI// Deploy wrapped token on Base\nconst mintBytes32 = getBase58Codec().encode(SOLANA_SPL_MINT_ADDRESS).toHex();\n\nawait client.writeContract({\n address: \"0x58207331CBF8Af87BB6453b610E6579D9878e4EA\", // Factory\n abi: TokenFactory,\n functionName: \"deploy\",\n args: [`0x${mintBytes32}`, \"Token Name\", \"SYMBOL\", 9],\n});\nSee all 9 lines\n​Base to Solana\nFlow: Burn ERC20 SOL on Base → Wait for finalization → Generate Merkle proof → Execute on Solana\nBurn wrapped tokens on Base, wait for the message to become provable, then execute the proof on\nSolana to unlock the native asset. This path offers full custody and requires a prover.\nBase → Solana Examplehttps://github.com/base/bridge/blob/main/scripts/src/internal/sol/base.ts\nbridgeSolFromBaseToSolana/index.tsReport incorrect codeCopyAsk AI// Step 1: Burn SOL on Base\nconst transfer = {\n localToken: \"0xC5b9112382f3c87AFE8e1A28fa52452aF81085AD\", // SOL (on Base)\n remoteToken: pubkeyToBytes32(SOL_ADDRESS),\n to: pubkeyToBytes32(solanaAddress),\n remoteAmount: BigInt(AMOUNT * 10**9),\n};\n\nconst txHash = await client.writeContract({\n address: \"0xB2068ECCDb908902C76E3f965c1712a9cF64171E\", // Bridge\n abi: Bridge,\n functionName: \"bridgeToken\",\n args: [transfer, []],\n});\n\n// Step 2: Wait for finalization\nconst isProvable = await isBridgeMessageProvable(txHash);\n\n// Step 3: Generate proof\nconst { event, rawProof } = await generateProof(txHash, baseBlockNumber);\n\n// Step 4: Execute on Solana\nconst proveIx = getProveMessageInstruction({\n nonce: event.message.nonce,\n sender: toBytes(event.message.sender),\n data: toBytes(event.message.data),\n proof: rawProof.map(e => toBytes(e)),\n messageHash: toBytes(event.messageHash),\n});\n\nconst relayIx = getRelayMessageInstruction({ message: messagePda });\nawait buildAndSendTransaction(SOLANA_RPC_URL, [proveIx, relayIx], payer);\nSee all 32 lines\nIf you operate a relayer that signs and submits Solana transactions for users in the Base → Solana\ndirection, do not sign transactions that require your relayer pubkey as a signer.A malicious user can encode a transaction that includes your relayer pubkey as a required signer; if\nyou sign and submit it, you may unintentionally authorize arbitrary instructions (including ones\nthat can steal relayer funds). As a baseline mitigation, ignore any transaction that specifies your\npubkey as a signer.\n​Utilities\nThe repository includes utilities for converting between Solana and Base address formats,\ngetting your Solana CLI keypair for signing transactions,\nand building and sending Solana transactions.\nBase Bridge Examples - Utilitieshttps://github.com/base/bridge/tree/main/scripts/src/commands\n​Address Conversion\nConvert Solana pubkey to bytes32 for Base contracts:\nexample.tsReport incorrect codeCopyAsk AI// Convert Solana pubkey to bytes32 for Base contracts\nimport { pubkeyToBytes32 } from \"./utils/pubkeyToBytes32\";\n\nconst bytes32Address = pubkeyToBytes32(solanaAddress);\n\n​Keypair Management\nGet your Solana CLI keypair for signing transactions:\nexample.tsReport incorrect codeCopyAsk AIimport { getSolanaCliConfigKeypairSigner } from \"./utils/keypair\";\n\nconst payer = await getSolanaCliConfigKeypairSigner();\n\n​Transaction Building\nBuild and send Solana transactions:\nexample.tsReport incorrect codeCopyAsk AIimport { buildAndSendTransaction } from \"./utils/buildAndSendTransaction\";\n\nconst signature = await buildAndSendTransaction(SOLANA_RPC_URL, ixs, payer);\n\n​Terminally Onchain Example\nTerminally Onchainhttps://github.com/base/sol2base\nTerminally Onchain is a production Next.js app that exposes the bridge via a\ncommand terminal UI. Users connect a Solana wallet, type commands such as to bridge and call a contract on Base:\nReport incorrect codeCopyAsk AIbridge 0.0001 sol 0xYourTwin --call-contract 0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82 \\\n --call-selector \"transfer(address,uint256)\" \\\n --call-args 0x0000000000000000000000000000000000000000 100000000000000\n\nThe workflow:\n\nParse command: The terminal parser resolves the asset, destination, and optional Base call (selector + args + value).\nStage bridge: queueBridge validates SPL overrides, ABI-encodes the Base call via encodeFunctionData, and stages relay overrides.\nExecute: solanaBridge.bridge() resolves the destination (ENS/Basename), ensures balances, and calls realBridgeImplementation to sign and send the Solana transaction.\nRelay + Call: If relay gas is prepaid, the Base Relayer executes the attached call from the user’s Twin contract immediately after ERC20 SOL is minted.\n\nKey implementation references:\n\nsrc/lib/bridge.ts: Asset resolution (supports mint addresses), environment-aware RPC connections, and call attachment support.\nsrc/lib/realBridgeImplementation.ts: Builds Solana transactions with PayForRelay + bridge_sol/bridge_spl instructions, using per-environment PDAs and gas-fee receivers.\nsrc/components/MainContent.tsx: Terminal UI with command staging, log viewer, and ABI encoding for arbitrary Base calls.\nsrc/components/WalletConnection.tsx: Fetches the deterministic Twin address on Base Mainnet/Sepolia for the connected Solana wallet.\n\n​Running the Terminal\nTerminalReport incorrect codeCopyAsk AIgit clone https://github.com/base/sol2base.git\ncd sol2base\nnpm install --legacy-peer-deps\n\n# Configure env (RPC URLs, relayer addresses, CDP API keys, etc.)\ncp env.template .env.local\n\nnpm run dev # defaults to http://localhost:3000\n\nThe terminal exposes both Base Sepolia ↔ Solana Devnet and Base Mainnet ↔ Solana Mainnet. Use the\nnetwork dropdown in the UI to switch.Set CDP_API_KEY in your .env file to get access to the faucet.\n​Contract Addresses\n​Base Mainnet\nReport incorrect codeCopyAsk AI{\n \"Bridge\": \"0x3eff766C76a1be2Ce1aCF2B69c78bCae257D5188\",\n \"BridgeValidator\": \"0xAF24c1c24Ff3BF1e6D882518120fC25442d6794B\",\n \"CrossChainERC20Factory\": \"0xDD56781d0509650f8C2981231B6C917f2d5d7dF2\",\n \"SOL\": \"0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82\"\n}\n\n​Solana Mainnet\nReport incorrect codeCopyAsk AI{\n \"BridgeProgram\": \"HNCne2FkVaNghhjKXapxJzPaBvAKDG1Ge3gqhZyfVWLM\",\n \"BaseRelayerProgram\": \"g1et5VenhfJHJwsdJsDbxWZuotD5H4iELNG61kS4fb9\"\n}\n\n​Base Sepolia\nReport incorrect codeCopyAsk AI{\n \"Bridge\": \"0x01824a90d32A69022DdAEcC6C5C14Ed08dB4EB9B\",\n \"BridgeValidator\": \"0xa80C07DF38fB1A5b3E6a4f4FAAB71E7a056a4EC7\",\n \"CrossChainERC20Factory\": \"0x488EB7F7cb2568e31595D48cb26F63963Cc7565D\",\n \"SOL\": \"0xCace0c896714DaF7098FFD8CC54aFCFe0338b4BC\",\n \"FLYWHEEL_ADDRESS\": \"0x00000F14AD09382841DB481403D1775ADeE1179F\",\n \"BRIDGE_CAMPAIGN_ADDRESS\": \"0xE2AD1C34382410C30d826B019A0B3700F5c4e6c9\"\n}\n\n​Solana Devnet\nReport incorrect codeCopyAsk AI{\n \"BridgeProgram\": \"7c6mteAcTXaQ1MFBCrnuzoZVTTAEfZwa6wgy4bqX3KXC\",\n \"BaseRelayerProgram\": \"56MBBEYAtQAdjT4e1NzHD8XaoyRSTvfgbSVVcEcHj51H\",\n \"GasFeeReceiver\": \"AFs1LCbodhvwpgX3u3URLsud6R1XMSaMiQ5LtXw4GKYT\"\n}\n\n​Resources\nBase Bridge RepositorySource code, contracts, programs, and scriptsSolana ExplorerMonitor Solana mainnet-beta transactionsBase ExplorerMonitor Base Mainnet transactionsDiscord SupportGet help from the Base communityWas this page helpful?YesNoSuggest editsRaise issueBridging an L1 token to BasePreviousContract AddressesNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "// Configure\nconst TO = \"0x8c1a617bdb47342f9c17ac8750e0b070c372c721\"; // Base address\nconst AMOUNT = 0.001; // SOL amount\n\n// Bridge SOL with auto-relay\nconst ixs = [\n  getBridgeSolInstruction({\n    payer,\n    from: payer,\n    solVault: solVaultAddress,\n    bridge: bridgeAccountAddress,\n    outgoingMessage,\n    to: toBytes(TO),\n    remoteToken: toBytes(\"0xC5b9112382f3c87AFE8e1A28fa52452aF81085AD\"), // SOL on Base\n    amount: BigInt(AMOUNT * 10**9),\n  }),\n  await buildPayForRelayIx(RELAYER_PROGRAM_ID, outgoingMessage, payer)\n];\n\nawait buildAndSendTransaction(SOLANA_RPC_URL, ixs, payer);"
+    },
+    {
+      "language": "unknown",
+      "code": "// Deploy wrapped token on Base\nconst mintBytes32 = getBase58Codec().encode(SOLANA_SPL_MINT_ADDRESS).toHex();\n\nawait client.writeContract({\n  address: \"0x58207331CBF8Af87BB6453b610E6579D9878e4EA\", // Factory\n  abi: TokenFactory,\n  functionName: \"deploy\",\n  args: [`0x${mintBytes32}`, \"Token Name\", \"SYMBOL\", 9],\n});"
+    },
+    {
+      "language": "unknown",
+      "code": "// Step 1: Burn SOL on Base\nconst transfer = {\n  localToken: \"0xC5b9112382f3c87AFE8e1A28fa52452aF81085AD\", // SOL (on Base)\n  remoteToken: pubkeyToBytes32(SOL_ADDRESS),\n  to: pubkeyToBytes32(solanaAddress),\n  remoteAmount: BigInt(AMOUNT * 10**9),\n};\n\nconst txHash = await client.writeContract({\n  address: \"0xB2068ECCDb908902C76E3f965c1712a9cF64171E\", // Bridge\n  abi: Bridge,\n  functionName: \"bridgeToken\",\n  args: [transfer, []],\n});\n\n// Step 2: Wait for finalization\nconst isProvable = await isBridgeMessageProvable(txHash);\n\n// Step 3: Generate proof\nconst { event, rawProof } = await generateProof(txHash, baseBlockNumber);\n\n// Step 4: Execute on Solana\nconst proveIx = getProveMessageInstruction({\n  nonce: event.message.nonce,\n  sender: toBytes(event.message.sender),\n  data: toBytes(event.message.data),\n  proof: rawProof.map(e => toBytes(e)),\n  messageHash: toBytes(event.messageHash),\n});\n\nconst relayIx = getRelayMessageInstruction({ message: messagePda });\nawait buildAndSendTransaction(SOLANA_RPC_URL, [proveIx, relayIx], payer);"
+    },
+    {
+      "language": "unknown",
+      "code": "// Convert Solana pubkey to bytes32 for Base contracts\nimport { pubkeyToBytes32 } from \"./utils/pubkeyToBytes32\";\n\nconst bytes32Address = pubkeyToBytes32(solanaAddress);"
+    },
+    {
+      "language": "unknown",
+      "code": "import { getSolanaCliConfigKeypairSigner } from \"./utils/keypair\";\n\nconst payer = await getSolanaCliConfigKeypairSigner();"
+    },
+    {
+      "language": "unknown",
+      "code": "import { buildAndSendTransaction } from \"./utils/buildAndSendTransaction\";\n\nconst signature = await buildAndSendTransaction(SOLANA_RPC_URL, ixs, payer);"
+    },
+    {
+      "language": "unknown",
+      "code": "bridge 0.0001 sol 0xYourTwin --call-contract 0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82 \\\n  --call-selector \"transfer(address,uint256)\" \\\n  --call-args 0x0000000000000000000000000000000000000000 100000000000000"
+    },
+    {
+      "language": "unknown",
+      "code": "git clone https://github.com/base/sol2base.git\ncd sol2base\nnpm install --legacy-peer-deps\n\n# Configure env (RPC URLs, relayer addresses, CDP API keys, etc.)\ncp env.template .env.local\n\nnpm run dev   # defaults to http://localhost:3000"
+    },
+    {
+      "language": "unknown",
+      "code": "{\n  \"Bridge\": \"0x3eff766C76a1be2Ce1aCF2B69c78bCae257D5188\",\n  \"BridgeValidator\": \"0xAF24c1c24Ff3BF1e6D882518120fC25442d6794B\",\n  \"CrossChainERC20Factory\": \"0xDD56781d0509650f8C2981231B6C917f2d5d7dF2\",\n  \"SOL\": \"0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82\"\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "{\n  \"BridgeProgram\": \"HNCne2FkVaNghhjKXapxJzPaBvAKDG1Ge3gqhZyfVWLM\",\n  \"BaseRelayerProgram\": \"g1et5VenhfJHJwsdJsDbxWZuotD5H4iELNG61kS4fb9\"\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "{\n  \"Bridge\": \"0x01824a90d32A69022DdAEcC6C5C14Ed08dB4EB9B\",\n  \"BridgeValidator\": \"0xa80C07DF38fB1A5b3E6a4f4FAAB71E7a056a4EC7\",\n  \"CrossChainERC20Factory\": \"0x488EB7F7cb2568e31595D48cb26F63963Cc7565D\",\n  \"SOL\": \"0xCace0c896714DaF7098FFD8CC54aFCFe0338b4BC\",\n  \"FLYWHEEL_ADDRESS\": \"0x00000F14AD09382841DB481403D1775ADeE1179F\",\n  \"BRIDGE_CAMPAIGN_ADDRESS\": \"0xE2AD1C34382410C30d826B019A0B3700F5c4e6c9\"\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "{\n  \"BridgeProgram\": \"7c6mteAcTXaQ1MFBCrnuzoZVTTAEfZwa6wgy4bqX3KXC\",\n  \"BaseRelayerProgram\": \"56MBBEYAtQAdjT4e1NzHD8XaoyRSTvfgbSVVcEcHj51H\",\n  \"GasFeeReceiver\": \"AFs1LCbodhvwpgX3u3URLsud6R1XMSaMiQ5LtXw4GKYT\"\n}"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "How it works",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#how-it-works"
+    },
+    {
+      "text": "On Base",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#on-base"
+    },
+    {
+      "text": "On Solana",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#on-solana"
+    },
+    {
+      "text": "Bridging Flows",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#bridging-flows"
+    },
+    {
+      "text": "Solana to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-to-base"
+    },
+    {
+      "text": "Auto-Relay Example",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#auto-relay-example"
+    },
+    {
+      "text": "Wrap Custom SPL Tokens",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#wrap-custom-spl-tokens"
+    },
+    {
+      "text": "Base to Solana",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-to-solana"
+    },
+    {
+      "text": "Utilities",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#utilities"
+    },
+    {
+      "text": "Address Conversion",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#address-conversion"
+    },
+    {
+      "text": "Keypair Management",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#keypair-management"
+    },
+    {
+      "text": "Transaction Building",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#transaction-building"
+    },
+    {
+      "text": "Terminally Onchain Example",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#terminally-onchain-example"
+    },
+    {
+      "text": "Running the Terminal",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#running-the-terminal"
+    },
+    {
+      "text": "Contract Addresses",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#contract-addresses"
+    },
+    {
+      "text": "Base Mainnet",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-mainnet"
+    },
+    {
+      "text": "Solana Mainnet",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-mainnet"
+    },
+    {
+      "text": "Base Sepolia",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-sepolia"
+    },
+    {
+      "text": "Solana Devnet",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-devnet"
+    },
+    {
+      "text": "Resources",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#resources"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#how-it-works"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#on-base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#on-solana"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#bridging-flows"
+    },
+    {
+      "text": "Solana → BasePush-based with optional relayer for instant execution on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-to-base"
+    },
+    {
+      "text": "Base → SolanaProof-based burn and unlock with full custody",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-to-solana"
+    },
+    {
+      "text": "Terminally OnchainProduction terminal UI for bridging + contract calls",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#terminally-onchain-example"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-to-base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#auto-relay-example"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#wrap-custom-spl-tokens"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-to-solana"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#utilities"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#address-conversion"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#keypair-management"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#transaction-building"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#terminally-onchain-example"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#running-the-terminal"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#contract-addresses"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-mainnet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-mainnet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#base-sepolia"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#solana-devnet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#resources"
+    },
+    {
+      "text": "Discord SupportGet help from the Base community",
+      "url": "https://base.org/discord"
+    },
+    {
+      "text": "Bridging an L1 token to BasePrevious",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Contract AddressesNext",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    }
+  ]
+}

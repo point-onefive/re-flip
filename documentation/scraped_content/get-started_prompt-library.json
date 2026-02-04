@@ -1,0 +1,364 @@
+{
+  "url": "https://docs.base.org/get-started/prompt-library",
+  "title": "Developer's Guide to Effective AI Prompting - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:32.221841",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Understanding Context Windows"
+    },
+    {
+      "level": "h3",
+      "text": "​Why Context Matters"
+    },
+    {
+      "level": "h3",
+      "text": "​Optimizing for Context Windows"
+    },
+    {
+      "level": "h2",
+      "text": "​Setting Up AI Tools"
+    },
+    {
+      "level": "h3",
+      "text": "​Configuring Cursor Rules"
+    },
+    {
+      "level": "h3",
+      "text": "​Creating Cursor Rules"
+    },
+    {
+      "level": "h3",
+      "text": "​Setting Up an OnchainKit Project"
+    },
+    {
+      "level": "h2",
+      "text": "​Creating Project Documentation"
+    },
+    {
+      "level": "h2",
+      "text": "​Effective Prompting Strategies"
+    },
+    {
+      "level": "h2",
+      "text": "​Working with OnchainKit"
+    },
+    {
+      "level": "h3",
+      "text": "​Leveraging LLMs.txt for Documentation"
+    },
+    {
+      "level": "h2",
+      "text": "​Debugging with AI"
+    },
+    {
+      "level": "h3",
+      "text": "​Effective Debugging Prompts"
+    },
+    {
+      "level": "h3",
+      "text": "​When You’re Stuck"
+    },
+    {
+      "level": "h2",
+      "text": "​Advanced Prompting Techniques"
+    },
+    {
+      "level": "h2",
+      "text": "​Best Practices Summary"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationBuild with AIDeveloper's Guide to Effective AI PromptingGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnStatusFaucetBridgeBlogIntroductionBaseQuickstartBuild an AppLaunch a TokenDeploy Smart ContractsBuilder SupportGet FundedBase Services HubBase Mentorship ProgramCountry Leads & AmbassadorsBuild with AIMCP ServerStatic Docs FilesPrompt LibraryOn this pageUnderstanding Context WindowsWhy Context MattersOptimizing for Context WindowsSetting Up AI ToolsConfiguring Cursor RulesCreating Cursor RulesSetting Up an OnchainKit ProjectCreating Project DocumentationEffective Prompting StrategiesWorking with OnchainKitLeveraging LLMs.txt for DocumentationDebugging with AIEffective Debugging PromptsWhen You’re StuckAdvanced Prompting TechniquesBest Practices SummaryThis guide helps developers leverage AI tools effectively in their coding workflow. Whether you’re using Cursor, GitHub Copilot, or other AI assistants, these strategies will help you get better results and integrate AI smoothly into your development process.\n​Understanding Context Windows\n​Why Context Matters\nAI coding assistants have what’s called a “context window” - the amount of text they can “see” and consider when generating responses. Think of it as the AI’s working memory:\n\nMost modern AI assistants can process thousands of tokens (roughly 4-5 words per token)\nEverything you share and everything the AI responds with consumes this limited space\nOnce the context window fills up, parts of your conversational history may be lost.\n\nThis is why providing relevant context upfront is crucial - the AI can only work with what it can “see” in its current context window.\n​Optimizing for Context Windows\nTo get the most out of AI assistants:\n\nPrioritize relevant information: Focus on sharing the most important details first\nRemove unnecessary content: Avoid pasting irrelevant code or documentation\nStructure your requests: Use clear sections and formatting to make information easy to process\nReference external resources: For large codebases, consider sharing only the most relevant files\nFor larger projects, create and reference a central documentation file that summarizes key information, rather than repeatedly explaining the same context.\n\n​Setting Up AI Tools\n​Configuring Cursor Rules\nCursor Rules allow you to provide consistent context to Cursor AI, making it more effective at understanding your codebase and providing relevant suggestions.\n​Creating Cursor Rules\n\nOpen the Command Palette in Cursor:\n\nMac: Cmd + Shift + P\n\nWindows/Linux: Ctrl + Shift + P\n\nSearch for “Cursor Rules” and select the option to create or edit rules\n\nAdd project-specific rules that help Cursor understand your project:\n\nNext.js\nAstro\nVite\n\nSave your rules file and Cursor will apply these rules to its AI suggestions\n\n​Setting Up an OnchainKit Project\nTo create a new OnchainKit project:\nReport incorrect codeCopyAsk AInpm create onchain@latest\n\nAfter creating your project, prompt to generate comprehensive documentation for your new OnchainKit project.\n​Creating Project Documentation\nA comprehensive instructions file helps AI tools understand your project better. This should be created early in your project and updated regularly.\nReady-to-Use Prompt for Creating Instructions.md:\nReport incorrect codeCopyAsk AICreate a detailed instructions.md file for my project with the following sections:\n\n1. Overview: Summarize the project goals, problem statements, and core functionality\n2. Tech Stack: List all technologies, libraries, frameworks with versions\n3. Project Structure: Document the file organization with explanations\n4. Coding Standards: Document style conventions, linting rules, and patterns\n5. User Stories: Key functionality from the user perspective\n6. APIs and Integrations: External services and how they connect\n\n​Effective Prompting Strategies\nBe Specific and Direct\nStart with clear commands and be specific about what you want. AI tools respond best to clear, direct instructions.\nExample: ❌ “Help me with my code”\n✅ “Refactor this authentication function to use async/await instead of nested then() calls”\nProvide Context for Complex Tasks\nReady-to-Use Prompt:\nReport incorrect codeCopyAsk AII'm working on a onchainkit project using [frameworks/libraries]. I need your help with:\n\n1. Problem: [describe specific issue]\n2. Current approach: [explain what you've tried]\n3. Constraints: [mention any technical limitations]\n4. Expected outcome: [describe what success looks like]\n\nHere's the relevant documentation @https://docs.base.org/onchainkit/llms.txt\n\nAsk for Iterations\nStart simple and refine through iterations rather than trying to get everything perfect in one go.\nReady-to-Use Prompt:\nReport incorrect codeCopyAsk AILet's approach this step by step:\n1. First, implement a basic version of [feature] with minimal functionality\n2. Then, we'll review and identify areas for improvement\n3. Next, let's add error handling and edge cases\n4. Finally, we'll optimize for performance\n\nPlease start with step 1 now.\n\n​Working with OnchainKit\n​Leveraging LLMs.txt for Documentation\nThe OnchainKit project provides optimized documentation in the form of LLMs.txt files. These files are specifically formatted to be consumed by AI models:\n\nUse OnchainKit Documentation\n2.Find the component you want to implement\n3.Copy the corresponding LLMs.txt url\n4.Paste it into your prompt to provide context\n\nExample LLMs.txt Usage:\nReport incorrect codeCopyAsk AII'm implementing a swap component with OnchainKit. Here's the relevant LLMs.txt:\n\n@https://docs.base.org/onchainkit/llms.txt\n\nBased on this documentation, please show me how to implement a wallet connector that:\n1. Swap from base usdc to base th\n2. Handles connection states properly\n3. Includes error handling\n4. Follows best practices for user experience\n\nComponent Integration Example\nReady-to-Use Prompt for Token Balance Display:\nReport incorrect codeCopyAsk AII need to implement a new feature in my project.\n\n1. Shows the connected wallet's balance of our {ERC20 token}. \n2. It Updates when the balance changes.\n3. Handles loading and error states appropriately\n4. Follows our project's coding standards\n5. Update our instructions.md to reflect this new implementation\n*update the prompt a token of your choice\n\n​Debugging with AI\n​Effective Debugging Prompts\nReady-to-Use Prompt for Bug Analysis:\nReport incorrect codeCopyAsk AII'm encountering an issue with my code:\n\n1. Expected behavior: [what should happen]\n2. Actual behavior: [what's happening instead]\n3. Error messages: [include any errors]\n4. Relevant code: [paste the problematic code]\n\nPlease analyze this situation step by step and help me:\n1. Identify potential causes of this issue\n2. Suggest debugging steps to isolate the problem\n3. Propose possible solutions\n\nReady-to-Use Prompt for Adding Debug Logs:\nReport incorrect codeCopyAsk AII need to debug the following function. Please add comprehensive logging statements that will help me trace:\n1. Input values and their types\n2. Function execution flow\n3. Intermediate state changes\n4. Output values or errors\n\nHere's my code:\n[paste your code]\n\n​When You’re Stuck\nIf you’re uncertain how to proceed:\nReady-to-Use Clarification Prompt:\nReport incorrect codeCopyAsk AII'm unsure how to proceed with [specific task]. Here's what I know:\n1. [context about the problem]\n2. [what you've tried]\n3. [specific areas where you need guidance]\n\nWhat additional information would help you provide better assistance?\n\nIf you’re unsure about something, simply state it clearly:\nReport incorrect codeCopyAsk AII'm not sure how to proceed with this implementation. Could you provide some guidance on possible approaches?\n\n​Advanced Prompting Techniques\nModern AI assistants have capabilities that you can leverage with these advanced techniques:\n1. Step-by-step reasoning: Ask the AI to work through problems systematically\nReport incorrect codeCopyAsk AIPlease analyze this code step by step and identify potential issues.\n\n2. Format specification: Request specific formats for clarity\nReport incorrect codeCopyAsk AIPlease structure your response as a tutorial with code examples and explanations.\n\n3. Length guidance: Indicate whether you want brief or detailed responses\nReport incorrect codeCopyAsk AIPlease provide a concise explanation in 2-3 paragraphs.\n\n4. Clarify ambiguities: Help resolve unclear points when you receive multiple options\nReport incorrect codeCopyAsk AII notice you suggested two approaches. To clarify, I'd prefer to use the first approach with {insert language choice here}.\n\n​Best Practices Summary\n\nUnderstand context limitations: Recognize that AI tools have finite context windows and prioritize information accordingly\nProvide relevant context: Share code snippets, error messages, and project details that matter for your specific question\nBe specific in requests: Clear, direct instructions yield better results than vague questions\nBreak complex tasks into steps: Iterative approaches often work better for complex problems\nRequest explanations: Ask the AI to explain generated code or concepts you don’t understand\nUse formatting for clarity: Structure your prompts with clear sections and formatting\nReference documentation: When working with specific libraries like OnchainKit, share relevant documentation\nTest and validate: Always review and test AI-generated code before implementing\nBuild on previous context: Refer to earlier parts of your conversation when iterating\nProvide feedback: Let the AI know what worked and what didn’t to improve future responses\nWas this page helpful?YesNoSuggest editsRaise issueStatic Docs FilesPrevious⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "npm create onchain@latest"
+    },
+    {
+      "language": "unknown",
+      "code": "Create a detailed instructions.md file for my project with the following sections:\n\n1. Overview: Summarize the project goals, problem statements, and core functionality\n2. Tech Stack: List all technologies, libraries, frameworks with versions\n3. Project Structure: Document the file organization with explanations\n4. Coding Standards: Document style conventions, linting rules, and patterns\n5. User Stories: Key functionality from the user perspective\n6. APIs and Integrations: External services and how they connect"
+    },
+    {
+      "language": "unknown",
+      "code": "I'm working on a onchainkit project using [frameworks/libraries]. I need your help with:\n\n1. Problem: [describe specific issue]\n2. Current approach: [explain what you've tried]\n3. Constraints: [mention any technical limitations]\n4. Expected outcome: [describe what success looks like]\n\nHere's the relevant documentation @https://docs.base.org/onchainkit/llms.txt"
+    },
+    {
+      "language": "unknown",
+      "code": "Let's approach this step by step:\n1. First, implement a basic version of [feature] with minimal functionality\n2. Then, we'll review and identify areas for improvement\n3. Next, let's add error handling and edge cases\n4. Finally, we'll optimize for performance\n\nPlease start with step 1 now."
+    },
+    {
+      "language": "unknown",
+      "code": "I'm implementing a swap component with OnchainKit. Here's the relevant LLMs.txt:\n\n@https://docs.base.org/onchainkit/llms.txt\n\nBased on this documentation, please show me how to implement a wallet connector that:\n1. Swap from base usdc to base th\n2. Handles connection states properly\n3. Includes error handling\n4. Follows best practices for user experience"
+    },
+    {
+      "language": "unknown",
+      "code": "I need to implement a new feature in my project.\n\n1. Shows the connected wallet's balance of our {ERC20 token}. \n2. It Updates when the balance changes.\n3. Handles loading and error states appropriately\n4. Follows our project's coding standards\n5. Update our instructions.md to reflect this new implementation\n*update the prompt a token of your choice"
+    },
+    {
+      "language": "unknown",
+      "code": "I'm encountering an issue with my code:\n\n1. Expected behavior: [what should happen]\n2. Actual behavior: [what's happening instead]\n3. Error messages: [include any errors]\n4. Relevant code: [paste the problematic code]\n\nPlease analyze this situation step by step and help me:\n1. Identify potential causes of this issue\n2. Suggest debugging steps to isolate the problem\n3. Propose possible solutions"
+    },
+    {
+      "language": "unknown",
+      "code": "I need to debug the following function. Please add comprehensive logging statements that will help me trace:\n1. Input values and their types\n2. Function execution flow\n3. Intermediate state changes\n4. Output values or errors\n\nHere's my code:\n[paste your code]"
+    },
+    {
+      "language": "unknown",
+      "code": "I'm unsure how to proceed with [specific task]. Here's what I know:\n1. [context about the problem]\n2. [what you've tried]\n3. [specific areas where you need guidance]\n\nWhat additional information would help you provide better assistance?"
+    },
+    {
+      "language": "unknown",
+      "code": "I'm not sure how to proceed with this implementation. Could you provide some guidance on possible approaches?"
+    },
+    {
+      "language": "unknown",
+      "code": "Please analyze this code step by step and identify potential issues."
+    },
+    {
+      "language": "unknown",
+      "code": "Please structure your response as a tutorial with code examples and explanations."
+    },
+    {
+      "language": "unknown",
+      "code": "Please provide a concise explanation in 2-3 paragraphs."
+    },
+    {
+      "language": "unknown",
+      "code": "I notice you suggested two approaches. To clarify, I'd prefer to use the first approach with {insert language choice here}."
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/get-started/prompt-library#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Bridge",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet"
+    },
+    {
+      "text": "Base",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Build an App",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Deploy Smart Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "text": "Get Funded",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "text": "Base Services Hub",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "text": "Base Mentorship Program",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Country Leads & Ambassadors",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "text": "MCP Server",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Static Docs Files",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    },
+    {
+      "text": "Understanding Context Windows",
+      "url": "https://docs.base.org/get-started/prompt-library#understanding-context-windows"
+    },
+    {
+      "text": "Why Context Matters",
+      "url": "https://docs.base.org/get-started/prompt-library#why-context-matters"
+    },
+    {
+      "text": "Optimizing for Context Windows",
+      "url": "https://docs.base.org/get-started/prompt-library#optimizing-for-context-windows"
+    },
+    {
+      "text": "Setting Up AI Tools",
+      "url": "https://docs.base.org/get-started/prompt-library#setting-up-ai-tools"
+    },
+    {
+      "text": "Configuring Cursor Rules",
+      "url": "https://docs.base.org/get-started/prompt-library#configuring-cursor-rules"
+    },
+    {
+      "text": "Creating Cursor Rules",
+      "url": "https://docs.base.org/get-started/prompt-library#creating-cursor-rules"
+    },
+    {
+      "text": "Setting Up an OnchainKit Project",
+      "url": "https://docs.base.org/get-started/prompt-library#setting-up-an-onchainkit-project"
+    },
+    {
+      "text": "Creating Project Documentation",
+      "url": "https://docs.base.org/get-started/prompt-library#creating-project-documentation"
+    },
+    {
+      "text": "Effective Prompting Strategies",
+      "url": "https://docs.base.org/get-started/prompt-library#effective-prompting-strategies"
+    },
+    {
+      "text": "Working with OnchainKit",
+      "url": "https://docs.base.org/get-started/prompt-library#working-with-onchainkit"
+    },
+    {
+      "text": "Leveraging LLMs.txt for Documentation",
+      "url": "https://docs.base.org/get-started/prompt-library#leveraging-llms-txt-for-documentation"
+    },
+    {
+      "text": "Debugging with AI",
+      "url": "https://docs.base.org/get-started/prompt-library#debugging-with-ai"
+    },
+    {
+      "text": "Effective Debugging Prompts",
+      "url": "https://docs.base.org/get-started/prompt-library#effective-debugging-prompts"
+    },
+    {
+      "text": "When You’re Stuck",
+      "url": "https://docs.base.org/get-started/prompt-library#when-you%E2%80%99re-stuck"
+    },
+    {
+      "text": "Advanced Prompting Techniques",
+      "url": "https://docs.base.org/get-started/prompt-library#advanced-prompting-techniques"
+    },
+    {
+      "text": "Best Practices Summary",
+      "url": "https://docs.base.org/get-started/prompt-library#best-practices-summary"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#understanding-context-windows"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#why-context-matters"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#optimizing-for-context-windows"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#setting-up-ai-tools"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#configuring-cursor-rules"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#creating-cursor-rules"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#setting-up-an-onchainkit-project"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#creating-project-documentation"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#effective-prompting-strategies"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#working-with-onchainkit"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#leveraging-llms-txt-for-documentation"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#debugging-with-ai"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#effective-debugging-prompts"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#when-you’re-stuck"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#advanced-prompting-techniques"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/prompt-library#best-practices-summary"
+    },
+    {
+      "text": "Static Docs FilesPrevious",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    }
+  ]
+}

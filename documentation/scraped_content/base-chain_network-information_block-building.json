@@ -1,0 +1,323 @@
+{
+  "url": "https://docs.base.org/base-chain/network-information/block-building",
+  "title": "Block Building - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:05.214479",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Overview"
+    },
+    {
+      "level": "h2",
+      "text": "​Configurations"
+    },
+    {
+      "level": "h3",
+      "text": "​Flashblocks"
+    },
+    {
+      "level": "h4",
+      "text": "​Timing"
+    },
+    {
+      "level": "h4",
+      "text": "​High Gas Limits"
+    },
+    {
+      "level": "h3",
+      "text": "​Per-Transaction Gas Maximum"
+    },
+    {
+      "level": "h3",
+      "text": "​Vanilla"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationNetwork InformationBlock BuildingGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageOverviewConfigurationsFlashblocksTimingHigh Gas LimitsPer-Transaction Gas MaximumVanilla​Overview\nThis section describes how blocks are ordered on the Base networks. The ordering is separate from the UX,\nfor example the sequencer could be building Flashblocks every 200ms, without these Flashblocks being exposed publicly. In this scenario, block ordering\nwould change but the user experience would remain consistent.\nThe Base networks are currently configured in the following ways:\nNetworkCurrent ConfigurationUpcoming DeploymentsBase MainnetFlashblocks + Per-Transaction Gas MaxBase SepoliaFlashblocks + Per-Transaction Gas Max\nSee the Configuration Changelog for a history of changes to block building and other network parameters.\n​Configurations\n​Flashblocks\nCurrently, blocks are built using op-rbuilder and priority fee auctions occur\nevery 200ms. There are two changes from the vanilla ordering to be aware of:\n​Timing\nFlashblocks are built every 200ms, each ordering a portion of the block. Unlike the current system where later-arriving transactions with higher priority fees can be placed at the top of the block, Flashblocks creates a time-based constraint. Once a Flashblock is built and broadcast, its transaction ordering is locked even if a transaction with a higher priority fee arrives later, it cannot be included in earlier, already built Flashblocks.\n​High Gas Limits\nIf your app creates transactions with large gas limits, we recommend monitoring to detect any changes in inclusion latency. Transactions with gas limits over 1/10 of the current block gas limit (currently 14 million gas), face additional constraints:\n\nEach Flashblock can only use a portion of the block’s total gas limit\nFlashblock 1: up to 1/10 of the total gas\nFlashblock 2: up to 2/10 of the total gas\n\nAnd so on for subsequent Flashblocks\nConsequently, transactions with large gas requirements must wait for later Flashblocks with sufficient gas capacity. For example, a transaction exceeding 1/10 of the block’s gas limit cannot be included in Flashblock 1 and must wait for Flashblock 2 or later.\n​Per-Transaction Gas Maximum\nBase enforces a per-transaction gas maximum of 25,000,000 gas. Transactions that specify a gas limit above this value are rejected by the mempool before inclusion. eth_sendTransaction or eth_sendRawTransaction will return a JSON-RPC error (for example: exceeds maximum per-transaction gas limit). This cap does not change the block gas limit or the block validity conditions.\nFusaka’s EIP 7825 will change the block validity conditions and enforce a lower per-transaction gas maximum of 16,777,216 gas (2^24). We expect this protocol change to be adopted in all OP Stack chains around January 2026.\nBundler operators for smart contract wallets must configure their systems to limit the bundle size to fit within this cap.\n​Vanilla\nBlocks are built every 2s by op-geth. Transactions within those blocks are ordered by\npriority fee, see the (code).Was this page helpful?YesNoSuggest editsRaise issueNetwork FeesPreviousTransaction FinalityNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Overview",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#overview"
+    },
+    {
+      "text": "Configurations",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#configurations"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "Timing",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#timing"
+    },
+    {
+      "text": "High Gas Limits",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#high-gas-limits"
+    },
+    {
+      "text": "Per-Transaction Gas Maximum",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Vanilla",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#vanilla"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#overview"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "Per-Transaction Gas Max",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "Per-Transaction Gas Max",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#configurations"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#timing"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#high-gas-limits"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#vanilla"
+    },
+    {
+      "text": "Network FeesPrevious",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Transaction FinalityNext",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "url": "https://docs.base.org/base-chain/network-information/transaction-finality",
+  "title": "Transaction Finality - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:13.300868",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​What is transaction finality?"
+    },
+    {
+      "level": "h2",
+      "text": "​Finality for Base L2 Transactions"
+    },
+    {
+      "level": "h3",
+      "text": "Flashblock Inclusion: ~200ms"
+    },
+    {
+      "level": "h3",
+      "text": "L2 Block Inclusion: ~2s"
+    },
+    {
+      "level": "h3",
+      "text": "L1 Batch Inclusion: ~2m"
+    },
+    {
+      "level": "h3",
+      "text": "L1 Batch Finality: ~20m"
+    },
+    {
+      "level": "h2",
+      "text": "​Finality for Withdrawal Transactions"
+    },
+    {
+      "level": "h2",
+      "text": "​FAQ"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationNetwork InformationTransaction FinalityGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageWhat is transaction finality?Finality for Base L2 TransactionsFinality for Withdrawal TransactionsFAQ​What is transaction finality?\nFinality refers to the point at which a transaction sent to Base becomes irreversible. This provides guarantees that the transaction will not be rolled back or lost.\nFinality works differently for normal transactions that modify Base L2 state than it does for transactions that withdraw funds from Base L2 to Ethereum L1.\nOnly transactions that withdraw funds from Base to Ethereum must wait 7 days. Regular transactions within Base, such as swaps or sends, do not have to wait 7 days.\n​Finality for Base L2 Transactions\nThis describes finality for transactions on Base except withdrawal transactions that move funds from Base to Ethereum L1\nFor transactions on Base, finality is not a single time to wait for. Instead, there are 4 stages in time that each provide increasing security guarantees.\n\n1Flashblock Inclusion: ~200msAfter roughly 200ms, the transaction is included in a preconfirmation block (Flashblock) by the Base sequencer.Under 0.001% probability of a reorg.\nFlashblocks reorg less than 0.001% of the time\nYou can see the reorg history in our public stats page.\n2L2 Block Inclusion: ~2sAfter roughly 2 seconds, the sequencer has built the transaction into an L2 block and distributed it to validator nodes.Near 0% probability of a reorg.\nOnly a single Base L2 block has ever reorged, representing .0000003% of transactions. The data can be seen here\n3L1 Batch Inclusion: ~2mAfter roughly 2 minutes, a Base batch containing the transaction has been posted to Ethereum.Effectively 0% probability of a reorg.\nThere has never been a reorg of L2 blocks that were batched to Ethereum L1.\nA reorg of Ethereum L1 does not require a reorg of the Base L2 chain. The sequencer and validator nodes maintain a configurable lag from the tip of Ethereum, so typical L1 reorgs have no effect. In the event of larger Ethereum reorgs, Base can resubmit batch data on L1 without changing the sequenced L2 blocks.\n4L1 Batch Finality: ~20mThe Ethereum L1 batch containing the transaction is older than 2 epochs, or 64 L1 blocks.Effectively 0% probability of a reorg.\nL2 blocks that have reached L1 batch finality are protected from reorgs the same way Ethereum finalized blocks are. They are in practice impossible to reverse.\n\n​Finality for Withdrawal Transactions\nThis describes finality of transactions that move funds from Base to Ethereum\nOnly withdrawals to Ethereum must wait 7 days to finalize before the funds can be released to the address on Ethereum L1. This allows Base’s Fault Proof system to provide extremely high security guarantees for funds bridged to Base.\nWhat happens during the 7 days?When a transaction initiates a withdrawal from Base to Ethereum, the funds are removed from the account balance on Base. Later, a permissionless “proposer” must provide Ethereum with proof that Base contains this withdrawal.However, Ethereum cannot natively confirm what happened on Base as they are separate blockchains. Thus, there is a 7 day window in which a permissionless “challenger” can dispute a proposal that it feels is malicious. If no challenge is made in the 7 days, the withdrawal can be proven against the finalized output root and released to the L1 recipient. But if a challenge is made, the proposer and challenger play what is called the Fault Dispute Game. This game requires increasing bonds to be made, with an eventual winner. If the proposer wins, the output root finalizes and can be used to prove withdrawals against (releasing them on L1). If the challenger wins, the output proposal becomes invalid.This system requires only a one honest party to remain secure. Base will always run an honest proposer and challenger.Note: if the dispute game is won by a challenger, the state of the L2 chain does not reorg. The output proposal is marked invalid and any withdrawals that were proven against it cannot finalize. Those withdrawals would need to be re-proven against a different, valid output root.\n​FAQ\nIf there is a reorg on Ethereum, will it cause a reorg on Base?In almost all circumstances, no. Base can simply re-submit batch data to Ethereum transparently while the L2 chain continues to progress.How long do deposit transactions take to finalize?Transactions moving funds from Ethereum L1 to Base must be initiated on Ethereum and typically get included within 3 minutes by the Base sequencer.If a challenger wins a dispute game, will the L2 chain reorg?No. The output proposal that was challenged is marked invalid, and any actions that used it’s output root become invalid. Specifically, withdrawals from Base to L1 that proved against this output root must now prove against a different and valid one.Was this page helpful?YesNoSuggest editsRaise issueBlock BuildingPreviousDifferences between Ethereum and BaseNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "What is transaction finality?",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#what-is-transaction-finality"
+    },
+    {
+      "text": "Finality for Base L2 Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#finality-for-base-l2-transactions"
+    },
+    {
+      "text": "Finality for Withdrawal Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#finality-for-withdrawal-transactions"
+    },
+    {
+      "text": "FAQ",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#faq"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#what-is-transaction-finality"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#finality-for-base-l2-transactions"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "public stats page.",
+      "url": "https://base.org/stats"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#finality-for-withdrawal-transactions"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality#faq"
+    },
+    {
+      "text": "Block BuildingPrevious",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Differences between Ethereum and BaseNext",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    }
+  ]
+}

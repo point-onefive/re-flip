@@ -1,0 +1,256 @@
+{
+  "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp",
+  "title": "Create a Mini App - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:08.813213",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Deploy to Vercel"
+    },
+    {
+      "level": "h2",
+      "text": "​Next Steps"
+    },
+    {
+      "level": "h2",
+      "text": "Templates"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartCreate a Mini AppGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnQuickstartMigrate an Existing AppCreate a Mini AppBuild ChecklistBuilding for The Base AppMini App TemplatesNEWCore ConceptsManifestContextEmbeds & PreviewsBase AccountNotificationsAuthenticationNavigationTechnical GuidesSign Your ManifestGenerate Dynamic Embed ImagesSend Notifications (Neynar)Accept PaymentsFeatured GuidelinesFeatured ChecklistProduct GuidelinesDesign GuidelinesNotification GuidelinesTechnical GuidelinesGrowth PlaybookWhy Mini AppsOptimize OnboardingIdeating Viral AppsRewardsTroubleshootingCommon Issues & DebuggingBase App CompatibilityHow Search worksTest Your AppResourcesTemplatesDesign resourcesLlms full.txtPrerequisites\n\nBase app account\nVercel account for hosting the application\n\n1Deploy TemplateClick the button below and follow the prompts to deploy the quickstart template to Vercel.Deploy to VercelRapidly deploy the quickstart template to Vercel to get started.2Clone your repositoryClone the repo created by Vercel to make local edits.Replace <your-username> with your github username.TerminalReport incorrect codeCopyAsk AIgit clone https://github.com/<your-username>/new-mini-app-quickstart\ncd new-mini-app-quickstart\nnpm install\n3Update Manifest configurationThe minikit.config.ts file is responsible for configuring your manifest located at app/.well-known/farcaster.json and creating embed metadata. You can customize the manifest by updating the miniapp object.For details on each field, see the field reference.minikit.config.tsReport incorrect codeCopyAsk AIexport const minikitConfig = {\n accountAssociation: { // this will be added in step 5\n \"header\": \"\",\n \"payload\": \"\",\n \"signature\": \"\"\n },\n miniapp: {\n version: \"1\",\n name: \"Cubey\", \n subtitle: \"Your AI Ad Companion\", \n description: \"Ads\",\n screenshotUrls: [`${ROOT_URL}/screenshot-portrait.png`],\n iconUrl: `${ROOT_URL}/blue-icon.png`,\n splashImageUrl: `${ROOT_URL}/blue-hero.png`,\n splashBackgroundColor: \"#000000\",\n homeUrl: ROOT_URL,\n webhookUrl: `${ROOT_URL}/api/webhook`,\n primaryCategory: \"social\",\n tags: [\"marketing\", \"ads\", \"quickstart\", \"waitlist\"],\n heroImageUrl: `${ROOT_URL}/blue-hero.png`, \n tagline: \"\",\n ogTitle: \"\",\n ogDescription: \"\",\n ogImageUrl: `${ROOT_URL}/blue-hero.png`,\n },\n} as const;\n4Create accountAssociation CredentialsNow that you have a public domain for your application, you are ready to associate your mini app with your Farcaster account.\n\nEnsure all changes are live by pushing changes to the main branch.\nEnsure that Vercel’s Deployment Protection is off by going to the Vercel dashboard for your project and navigating to Settings -> Deployment Protection and toggling “Vercel Authentication” to off and click save. \n\nNavigate to the Base Build Account association tool.\n\nPaste your domain in the App URL field (ex: sample-url.vercel.app) and click “Submit”\n\nClick on the “Verify” button that appears and follow the instructions to generate the accountAssociation fields.\nCopy the accountAssociation object\n5Update `minikit.config.ts`Update your minikit.config.ts file to include the accountAssociation object you copied in the previous step.minikit.config.tsReport incorrect codeCopyAsk AIexport const minikitConfig = {\n accountAssociation: {\n \"header\": \"eyJmaBBiOjE3MzE4LCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4NzYwQjA0NDc5NjM4MTExNzNmRjg3YDPBYzA5OEJBQ0YxNzNCYkU0OCJ9\",\n \"payload\": \"eyJkb21haW4iOiJ4BWl0bGlzdC1xcy52ZXJjZWwuYXBwIn7\",\n \"signature\": \"MHhmNGQzN2M2OTk4NDIwZDNjZWVjYTNiODllYzJkMjAwOTkyMDEwOGVhNTFlYWI3NjAyN2QyMmM1MDVhNzIyMWY2NTRiYmRlZmQ0NGQwOWNiY2M2NmI2B7VmNGZiMmZiOGYzNDVjODVmNmQ3ZTVjNzI3OWNmMGY4ZTA2ODYzM2FjZjFi\"\n },\n miniapp: {\n ...\n },\n }\n6Push updates to productionPush all changes to the main branch. Vercel will automatically deploy the changes to your production environment.7Preview Your AppGo to base.dev/preview to validate your app.\nAdd your app URL to view the embeds and click the launch button to verify the app launches as expected.\nUse the “Account association” tab to verify the association credentials were created correctly.\nUse the “Metadata” tab to see the metadata added from the manifest and identify any missing fields.\n8Post to PublishTo publish your app, create a post in the Base app with your app’s URL.\n​Next Steps\nExplore the templates and resources available to help you build your mini app.\nTemplatesWas this page helpful?YesNoSuggest editsRaise issueMigrate an Existing AppPreviousBuild ChecklistNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "git clone https://github.com/<your-username>/new-mini-app-quickstart\ncd new-mini-app-quickstart\nnpm install"
+    },
+    {
+      "language": "unknown",
+      "code": "export const minikitConfig = {\n  accountAssociation: { // this will be added in step 5\n    \"header\": \"\",\n    \"payload\": \"\",\n    \"signature\": \"\"\n  },\n  miniapp: {\n    version: \"1\",\n    name: \"Cubey\", \n    subtitle: \"Your AI Ad Companion\", \n    description: \"Ads\",\n    screenshotUrls: [`${ROOT_URL}/screenshot-portrait.png`],\n    iconUrl: `${ROOT_URL}/blue-icon.png`,\n    splashImageUrl: `${ROOT_URL}/blue-hero.png`,\n    splashBackgroundColor: \"#000000\",\n    homeUrl: ROOT_URL,\n    webhookUrl: `${ROOT_URL}/api/webhook`,\n    primaryCategory: \"social\",\n    tags: [\"marketing\", \"ads\", \"quickstart\", \"waitlist\"],\n    heroImageUrl: `${ROOT_URL}/blue-hero.png`, \n    tagline: \"\",\n    ogTitle: \"\",\n    ogDescription: \"\",\n    ogImageUrl: `${ROOT_URL}/blue-hero.png`,\n  },\n} as const;"
+    },
+    {
+      "language": "unknown",
+      "code": "export const minikitConfig = {\n    accountAssociation: {\n        \"header\": \"eyJmaBBiOjE3MzE4LCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4NzYwQjA0NDc5NjM4MTExNzNmRjg3YDPBYzA5OEJBQ0YxNzNCYkU0OCJ9\",\n        \"payload\": \"eyJkb21haW4iOiJ4BWl0bGlzdC1xcy52ZXJjZWwuYXBwIn7\",\n        \"signature\": \"MHhmNGQzN2M2OTk4NDIwZDNjZWVjYTNiODllYzJkMjAwOTkyMDEwOGVhNTFlYWI3NjAyN2QyMmM1MDVhNzIyMWY2NTRiYmRlZmQ0NGQwOWNiY2M2NmI2B7VmNGZiMmZiOGYzNDVjODVmNmQ3ZTVjNzI3OWNmMGY4ZTA2ODYzM2FjZjFi\"\n    },\n    miniapp: {\n        ...\n    },\n  }"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Migrate an Existing App",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "Create a Mini App",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "Build Checklist",
+      "url": "https://docs.base.org/mini-apps/quickstart/build-checklist"
+    },
+    {
+      "text": "Building for The Base App",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "Manifest",
+      "url": "https://docs.base.org/mini-apps/core-concepts/manifest"
+    },
+    {
+      "text": "Context",
+      "url": "https://docs.base.org/mini-apps/core-concepts/context"
+    },
+    {
+      "text": "Embeds & Previews",
+      "url": "https://docs.base.org/mini-apps/core-concepts/embeds-and-previews"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/mini-apps/core-concepts/base-account"
+    },
+    {
+      "text": "Notifications",
+      "url": "https://docs.base.org/mini-apps/core-concepts/notifications"
+    },
+    {
+      "text": "Authentication",
+      "url": "https://docs.base.org/mini-apps/core-concepts/authentication"
+    },
+    {
+      "text": "Navigation",
+      "url": "https://docs.base.org/mini-apps/core-concepts/navigation"
+    },
+    {
+      "text": "Sign Your Manifest",
+      "url": "https://docs.base.org/mini-apps/technical-guides/sign-manifest"
+    },
+    {
+      "text": "Generate Dynamic Embed Images",
+      "url": "https://docs.base.org/mini-apps/technical-guides/dynamic-embeds"
+    },
+    {
+      "text": "Send Notifications (Neynar)",
+      "url": "https://docs.base.org/mini-apps/technical-guides/neynar-notifications"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/mini-apps/technical-guides/accept-payments"
+    },
+    {
+      "text": "Featured Checklist",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/overview"
+    },
+    {
+      "text": "Product Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/product-guidelines"
+    },
+    {
+      "text": "Design Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/design-guidelines"
+    },
+    {
+      "text": "Notification Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/notification-guidelines"
+    },
+    {
+      "text": "Technical Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/technical-guidelines"
+    },
+    {
+      "text": "Why Mini Apps",
+      "url": "https://docs.base.org/mini-apps/introduction/overview"
+    },
+    {
+      "text": "Optimize Onboarding",
+      "url": "https://docs.base.org/mini-apps/growth/optimize-onboarding"
+    },
+    {
+      "text": "Ideating Viral Apps",
+      "url": "https://docs.base.org/mini-apps/growth/build-viral-mini-apps"
+    },
+    {
+      "text": "Rewards",
+      "url": "https://docs.base.org/mini-apps/growth/rewards"
+    },
+    {
+      "text": "Common Issues & Debugging",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/common-issues"
+    },
+    {
+      "text": "Base App Compatibility",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/base-app-compatibility"
+    },
+    {
+      "text": "How Search works",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/how-search-works"
+    },
+    {
+      "text": "Test Your App",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/testing"
+    },
+    {
+      "text": "Templates",
+      "url": "https://docs.base.org/mini-apps/resources/templates"
+    },
+    {
+      "text": "Design resources",
+      "url": "https://docs.base.org/mini-apps/resources/design-resources"
+    },
+    {
+      "text": "Llms full.txt",
+      "url": "https://docs.base.org/mini-apps/llms-full.txt"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "field reference",
+      "url": "https://docs.base.org/mini-apps/features/manifest#field-reference"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp#next-steps"
+    },
+    {
+      "text": "Templates",
+      "url": "https://docs.base.org/mini-apps/resources/templates"
+    },
+    {
+      "text": "Migrate an Existing AppPrevious",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "Build ChecklistNext",
+      "url": "https://docs.base.org/mini-apps/quickstart/build-checklist"
+    }
+  ]
+}

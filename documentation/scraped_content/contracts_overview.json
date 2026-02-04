@@ -1,0 +1,119 @@
+{
+  "url": "https://docs.base.org/contracts/overview",
+  "title": "Page Not Found",
+  "scraped_at": "2026-02-04T10:26:20.585490",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Page Not Found"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationPage Not FoundGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnUse CasesOnboard UserAccept Crypto PaymentsAI Agent with Spend PermissionsLaunch AI Agents on BaseLaunch a TokenOnchain SocialDefi Your AppGo GaslessBase App CoinsWriting TestsBuild with AIAI-powered IDEsPrompt LibraryVibe Code a Mini AppFoundationsDocumentation & ReadingBuildingAdd MiniKit to Your App404Page Not FoundWe couldn't find the page. Maybe you were looking for one of these pages below?Testing with Hardhat and TypechainFoundry: Testing smart contractsOverview⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/contracts/overview#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Onboard User",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Accept Crypto Payments",
+      "url": "https://docs.base.org/cookbook/accept-crypto-payments"
+    },
+    {
+      "text": "AI Agent with Spend Permissions",
+      "url": "https://docs.base.org/cookbook/spend-permissions-ai-agent"
+    },
+    {
+      "text": "Launch AI Agents on Base",
+      "url": "https://docs.base.org/cookbook/launch-ai-agents"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/cookbook/launch-tokens"
+    },
+    {
+      "text": "Onchain Social",
+      "url": "https://docs.base.org/cookbook/onchain-social"
+    },
+    {
+      "text": "Defi Your App",
+      "url": "https://docs.base.org/cookbook/defi-your-app"
+    },
+    {
+      "text": "Go Gasless",
+      "url": "https://docs.base.org/cookbook/go-gasless"
+    },
+    {
+      "text": "Base App Coins",
+      "url": "https://docs.base.org/cookbook/base-app-coins"
+    },
+    {
+      "text": "Writing Tests",
+      "url": "https://docs.base.org/cookbook/testing-onchain-apps"
+    },
+    {
+      "text": "AI-powered IDEs",
+      "url": "https://docs.base.org/cookbook/ai-prompting"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/cookbook/base-builder-mcp"
+    },
+    {
+      "text": "Testing with Hardhat and Typechain",
+      "url": "https://docs.base.org/learn/hardhat/hardhat-testing/hardhat-testing-sbs#overview"
+    },
+    {
+      "text": "Foundry: Testing smart contracts",
+      "url": "https://docs.base.org/learn/foundry/testing-smart-contracts#overview"
+    },
+    {
+      "text": "Overview",
+      "url": "https://docs.base.org/learn/onchain-app-development/frontend-setup/overview#overview"
+    }
+  ]
+}

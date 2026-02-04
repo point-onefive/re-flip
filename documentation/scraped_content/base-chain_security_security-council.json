@@ -1,0 +1,267 @@
+{
+  "url": "https://docs.base.org/base-chain/security/security-council",
+  "title": "Security Council for Base - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:24.459786",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Purpose"
+    },
+    {
+      "level": "h2",
+      "text": "​Structure"
+    },
+    {
+      "level": "h2",
+      "text": "​Roles & Responsibilities"
+    },
+    {
+      "level": "h2",
+      "text": "​The future"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationSecuritySecurity Council for BaseGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pagePurposeStructureRoles & ResponsibilitiesThe futureThis page outlines the purpose, goals, structure, and responsibilities of the\nSecurity Council for Base. The Council is composed of individuals and\norganizations who hold signing keys and help manage upgrades to keep the Base\nnetwork secure.\n​Purpose\nBase’s mission is to build a global onchain economy that increases innovation,\ncreativity, and freedom. We believe this is only possible on a decentralized\nplatform. This is why Base is (1) built on Ethereum, the most secure and\ndecentralized L1, (2) built on the open and permissionless OP Stack, and (3)\nupholds key Neutrality Principles.\nAs part of our ongoing commitment to decentralization, Base launched\npermissionless fault proofs in\nOctober 2024, decentralized control of contract upgrades via a Security Council\nin April 2025, and has now reached Stage 1 Decentralization.\nIn reaching Stage 1, Base provides stronger security guarantees and fewer\ntrust assumptions. Builders benefit from infrastructure certainty (no unexpected\nrule changes), and there’s no single point of failure—everyone can participate\nin verifying and securing the network.\n​Structure\nComposition and quorum\nStage 1 Decentralization requirements say that the group which approves Base\nChain contract upgrades must contain:\n\nat least 8 participants\na ≥75% quorum\na quorum-blocking group outside the main rollup operator (Base)\n\nIn addition to the current signing entities (Optimism and Coinbase), the\nSecurity Council adds 10 independent entities and individuals from\ngeographically diverse regions. To satisfy the ≥75% quorum, 9 out of the 12\nentities (the 10 entities in the Security Council, Optimism, and Coinbase) are\nrequired to approve Base upgrades. Base upgrades cannot take effect until a\nquorum of these entities sign and approve the upgrade. This composition\nsatisfies all requirements.\nMember Selection criteria\n\nRepresentation across diverse geographic regions and international territories\nStrong alignment with Base’s mission and values\nDiverse organizations - each member represents a separate entity\nProven track record in the Base and Ethereum ecosystem - in good standing in upholding professional and ethical standards in the community\nTechnical competency and good security practices - has completed screening processes, including background checks, and have shown ability to securely store and use sensitive key materials\n\nCurrent Roster\nThis is a living list that will stay up to date with membership. As of April 2025, the Security Council currently contains members from the following entities and individuals, based in the listed geographical jurisdictions.\n\n[Entity] Aerodrome – signer based in Japan\n\nAerodrome is a decentralized exchange on Base where users can swap, earn rewards and actively participate in the onchain economy.\n0xa5959a39cA67b9fb473E4A3A898C611EEAc9CB73\n\n[Entity] Moonwell – signer based in Brazil\n\nMoonwell is a decentralized lending and borrowing platform built on Base.\n0x21C7D1e6A81Daca071bA94839ab74C39A25f851F\n\n[Entity] Blackbird – signer based in USA\n\nBlackbird is a loyalty and payments platform built specifically for the restaurant industry, powered by Base.\n0xA5657B88A0130a626fcDd6aAA59522373438CdFE\n\n[Entity] ChainSafe – signer based in Canada\n\nChainSafe is a blockchain R&D firm focused on decentralized infrastructure.\n0x1C56A6d2A6Af643cea4E62e72B75B9bDe8d62e2B\n\n[Entity] Talent Protocol – signer based in Portugal\n\nTalent Protocol brings professional reputation onchain to help Base builders showcase their skills and get the recognition they deserve.\n0x5ff5C78ff194acc24C22DAaDdE4D639ebF18ACC6\n\n[Entity] Moshicam – signer based in USA\n\nMoshicam is a community-based photo editing app built on Base.\n0xa8ee754FD1d069fb4B5d652730A0ca5e07a3fb06\n\n[Individual] Seneca – based in USA\n\nSeneca is the co-founder of Rounds, a social platform which has powered grant distribution to Base builders.\n0x82C80F34C4b5c153dB76122a11AaD2F77C99E766\n\n[Individual] Juan Suarez – based in USA\n\nJuan is an active member of the Base ecosystem and has advised a number of key Base projects. He is a former member of the Coinbase Legal Team.\n0x99DB5BbA0db16e9aD05e3ff53310683CC3C971D2\n\n[Individual] Toady Hawk – based in Canada\n\nToady Hawk is the founder of Zero Rights Media, an open source onchain media org on Base (producers of ZEROPOD), and The Yellow Collective, an onchain culture club for artists and creators on Base.\n0x0E8A99738a50D523871739c6d676554b0E34252f\n\n[Individual] Roberto Bayardo – based in USA\n\nRoberto Bayardo is an engineer at Commonware, building a framework for high-performance blockchains. He is a former core Base contributor.\n0x18e982274f8C5B548D5aAc7aBef44D61504e1b3E\n\nIndividuals representing each entity are not published to protect personal privacy and to enhance security.\nMember Terms\nThe Security Council for Base operates on a staggered “cohort” model:\n\nCohort 1: 6-month term beginning April 2025\nCohort 2: 9-month term beginning April 2025\n\n​Roles & Responsibilities\nReview and approve changes\n\nCouncil members are notified about proposed upgrades, and they must verify, approve, and sign these upgrades.\nCouncil members must verify, approve and sign role changes (in case of key rotations for lost devices, member rotations, etc.). Any key rotations will not disrupt quorum or security.\n\nMaintain availability and lines of communication\n\nBe accessible and reachable for scheduled signings, coordination calls, and emergencies.\nCollaborate with other members to resolve urgent issues.\n\nPreserve key security\n\nGenerate and store key materials securely.\nKeys should only be used for activities which directly relate to the Security Council member role (upgrades and ownership changes).\nReport suspected loss of access or compromise immediately.\nUndergo onchain safety and security training at the beginning of each term.\nAt regular intervals, participate in a liveness check by signing a message, to confirm ongoing control of the key.\n\nAct in good faith\n\nAvoid conflicts of interest and disclose potential conflicts.\nParticipate in removing or replacing dysfunctional signers without compromising security.\n\n​The future\nThe Security Council for Base is a critical step toward a more decentralized,\nresilient, and secure future for the Base network. By distributing key\nresponsibilities across trusted, independent participants and implementing fault\nproofs, we’ve reduced reliance on any single entity while strengthening\nguarantees for users, builders, and the broader ecosystem.\nThis is just the beginning. As Base continues to evolve, the role of the\nSecurity Council will be progressively minimized, paving the way for even more\ntrustless infrastructure beyond Stage 1—Stage 2—and even greater community\ncontrol.\nOur mission remains the same: to build a global onchain economy that empowers\ninnovation, creativity, and freedom—on a foundation that everyone can rely on.\nBase is for everyone.Was this page helpful?YesNoSuggest editsRaise issueTokens in Coinbase WalletPreviousHow to avoid getting your app flagged as maliciousNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/security/security-council#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Purpose",
+      "url": "https://docs.base.org/base-chain/security/security-council#purpose"
+    },
+    {
+      "text": "Structure",
+      "url": "https://docs.base.org/base-chain/security/security-council#structure"
+    },
+    {
+      "text": "Roles & Responsibilities",
+      "url": "https://docs.base.org/base-chain/security/security-council#roles-%26-responsibilities"
+    },
+    {
+      "text": "The future",
+      "url": "https://docs.base.org/base-chain/security/security-council#the-future"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/security/security-council#purpose"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/security/security-council#structure"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/security/security-council#roles-&-responsibilities"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/security/security-council#the-future"
+    },
+    {
+      "text": "Tokens in Coinbase WalletPrevious",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "How to avoid getting your app flagged as maliciousNext",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    }
+  ]
+}

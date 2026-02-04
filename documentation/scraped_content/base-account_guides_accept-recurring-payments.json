@@ -1,0 +1,476 @@
+{
+  "url": "https://docs.base.org/base-account/guides/accept-recurring-payments",
+  "title": "Accept Recurring Payments - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:11.765973",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Start accepting recurring payments with Base Pay Subscriptions"
+    },
+    {
+      "level": "h2",
+      "text": "​How It Works"
+    },
+    {
+      "level": "h2",
+      "text": "​Implementation Guide"
+    },
+    {
+      "level": "h3",
+      "text": "​Architecture Overview"
+    },
+    {
+      "level": "h3",
+      "text": "​Setup: Create Your Subscription Owner Wallet"
+    },
+    {
+      "level": "h3",
+      "text": "​Client-Side: Create Subscriptions"
+    },
+    {
+      "level": "h3",
+      "text": "​Server-Side: Charge Subscriptions"
+    },
+    {
+      "level": "h3",
+      "text": "​Server-Side: Revoke Subscriptions"
+    },
+    {
+      "level": "h3",
+      "text": "​Fund Management"
+    },
+    {
+      "level": "h3",
+      "text": "​Testing on Testnet"
+    },
+    {
+      "level": "h2",
+      "text": "​Network and Token Support"
+    },
+    {
+      "level": "h2",
+      "text": "​Advanced Topics"
+    },
+    {
+      "level": "h3",
+      "text": "​Custom Transaction Handling"
+    },
+    {
+      "level": "h2",
+      "text": "​API Reference"
+    },
+    {
+      "level": "h2",
+      "text": "subscribe()"
+    },
+    {
+      "level": "h2",
+      "text": "getStatus()"
+    },
+    {
+      "level": "h2",
+      "text": "charge()"
+    },
+    {
+      "level": "h2",
+      "text": "revoke()"
+    },
+    {
+      "level": "h2",
+      "text": "Setup Owner Wallet"
+    },
+    {
+      "level": "h2",
+      "text": "prepareCharge()"
+    },
+    {
+      "level": "h2",
+      "text": "prepareRevoke()"
+    },
+    {
+      "level": "h2",
+      "text": "Spend Permissions"
+    },
+    {
+      "level": "h2",
+      "text": "One-Time Payments"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationGuidesAccept Recurring PaymentsGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubSupportIntroductionBase Account OverviewQuickstartWeb (HTML + JS)Web (Next.js)Mobile (React Native)GuidesAuthenticate UsersAccept PaymentsAccept Recurring PaymentsBatch TransactionsSponsor GasUse Sub AccountsUse Spend PermissionsUse Coinbase Balances OnchainSign and Verify Typed DataPay Gas in ERC20 tokensFramework IntegrationsWagmi/ViemPrivyCoinbase Developer PlatformRainbowKitReownThirdwebReferenceAccount SDKProviderUI ElementsOnchain ContractsMoreTroubleshootingBase Gasless CampaignTelemetryMigrate from Coinbase Wallet SDKBasenamesBasenames FAQBasename Transfer GuideContributeContribute to the Base Account DocsSecurity and Bug BountyOn this pageStart accepting recurring payments with Base Pay SubscriptionsHow It WorksImplementation GuideArchitecture OverviewSetup: Create Your Subscription Owner WalletClient-Side: Create SubscriptionsServer-Side: Charge SubscriptionsServer-Side: Revoke SubscriptionsFund ManagementTesting on TestnetNetwork and Token SupportAdvanced TopicsCustom Transaction HandlingAPI Reference​Start accepting recurring payments with Base Pay Subscriptions\nBase Subscriptions enable you to build predictable, recurring revenue streams by accepting automatic USDC payments. Whether you’re running a SaaS platform, content subscription service, or any business model requiring regular payments, Base Subscriptions provide a seamless solution with no merchant fees.\nKey Capabilities:\nFlexible Billing PeriodsSupport any billing cycle that fits your business model:\nDaily subscriptions for short-term services\nWeekly for regular deliveries or services\nMonthly for standard SaaS subscriptions\nAnnual for discounted long-term commitments\nCustom periods (e.g., 14 days, 90 days) for unique models\nPartial and Usage-Based ChargingCharge any amount up to the permitted limit:\nFixed recurring amounts for predictable billing\nVariable usage-based charges within a cap\nTiered pricing with different charge amounts\nProrated charges for mid-cycle changes\nSubscription ManagementFull control over the subscription lifecycle:\nReal-time status checking to verify active subscriptions\nRemaining charge amount for the current period\nNext period start date for planning\nCancellation detection for immediate updates\nEnterprise-Ready FeaturesBuilt for production use cases:\nNo transaction fees or platform cuts\nInstant settlement in USDC stablecoin\nTestnet support for development and testing\nDetailed transaction history for accounting\nProgrammatic access via SDK\n\n​How It Works\nBase Subscriptions leverage Spend Permissions – a powerful onchain primitive that allows users to grant revocable spending rights to applications. Here’s the complete flow:\n1User Approves SubscriptionYour customer grants your application permission to charge their wallet up to a specified amount each billing period. This is a one-time approval that remains active until cancelled.2Application Charges PeriodicallyYour backend service charges the subscription when payment is due, without requiring any user interaction. You can charge up to the approved amount per period.3Smart Period ManagementThe spending limit automatically resets at the start of each new period. If you don’t charge the full amount in one period, it doesn’t roll over.4User Maintains ControlCustomers can view and cancel their subscriptions anytime through their wallet, ensuring transparency and trust.\n​Implementation Guide\n​Architecture Overview\nA complete subscription implementation requires both client and server components:\nClient-Side (Frontend):\n\nUser interface for subscription creation\nCreate wallet requests and handle user responses\n\nServer-Side (Backend - Node.js):\n\nCDP smart wallet for executing charges and revocations\nScheduled jobs for periodic billing\nDatabase for subscription tracking\nHandlers for status updates\nRetry logic for failed charges\n\nCDP-Powered BackendBase Subscriptions use CDP (Coinbase Developer Platform) server wallets for effortless backend management. The charge() and revoke() functions handle all transaction details automatically:\n✅ Automatic wallet management\n✅ Built-in transaction signing\n✅ Gas estimation and nonce handling\n✅ Optional paymaster support for gasless transactions\nGet CDP credentials from CDP Portal.\nSecurity RequirementsTo accept recurring payments, you need:\nCDP credentials (API key ID, secret, and wallet secret)\nBackend infrastructure (Node.js) to execute charges securely\nDatabase to store and manage subscription IDs\nNever expose CDP credentials in client-side code\n\n​Setup: Create Your Subscription Owner Wallet\nFirst, set up your CDP smart wallet that will act as the subscription owner:\nbackend/setup.tsReport incorrect codeCopyAsk AIimport { base } from '@base-org/account/node';\n\n// Backend setup (Node.js only)\n// Set CDP credentials as environment variables:\n// CDP_API_KEY_ID, CDP_API_KEY_SECRET, CDP_WALLET_SECRET\n// PAYMASTER_URL (recommended for gasless transactions)\n\nasync function setupSubscriptionWallet() {\n try {\n // Create or retrieve your subscription owner wallet (CDP smart wallet)\n const wallet = await base.subscription.getOrCreateSubscriptionOwnerWallet({\n walletName: 'my-app-subscriptions' // Optional: customize wallet name\n });\n\n console.log('✅ Subscription owner wallet ready!');\n console.log(`Smart Wallet Address: ${wallet.address}`);\n console.log(`Wallet Name: ${wallet.walletName}`);\n\n // Make this address available to your frontend\n // Option 1: Store in database/config\n // Option 2: Expose via API endpoint\n // Option 3: Set as public environment variable (e.g., NEXT_PUBLIC_SUBSCRIPTION_OWNER)\n\n return wallet;\n } catch (error) {\n console.error('Failed to setup wallet:', error.message);\n throw error;\n }\n}\n\n// Run once at application startup\nsetupSubscriptionWallet();\n\n// Optional: Provide an API endpoint for the frontend to fetch the address\nexport async function getSubscriptionOwnerAddress() {\n const wallet = await base.subscription.getOrCreateSubscriptionOwnerWallet();\n return wallet.address;\n}\nSee all 38 lines\nBackend Only: This setup runs in your Node.js backend with CDP credentials. The resulting wallet address is public and safe to share with your frontend for use in subscribe() calls.\nKeep CDP Credentials Private: Never expose CDP credentials (API key, secrets) to the frontend. Only the subscription owner wallet address needs to be accessible to the frontend.\n​Client-Side: Create Subscriptions\nUsers create subscriptions from your frontend application:\nSubscriptionButton.tsxReport incorrect codeCopyAsk AIimport React, { useState } from 'react';\nimport { base } from '@base-org/account';\n\n// This address comes from your backend setup (see setup.ts example above)\n// You can fetch it from your backend or configure it as a public env var\nconst SUBSCRIPTION_OWNER_ADDRESS = \"0xYourCDPWalletAddress\"; // Replace with your actual address\n\nexport function SubscriptionButton() {\n const [loading, setLoading] = useState(false);\n const [subscribed, setSubscribed] = useState(false);\n const [subscriptionId, setSubscriptionId] = useState('');\n\n const handleSubscribe = async () => {\n setLoading(true);\n\n try {\n // Create subscription\n const subscription = await base.subscription.subscribe({\n recurringCharge: \"29.99\",\n subscriptionOwner: SUBSCRIPTION_OWNER_ADDRESS, // Address from your backend CDP wallet\n periodInDays: 30,\n testnet: false\n });\n\n // Store subscription ID for future reference\n setSubscriptionId(subscription.id);\n console.log('Subscription created:', subscription.id);\n console.log('Payer:', subscription.subscriptionPayer);\n console.log('Amount:', subscription.recurringCharge);\n console.log('Period:', subscription.periodInDays, 'days');\n\n // Send subscription ID to your backend\n await saveSubscriptionToBackend(subscription.id, subscription.subscriptionPayer);\n\n setSubscribed(true);\n\n } catch (error) {\n console.error('Subscription failed:', error);\n alert('Failed to create subscription: ' + error.message);\n } finally {\n setLoading(false);\n }\n };\n\n const saveSubscriptionToBackend = async (id: string, payer: string) => {\n // Example API call to store subscription in your database\n const response = await fetch('/api/subscriptions', {\n method: 'POST',\n headers: { 'Content-Type': 'application/json' },\n body: JSON.stringify({ subscriptionId: id, payerAddress: payer })\n });\n\n if (!response.ok) {\n throw new Error('Failed to save subscription');\n }\n };\n\n if (subscribed) {\n return (\n <div className=\"subscription-status\">\n <Check>✅ Subscription active</Check>\n <p>Subscription ID: {subscriptionId.slice(0, 10)}...</p>\n </div>\n );\n }\n\n return (\n <button \n onClick={handleSubscribe} \n disabled={loading}\n className=\"subscribe-button\"\n >\n {loading ? 'Processing...' : 'Subscribe - $29.99/month'}\n </button>\n );\n}\nSee all 76 lines\n​Server-Side: Charge Subscriptions\nExecute charges effortlessly from your backend using CDP:\nchargeSubscriptions.tsReport incorrect codeCopyAsk AIimport { base } from '@base-org/account/node';\n\n// Requires: CDP_API_KEY_ID, CDP_API_KEY_SECRET, CDP_WALLET_SECRET env vars\n// Recommended: PAYMASTER_URL for gasless transactions\n\nasync function chargeSubscription(subscriptionId: string, recipientAddress?: string) {\n try {\n // 1. Check subscription status\n const status = await base.subscription.getStatus({\n id: subscriptionId,\n testnet: false\n });\n\n if (!status.isSubscribed) {\n console.log('Subscription cancelled by user');\n return { success: false, reason: 'cancelled' };\n }\n\n const availableCharge = parseFloat(status.remainingChargeInPeriod || '0');\n\n if (availableCharge === 0) {\n console.log(`No charge available until ${status.nextPeriodStart}`);\n return { success: false, reason: 'no_charge_available' };\n }\n\n // 2. Charge the subscription - CDP handles everything automatically\n // Using paymaster for gasless transactions (recommended)\n const result = await base.subscription.charge({\n id: subscriptionId,\n amount: 'max-remaining-charge',\n paymasterUrl: process.env.PAYMASTER_URL, // Optional: for gasless transactions\n recipient: recipientAddress, // Optional: send USDC to specific address\n testnet: false\n });\n\n console.log(`✅ Charged ${result.amount} USDC (gasless)`);\n console.log(`Transaction: ${result.id}`);\n if (recipientAddress) {\n console.log(`Sent to: ${recipientAddress}`);\n }\n\n return {\n success: true,\n transactionHash: result.id,\n amount: result.amount,\n recipient: result.recipient\n };\n\n } catch (error) {\n console.error('Charge failed:', error);\n return { success: false, error: error.message };\n }\n}\nSee all 53 lines\n​Server-Side: Revoke Subscriptions\nCancel subscriptions programmatically from your backend:\nrevokeSubscription.tsReport incorrect codeCopyAsk AIimport { base } from '@base-org/account/node';\n\nasync function revokeSubscription(subscriptionId: string, reason: string) {\n try {\n // Revoke the subscription with paymaster for gasless transactions\n const result = await base.subscription.revoke({\n id: subscriptionId,\n paymasterUrl: process.env.PAYMASTER_URL, // Optional: for gasless transactions\n testnet: false\n });\n\n console.log(`✅ Revoked subscription: ${subscriptionId}`);\n console.log(`Transaction: ${result.id}`);\n console.log(`Reason: ${reason}`);\n\n return {\n success: true,\n transactionHash: result.id\n };\n\n } catch (error) {\n console.error('Revoke failed:', error);\n return { success: false, error: error.message };\n }\n}\n\n// Usage examples\nasync function handleUserCancellation(subscriptionId: string) {\n return await revokeSubscription(subscriptionId, 'user_requested');\n}\n\nasync function handlePolicyViolation(subscriptionId: string) {\n return await revokeSubscription(subscriptionId, 'policy_violation');\n}\nSee all 34 lines\nAutomatic Transaction Management: The charge() and revoke() functions handle all transaction details including wallet management, gas estimation, nonce handling, and transaction confirmation. Use the paymasterUrl parameter to enable gasless transactions for your users.\nGasless Transactions: Set the PAYMASTER_URL environment variable to sponsor gas fees for your subscription charges and revocations. This creates a seamless experience where your backend covers all gas costs. Get your paymaster URL from the CDP Portal.\n​Fund Management\nBy default, charged USDC remains in your subscription owner wallet. You can optionally specify a recipient address to automatically transfer funds to a different address:\n Default (Keep in Owner Wallet) Send to Treasury Wallet Dynamic RecipientsReport incorrect codeCopyAsk AI// Funds stay in the subscription owner wallet\nconst result = await base.subscription.charge({\n id: subscriptionId,\n amount: 'max-remaining-charge',\n testnet: false\n});\n\n// USDC is now in your CDP smart wallet\n// Access it later or transfer as needed\nReport incorrect codeCopyAsk AI// Automatically send to your treasury wallet\nconst result = await base.subscription.charge({\n id: subscriptionId,\n amount: 'max-remaining-charge',\n recipient: '0xYourTreasuryAddress',\n testnet: false\n});\n\n// USDC is sent directly to the recipient address\nconsole.log(`Sent ${result.amount} to ${result.recipient}`);\nReport incorrect codeCopyAsk AI// Send to different addresses based on subscription type\nasync function chargeWithRecipient(subscriptionId: string, plan: string) {\n const recipients = {\n premium: '0xPremiumTreasuryAddress',\n basic: '0xBasicTreasuryAddress',\n enterprise: '0xEnterpriseTreasuryAddress'\n };\n\n return await base.subscription.charge({\n id: subscriptionId,\n amount: 'max-remaining-charge',\n recipient: recipients[plan],\n testnet: false\n });\n}\n\n​Testing on Testnet\nTest your subscription implementation on Base Sepolia before going live:\ntestnet-frontend.tsReport incorrect codeCopyAsk AI// Frontend: Create subscription on testnet\nconst subscription = await base.subscription.subscribe({\n recurringCharge: \"10.00\",\n subscriptionOwner: SUBSCRIPTION_OWNER_ADDRESS,\n periodInDays: 1, // Daily for faster testing\n testnet: true // Use Base Sepolia\n});\nSee all 7 lines\ntestnet-backend.tsReport incorrect codeCopyAsk AI// Backend: Setup wallet on testnet (Node.js only)\nimport { base } from '@base-org/account/node';\n\nconst wallet = await base.subscription.getOrCreateSubscriptionOwnerWallet({\n walletName: 'testnet-subscriptions'\n});\n\n// Check status on testnet\nconst status = await base.subscription.getStatus({\n id: subscriptionId,\n testnet: true\n});\n\n// Charge on testnet with paymaster\nconst result = await base.subscription.charge({\n id: subscriptionId,\n amount: \"10.00\",\n paymasterUrl: process.env.PAYMASTER_URL, // Gasless transactions\n testnet: true\n});\n\nconsole.log(`Testnet charge (gasless): ${result.id}`);\nSee all 22 lines\n​Network and Token Support\nBase Subscriptions (USDC on Base):\nNetworkChain IDTokenStatusBase Mainnet8453USDC✅ Production ReadyBase Sepolia84532USDC✅ Testing Available\nCustom Implementations Possible: While Base Subscriptions are optimized for USDC on Base, you can use the underlying Spend Permissions primitive to build custom subscription implementations with any ERC-20 token or native ETH on any EVM-compatible chain.\n​Advanced Topics\n​Custom Transaction Handling\nFor developers who need manual control over transaction execution or want to integrate with existing wallet infrastructure, use the lower-level utilities:\nprepareCharge - Manual Charge ExecutionIf you can’t use CDP wallets, prepareCharge() gives you call data to execute manually:Report incorrect codeCopyAsk AIimport { base } from '@base-org/account';\n\n// Prepare charge call data\nconst chargeCalls = await base.subscription.prepareCharge({\n id: subscriptionId,\n amount: 'max-remaining-charge',\n testnet: false\n});\n\n// Execute with your own wallet infrastructure\n// (requires custom wallet client setup)\nSee prepareCharge reference for details.prepareRevoke - Manual Revoke ExecutionSimilarly, prepareRevoke() provides revocation call data:Report incorrect codeCopyAsk AIimport { base } from '@base-org/account';\n\n// Prepare revoke call data\nconst revokeCall = await base.subscription.prepareRevoke({\n id: subscriptionId,\n testnet: false\n});\n\n// Execute with your own wallet infrastructure\nSee prepareRevoke reference for details.\n​API Reference\nsubscribe()Create subscriptions from frontendgetStatus()Check subscription statuscharge()Charge subscriptions from backendrevoke()Cancel subscriptions from backendSetup Owner WalletSetup CDP owner wallet for subscription managementprepareCharge()Advanced: Custom charge executionprepareRevoke()Advanced: Custom revoke executionSpend PermissionsDeep dive into the underlying primitiveOne-Time PaymentsAccept single payments\nWas this page helpful?YesNoSuggest editsRaise issueAccept PaymentsPreviousBatch TransactionsNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "import { base } from '@base-org/account/node';\n\n// Backend setup (Node.js only)\n// Set CDP credentials as environment variables:\n// CDP_API_KEY_ID, CDP_API_KEY_SECRET, CDP_WALLET_SECRET\n// PAYMASTER_URL (recommended for gasless transactions)\n\nasync function setupSubscriptionWallet() {\n  try {\n    // Create or retrieve your subscription owner wallet (CDP smart wallet)\n    const wallet = await base.subscription.getOrCreateSubscriptionOwnerWallet({\n      walletName: 'my-app-subscriptions' // Optional: customize wallet name\n    });\n    \n    console.log('✅ Subscription owner wallet ready!');\n    console.log(`Smart Wallet Address: ${wallet.address}`);\n    console.log(`Wallet Name: ${wallet.walletName}`);\n    \n    // Make this address available to your frontend\n    // Option 1: Store in database/config\n    // Option 2: Expose via API endpoint\n    // Option 3: Set as public environment variable (e.g., NEXT_PUBLIC_SUBSCRIPTION_OWNER)\n    \n    return wallet;\n  } catch (error) {\n    console.error('Failed to setup wallet:', error.message);\n    throw error;\n  }\n}\n\n// Run once at application startup\nsetupSubscriptionWallet();\n\n// Optional: Provide an API endpoint for the frontend to fetch the address\nexport async function getSubscriptionOwnerAddress() {\n  const wallet = await base.subscription.getOrCreateSubscriptionOwnerWallet();\n  return wallet.address;\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "import React, { useState } from 'react';\nimport { base } from '@base-org/account';\n\n// This address comes from your backend setup (see setup.ts example above)\n// You can fetch it from your backend or configure it as a public env var\nconst SUBSCRIPTION_OWNER_ADDRESS = \"0xYourCDPWalletAddress\"; // Replace with your actual address\n\nexport function SubscriptionButton() {\n  const [loading, setLoading] = useState(false);\n  const [subscribed, setSubscribed] = useState(false);\n  const [subscriptionId, setSubscriptionId] = useState('');\n  \n  const handleSubscribe = async () => {\n    setLoading(true);\n    \n    try {\n      // Create subscription\n      const subscription = await base.subscription.subscribe({\n        recurringCharge: \"29.99\",\n        subscriptionOwner: SUBSCRIPTION_OWNER_ADDRESS, // Address from your backend CDP wallet\n        periodInDays: 30,\n        testnet: false\n      });\n      \n      // Store subscription ID for future reference\n      setSubscriptionId(subscription.id);\n      console.log('Subscription created:', subscription.id);\n      console.log('Payer:', subscription.subscriptionPayer);\n      console.log('Amount:', subscription.recurringCharge);\n      console.log('Period:', subscription.periodInDays, 'days');\n      \n      // Send subscription ID to your backend\n      await saveSubscriptionToBackend(subscription.id, subscription.subscriptionPayer);\n      \n      setSubscribed(true);\n      \n    } catch (error) {\n      console.error('Subscription failed:', error);\n      alert('Failed to create subscription: ' + error.message);\n    } finally {\n      setLoading(false);\n    }\n  };\n  \n  const saveSubscriptionToBackend = async (id: string, payer: string) => {\n    // Example API call to store subscription in your database\n    const response = await fetch('/api/subscriptions', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ subscriptionId: id, payerAddress: payer })\n    });\n    \n    if (!response.ok) {\n      throw new Error('Failed to save subscription');\n    }\n  };\n  \n  if (subscribed) {\n    return (\n      <div className=\"subscription-status\">\n        <Check>✅ Subscription active</Check>\n        <p>Subscription ID: {subscriptionId.slice(0, 10)}...</p>\n      </div>\n    );\n  }\n  \n  return (\n    <button \n      onClick={handleSubscribe} \n      disabled={loading}\n      className=\"subscribe-button\"\n    >\n      {loading ? 'Processing...' : 'Subscribe - $29.99/month'}\n    </button>\n  );\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "import { base } from '@base-org/account/node';\n\n// Requires: CDP_API_KEY_ID, CDP_API_KEY_SECRET, CDP_WALLET_SECRET env vars\n// Recommended: PAYMASTER_URL for gasless transactions\n\nasync function chargeSubscription(subscriptionId: string, recipientAddress?: string) {\n  try {\n    // 1. Check subscription status\n    const status = await base.subscription.getStatus({\n      id: subscriptionId,\n      testnet: false\n    });\n    \n    if (!status.isSubscribed) {\n      console.log('Subscription cancelled by user');\n      return { success: false, reason: 'cancelled' };\n    }\n    \n    const availableCharge = parseFloat(status.remainingChargeInPeriod || '0');\n    \n    if (availableCharge === 0) {\n      console.log(`No charge available until ${status.nextPeriodStart}`);\n      return { success: false, reason: 'no_charge_available' };\n    }\n    \n    // 2. Charge the subscription - CDP handles everything automatically\n    // Using paymaster for gasless transactions (recommended)\n    const result = await base.subscription.charge({\n      id: subscriptionId,\n      amount: 'max-remaining-charge',\n      paymasterUrl: process.env.PAYMASTER_URL, // Optional: for gasless transactions\n      recipient: recipientAddress, // Optional: send USDC to specific address\n      testnet: false\n    });\n    \n    console.log(`✅ Charged ${result.amount} USDC (gasless)`);\n    console.log(`Transaction: ${result.id}`);\n    if (recipientAddress) {\n      console.log(`Sent to: ${recipientAddress}`);\n    }\n    \n    return {\n      success: true,\n      transactionHash: result.id,\n      amount: result.amount,\n      recipient: result.recipient\n    };\n    \n  } catch (error) {\n    console.error('Charge failed:', error);\n    return { success: false, error: error.message };\n  }\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "import { base } from '@base-org/account/node';\n\nasync function revokeSubscription(subscriptionId: string, reason: string) {\n  try {\n    // Revoke the subscription with paymaster for gasless transactions\n    const result = await base.subscription.revoke({\n      id: subscriptionId,\n      paymasterUrl: process.env.PAYMASTER_URL, // Optional: for gasless transactions\n      testnet: false\n    });\n    \n    console.log(`✅ Revoked subscription: ${subscriptionId}`);\n    console.log(`Transaction: ${result.id}`);\n    console.log(`Reason: ${reason}`);\n    \n    return {\n      success: true,\n      transactionHash: result.id\n    };\n    \n  } catch (error) {\n    console.error('Revoke failed:', error);\n    return { success: false, error: error.message };\n  }\n}\n\n// Usage examples\nasync function handleUserCancellation(subscriptionId: string) {\n  return await revokeSubscription(subscriptionId, 'user_requested');\n}\n\nasync function handlePolicyViolation(subscriptionId: string) {\n  return await revokeSubscription(subscriptionId, 'policy_violation');\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "// Funds stay in the subscription owner wallet\nconst result = await base.subscription.charge({\n  id: subscriptionId,\n  amount: 'max-remaining-charge',\n  testnet: false\n});\n\n// USDC is now in your CDP smart wallet\n// Access it later or transfer as needed"
+    },
+    {
+      "language": "unknown",
+      "code": "// Automatically send to your treasury wallet\nconst result = await base.subscription.charge({\n  id: subscriptionId,\n  amount: 'max-remaining-charge',\n  recipient: '0xYourTreasuryAddress',\n  testnet: false\n});\n\n// USDC is sent directly to the recipient address\nconsole.log(`Sent ${result.amount} to ${result.recipient}`);"
+    },
+    {
+      "language": "unknown",
+      "code": "// Send to different addresses based on subscription type\nasync function chargeWithRecipient(subscriptionId: string, plan: string) {\n  const recipients = {\n    premium: '0xPremiumTreasuryAddress',\n    basic: '0xBasicTreasuryAddress',\n    enterprise: '0xEnterpriseTreasuryAddress'\n  };\n  \n  return await base.subscription.charge({\n    id: subscriptionId,\n    amount: 'max-remaining-charge',\n    recipient: recipients[plan],\n    testnet: false\n  });\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "// Frontend: Create subscription on testnet\nconst subscription = await base.subscription.subscribe({\n  recurringCharge: \"10.00\",\n  subscriptionOwner: SUBSCRIPTION_OWNER_ADDRESS,\n  periodInDays: 1, // Daily for faster testing\n  testnet: true     // Use Base Sepolia\n});"
+    },
+    {
+      "language": "unknown",
+      "code": "// Backend: Setup wallet on testnet (Node.js only)\nimport { base } from '@base-org/account/node';\n\nconst wallet = await base.subscription.getOrCreateSubscriptionOwnerWallet({\n  walletName: 'testnet-subscriptions'\n});\n\n// Check status on testnet\nconst status = await base.subscription.getStatus({\n  id: subscriptionId,\n  testnet: true\n});\n\n// Charge on testnet with paymaster\nconst result = await base.subscription.charge({\n  id: subscriptionId,\n  amount: \"10.00\",\n  paymasterUrl: process.env.PAYMASTER_URL, // Gasless transactions\n  testnet: true\n});\n\nconsole.log(`Testnet charge (gasless): ${result.id}`);"
+    },
+    {
+      "language": "unknown",
+      "code": "import { base } from '@base-org/account';\n\n// Prepare charge call data\nconst chargeCalls = await base.subscription.prepareCharge({\n  id: subscriptionId,\n  amount: 'max-remaining-charge',\n  testnet: false\n});\n\n// Execute with your own wallet infrastructure\n// (requires custom wallet client setup)"
+    },
+    {
+      "language": "unknown",
+      "code": "import { base } from '@base-org/account';\n\n// Prepare revoke call data\nconst revokeCall = await base.subscription.prepareRevoke({\n  id: subscriptionId,\n  testnet: false\n});\n\n// Execute with your own wallet infrastructure"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Base Account Overview",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Web (HTML + JS)",
+      "url": "https://docs.base.org/base-account/quickstart/web"
+    },
+    {
+      "text": "Web (Next.js)",
+      "url": "https://docs.base.org/base-account/quickstart/web-react"
+    },
+    {
+      "text": "Mobile (React Native)",
+      "url": "https://docs.base.org/base-account/quickstart/mobile-integration"
+    },
+    {
+      "text": "Authenticate Users",
+      "url": "https://docs.base.org/base-account/guides/authenticate-users"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Accept Recurring Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "Batch Transactions",
+      "url": "https://docs.base.org/base-account/improve-ux/batch-transactions"
+    },
+    {
+      "text": "Sponsor Gas",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/paymasters"
+    },
+    {
+      "text": "Use Sub Accounts",
+      "url": "https://docs.base.org/base-account/improve-ux/sub-accounts"
+    },
+    {
+      "text": "Use Spend Permissions",
+      "url": "https://docs.base.org/base-account/improve-ux/spend-permissions"
+    },
+    {
+      "text": "Use Coinbase Balances Onchain",
+      "url": "https://docs.base.org/base-account/improve-ux/magic-spend"
+    },
+    {
+      "text": "Sign and Verify Typed Data",
+      "url": "https://docs.base.org/base-account/guides/sign-and-verify-typed-data"
+    },
+    {
+      "text": "Pay Gas in ERC20 tokens",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/erc20-paymasters"
+    },
+    {
+      "text": "Coinbase Developer Platform",
+      "url": "https://docs.base.org/base-account/framework-integrations/cdp"
+    },
+    {
+      "text": "RainbowKit",
+      "url": "https://docs.base.org/base-account/framework-integrations/rainbowkit"
+    },
+    {
+      "text": "Reown",
+      "url": "https://docs.base.org/base-account/framework-integrations/reown"
+    },
+    {
+      "text": "Thirdweb",
+      "url": "https://docs.base.org/base-account/framework-integrations/thirdweb"
+    },
+    {
+      "text": "Base Gasless Campaign",
+      "url": "https://docs.base.org/base-account/more/base-gasless-campaign"
+    },
+    {
+      "text": "Telemetry",
+      "url": "https://docs.base.org/base-account/more/telemetry"
+    },
+    {
+      "text": "Migrate from Coinbase Wallet SDK",
+      "url": "https://docs.base.org/base-account/guides/migration-guide"
+    },
+    {
+      "text": "Basenames FAQ",
+      "url": "https://docs.base.org/base-account/basenames/basenames-faq"
+    },
+    {
+      "text": "Basename Transfer Guide",
+      "url": "https://docs.base.org/base-account/basenames/basename-transfer"
+    },
+    {
+      "text": "Contribute to the Base Account Docs",
+      "url": "https://docs.base.org/base-account/contribute/contribute-to-base-account-docs"
+    },
+    {
+      "text": "Security and Bug Bounty",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty"
+    },
+    {
+      "text": "Start accepting recurring payments with Base Pay Subscriptions",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#start-accepting-recurring-payments-with-base-pay-subscriptions"
+    },
+    {
+      "text": "How It Works",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#how-it-works"
+    },
+    {
+      "text": "Implementation Guide",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#implementation-guide"
+    },
+    {
+      "text": "Architecture Overview",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#architecture-overview"
+    },
+    {
+      "text": "Setup: Create Your Subscription Owner Wallet",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#setup-create-your-subscription-owner-wallet"
+    },
+    {
+      "text": "Client-Side: Create Subscriptions",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#client-side-create-subscriptions"
+    },
+    {
+      "text": "Server-Side: Charge Subscriptions",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#server-side-charge-subscriptions"
+    },
+    {
+      "text": "Server-Side: Revoke Subscriptions",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#server-side-revoke-subscriptions"
+    },
+    {
+      "text": "Fund Management",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#fund-management"
+    },
+    {
+      "text": "Testing on Testnet",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#testing-on-testnet"
+    },
+    {
+      "text": "Network and Token Support",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#network-and-token-support"
+    },
+    {
+      "text": "Advanced Topics",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#advanced-topics"
+    },
+    {
+      "text": "Custom Transaction Handling",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#custom-transaction-handling"
+    },
+    {
+      "text": "API Reference",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#api-reference"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#start-accepting-recurring-payments-with-base-pay-subscriptions"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#how-it-works"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#implementation-guide"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#architecture-overview"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#setup-create-your-subscription-owner-wallet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#client-side-create-subscriptions"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#server-side-charge-subscriptions"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#server-side-revoke-subscriptions"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#fund-management"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#testing-on-testnet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#network-and-token-support"
+    },
+    {
+      "text": "Spend Permissions",
+      "url": "https://docs.base.org/base-account/improve-ux/spend-permissions"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#advanced-topics"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#custom-transaction-handling"
+    },
+    {
+      "text": "prepareChargereference",
+      "url": "https://docs.base.org/base-account/reference/base-pay/prepareCharge"
+    },
+    {
+      "text": "prepareRevokereference",
+      "url": "https://docs.base.org/base-account/reference/base-pay/prepareRevoke"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments#api-reference"
+    },
+    {
+      "text": "subscribe()Create subscriptions from frontend",
+      "url": "https://docs.base.org/base-account/reference/base-pay/subscribe"
+    },
+    {
+      "text": "getStatus()Check subscription status",
+      "url": "https://docs.base.org/base-account/reference/base-pay/getStatus"
+    },
+    {
+      "text": "charge()Charge subscriptions from backend",
+      "url": "https://docs.base.org/base-account/reference/base-pay/charge"
+    },
+    {
+      "text": "revoke()Cancel subscriptions from backend",
+      "url": "https://docs.base.org/base-account/reference/base-pay/revoke"
+    },
+    {
+      "text": "Setup Owner WalletSetup CDP owner wallet for subscription management",
+      "url": "https://docs.base.org/base-account/reference/base-pay/getOrCreateSubscriptionOwnerWallet"
+    },
+    {
+      "text": "prepareCharge()Advanced: Custom charge execution",
+      "url": "https://docs.base.org/base-account/reference/base-pay/prepareCharge"
+    },
+    {
+      "text": "prepareRevoke()Advanced: Custom revoke execution",
+      "url": "https://docs.base.org/base-account/reference/base-pay/prepareRevoke"
+    },
+    {
+      "text": "Spend PermissionsDeep dive into the underlying primitive",
+      "url": "https://docs.base.org/base-account/improve-ux/spend-permissions"
+    },
+    {
+      "text": "One-Time PaymentsAccept single payments",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Accept PaymentsPrevious",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Batch TransactionsNext",
+      "url": "https://docs.base.org/base-account/improve-ux/batch-transactions"
+    }
+  ]
+}

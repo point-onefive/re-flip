@@ -1,0 +1,99 @@
+{
+  "url": "https://www.base.org/build",
+  "title": "Base | Builders",
+  "scraped_at": "2026-02-04T10:26:16.189231",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "What will you build?"
+    },
+    {
+      "level": "h2",
+      "text": "Kickstart your app's growth"
+    },
+    {
+      "level": "h2",
+      "text": "Onboard everyone"
+    },
+    {
+      "level": "h2",
+      "text": "Accept crypto payments"
+    },
+    {
+      "level": "h2",
+      "text": "Integrate DeFi"
+    },
+    {
+      "level": "h2",
+      "text": "Launch AI agents"
+    },
+    {
+      "level": "h2",
+      "text": "Launch a dedicated chain on Base"
+    },
+    {
+      "level": "h2",
+      "text": "Tools for builders"
+    },
+    {
+      "level": "h2",
+      "text": "Base Account"
+    },
+    {
+      "level": "h2",
+      "text": "OnchainKit"
+    },
+    {
+      "level": "h2",
+      "text": "Mini Apps"
+    },
+    {
+      "level": "h1",
+      "text": "Get funded"
+    }
+  ],
+  "content": "What will you build?Everything you need to build, grow, and earn onchain.$031742B+ASSETS ON PLATFORM032740450msBLOCK TIME<$030.450161MEDIAN FEE01Kickstart your app's growthAccess millions of active users and grow your app by publishing it on the Base App. 02Onboard everyoneLet users sign up and sign in with Base Account — the universal account for the onchain world.import { SignInWithBase } from '../components/SignInWithBase'export default function Home() {return (<main><SignInWithBase /></main>)}03Accept crypto paymentsAccept crypto payments in your apps and ecommerce stores. Available for every business and live for Shopify merchants.04Integrate DeFiUnlock the power of DeFi protocols and services directly in your app. 05Launch AI agentsDeploy AI agents that can interact with onchain data and smart contracts.Agent06Launch a dedicated chain on BaseScale your app with dedicated blockspace and customized settings built for your users.L3 TestnetSettled on Base L2 with S3Automated transaction ordering to ensure optimal performanceManaged nodesOut-of-the-box block explorerBuildScaleMonetizeBase provides unmatched developer support and fosters a highly constructive community that inspires innovation and encourages you to push boundaries. If you want to build and win, Base is the place to be.Dhawal ShahHeyElsa AITools for buildersBase AccountA passkey-based universal account to connect with the onchain world./>OnchainKitAll-in-one toolkit and ready-to-use, full-stack components./>Mini AppsPublish your mini app to the Base app with a few lines of code./>Get fundedBase supports builders at every stage—from idea, to app, to business.Builder GrantsApply for Grants/>Builder RewardsClaim rewards/>Base BatchesAPPLY TO JOIN/>JUST BUILD IT.Build in minutes. Go live in hours.Start building",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "01Kickstart your app's growthAccess millions of active users and grow your app by publishing it on the Base App.",
+      "url": "https://docs.base.org/cookbook/onchain-social"
+    },
+    {
+      "text": "02Onboard everyoneLet users sign up and sign in with Base Account — the universal account for the onchain world.import{ SignInWithBase }from'../components/SignInWithBase'export default functionHome() {return(<main><SignInWithBase/></main>)}",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "03Accept crypto paymentsAccept crypto payments in your apps and ecommerce stores. Available for every business and live for Shopify merchants.",
+      "url": "https://docs.base.org/cookbook/accept-crypto-payments"
+    },
+    {
+      "text": "04Integrate DeFiUnlock the power of DeFi protocols and services directly in your app.",
+      "url": "https://docs.base.org/cookbook/defi-your-app"
+    },
+    {
+      "text": "05Launch AI agentsDeploy AI agents that can interact with onchain data and smart contracts.Agent",
+      "url": "https://docs.base.org/cookbook/launch-ai-agents"
+    },
+    {
+      "text": "06Launch a dedicated chain on BaseScale your app with dedicated blockspace and customized settings built for your users.L3 TestnetSettled on Base L2 with S3Automated transaction ordering to ensure optimal performanceManaged nodesOut-of-the-box block explorer",
+      "url": "https://docs.base.org/cookbook/deploy-a-chain"
+    },
+    {
+      "text": "Base AccountA passkey-based universal account to connect with the onchain world./>",
+      "url": "https://www.base.org/build/base-account"
+    },
+    {
+      "text": "OnchainKitAll-in-one toolkit and ready-to-use, full-stack components./>",
+      "url": "https://www.base.org/build/onchainkit"
+    },
+    {
+      "text": "Mini AppsPublish your mini app to the Base app with a few lines of code./>",
+      "url": "https://www.base.org/build/mini-apps"
+    },
+    {
+      "text": "Start building",
+      "url": "https://docs.base.org/"
+    }
+  ]
+}

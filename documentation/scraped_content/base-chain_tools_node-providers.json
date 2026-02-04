@@ -1,0 +1,483 @@
+{
+  "url": "https://docs.base.org/base-chain/tools/node-providers",
+  "title": "Node Providers - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:03.792047",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Coinbase Developer Platform (CDP)"
+    },
+    {
+      "level": "h2",
+      "text": "​1RPC"
+    },
+    {
+      "level": "h2",
+      "text": "​Alchemy"
+    },
+    {
+      "level": "h2",
+      "text": "​All That Node"
+    },
+    {
+      "level": "h2",
+      "text": "​Ankr"
+    },
+    {
+      "level": "h2",
+      "text": "​Blast"
+    },
+    {
+      "level": "h2",
+      "text": "​Blockdaemon"
+    },
+    {
+      "level": "h2",
+      "text": "​BlockPI"
+    },
+    {
+      "level": "h2",
+      "text": "​Chainstack"
+    },
+    {
+      "level": "h2",
+      "text": "​dRPC NodeCloud"
+    },
+    {
+      "level": "h2",
+      "text": "​GetBlock"
+    },
+    {
+      "level": "h2",
+      "text": "​NodeReal"
+    },
+    {
+      "level": "h2",
+      "text": "​Nodies DLB"
+    },
+    {
+      "level": "h2",
+      "text": "​NOWNodes"
+    },
+    {
+      "level": "h2",
+      "text": "​OnFinality"
+    },
+    {
+      "level": "h2",
+      "text": "​QuickNode"
+    },
+    {
+      "level": "h2",
+      "text": "​RockX"
+    },
+    {
+      "level": "h2",
+      "text": "​Stackup"
+    },
+    {
+      "level": "h2",
+      "text": "​SubQuery"
+    },
+    {
+      "level": "h2",
+      "text": "​Tenderly Web3 Gateway"
+    },
+    {
+      "level": "h2",
+      "text": "​Unifra"
+    },
+    {
+      "level": "h2",
+      "text": "​Validation Cloud"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationToolsNode ProvidersGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageCoinbase Developer Platform (CDP)1RPCAlchemyAll That NodeAnkrBlastBlockdaemonBlockPIChainstackdRPC NodeCloudGetBlockNodeRealNodies DLBNOWNodesOnFinalityQuickNodeRockXStackupSubQueryTenderly Web3 GatewayUnifraValidation Cloud​Coinbase Developer Platform (CDP)\nCDP provides an RPC endpoint that runs on the same node infrastructure that powers Coinbase’s retail exchange, meaning you get the rock solid reliability of our retail exchange as a developer. CDP gives you a free, rate limited RPC endpoint to begin building on Base.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​1RPC\n1RPC is the first and only on-chain attested privacy preserving RPC that eradicates metadata exposure and leakage when interacting with blockchains. 1RPC offers free and paid plans with additional features and increased request limits.\nSupported Networks\n\nBase Mainnet\n\n​Alchemy\nAlchemy is a popular API provider and developer platform. Its robust, free tier offers access to enhanced features like SDKs, JSON-RPC APIs, and hosted mainnet and testnet nodes for Base.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​All That Node\nAll That Node is a comprehensive multi-chain development suite, designed to support multiple networks from a single platform. They offer free and paid plans with additional features and increased request limits.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Ankr\nAnkr provides private and public RPC endpoints for Base, powered by a globally distributed and decentralized network of nodes. They offer free and paid plans with increased request limits.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Blast\nBlast provides fast and reliable decentralized blockchain APIs by partnering with third-party Node Providers. Blast offers users the ability to generate their own dedicated RPC endpoint for Base.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Blockdaemon\nBlockdaemon offers access to hosted Base nodes with a free plan at $0/month via the Ubiquity Data API Suite. Extra costs may be incurred depending on usage.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​BlockPI\nBlockPI is a high-quality, robust, and efficient RPC service network that provides access to Base nodes with free and paid plans.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Chainstack\nChainstack allows developers to run high-performing Base nodes and APIs in minutes. They offer elastic Base RPC nodes that provide personal, geographically diverse, and protected API endpoints, as well as archive nodes to query the entire history of the Base Mainnet. Get started with their free and paid pricing plans.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​dRPC NodeCloud\ndRPC NodeCloud provides access to Base Mainnet and Base Sepolia Testnet endpoints plus 180+ networks with smart routing, analytics, key control, and front-end protection. Powered by 40 providers across 9 geoclusters. Start free or go unlimited with flat rate pricing from $10.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​GetBlock\nGetBlock is a Blockchain-as-a-Service (BaaS) platform that provides instant API access to full nodes for Base. They offer free, pay per use, and unlimited pricing plans.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​NodeReal\nNodeReal is a blockchain infrastructure and services provider that provides instant and easy-access to Base node APIs.\nSupported Networks\n\nBase Mainnet\n\n​Nodies DLB\nNodies DLB provides highly performant RPC Services for Base, as well as all other OP-stacked chains. They offer free public endpoints, Pay-As-You-Go, and enterprise pricing plans.\nSupported Networks\n\nBase Mainnet\nBase Testnet (Available on request)\n\n​NOWNodes\nNOWNodes is a Web3 development tool that provides shared and dedicated no rate-limit access to Base RPC full nodes.\nSupported Networks\n\nBase Mainnet\n\n​OnFinality\nOnFinality provides high performance archive access to Base Mainnet and Base Sepolia, with a generous free tier and high rate limits, as well as Trace and Debug APIs, available to paid plans.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​QuickNode\nQuickNode offers access to the Base network with Flashblocks and archive data support. Trace/debug capabilities are available for detailed transaction analysis. For event-driven and data-streaming use cases, QuickNode offers Streams and Webhooks, and a Marketplace with add-ons like the Aerodrome Swap API. See the QuickNode Base docs for setup and examples.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​RockX\nRockX offers a global blockchain node network and developer tools for onchain innovation. Start with our free Base RPC to access institutional-grade solutions.\nSupported Networks\n\nBase Mainnet\n\n​Stackup\nStackup is a leading ERC-4337 infrastructure platform. You can access hosted Base nodes with built-in account abstraction tools like bundlers and paymasters.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​SubQuery\nSubQuery is a globally distributed, decentralized network of RPC nodes, offering generous free public endpoints and higher access through Flex Plans\nSupported Networks\n\nBase Mainnet\n\n​Tenderly Web3 Gateway\nTenderly Web3 Gateway provides a fast and reliable hosted node solution with a built-in suite of developer tooling and infrastructure building blocks covering your whole development lifecycle. Develop, test, deploy, and monitor your onchain app on the Base network with both free and paid plans.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Unifra\nUnifra is a Web3 developer platform that provides tools, APIs, and node infrastructure, and provides access to Base nodes that are nodes are reliable, scalable, and easy to use.\nSupported Networks\n\nBase Mainnet\n\n​Validation Cloud\nValidation Cloud is the world’s fastest node provider according to Compare Nodes. With 50 million compute units available for use without a credit card and a scale tier that never has rate limits, Validation Cloud is built to support your most rigorous and low-latency workloads.\nSupported Networks\n\nBase Mainnet\nWas this page helpful?YesNoSuggest editsRaise issueOnchain Registry APIPreviousBlock ExplorersNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Coinbase Developer Platform (CDP)",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#coinbase-developer-platform-cdp"
+    },
+    {
+      "text": "1RPC",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#1rpc"
+    },
+    {
+      "text": "Alchemy",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#alchemy"
+    },
+    {
+      "text": "All That Node",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#all-that-node"
+    },
+    {
+      "text": "Ankr",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#ankr"
+    },
+    {
+      "text": "Blast",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#blast"
+    },
+    {
+      "text": "Blockdaemon",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#blockdaemon"
+    },
+    {
+      "text": "BlockPI",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#blockpi"
+    },
+    {
+      "text": "Chainstack",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#chainstack"
+    },
+    {
+      "text": "dRPC NodeCloud",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#drpc-nodecloud"
+    },
+    {
+      "text": "GetBlock",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#getblock"
+    },
+    {
+      "text": "NodeReal",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#nodereal"
+    },
+    {
+      "text": "Nodies DLB",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#nodies-dlb"
+    },
+    {
+      "text": "NOWNodes",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#nownodes"
+    },
+    {
+      "text": "OnFinality",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#onfinality"
+    },
+    {
+      "text": "QuickNode",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#quicknode"
+    },
+    {
+      "text": "RockX",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#rockx"
+    },
+    {
+      "text": "Stackup",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#stackup"
+    },
+    {
+      "text": "SubQuery",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#subquery"
+    },
+    {
+      "text": "Tenderly Web3 Gateway",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#tenderly-web3-gateway"
+    },
+    {
+      "text": "Unifra",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#unifra"
+    },
+    {
+      "text": "Validation Cloud",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#validation-cloud"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#coinbase-developer-platform-cdp"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#1rpc"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#alchemy"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#all-that-node"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#ankr"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#blast"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#blockdaemon"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#blockpi"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#chainstack"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#drpc-nodecloud"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#getblock"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#nodereal"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#nodies-dlb"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#nownodes"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#onfinality"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#quicknode"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#rockx"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#stackup"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#subquery"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#tenderly-web3-gateway"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#unifra"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/node-providers#validation-cloud"
+    },
+    {
+      "text": "Onchain Registry APIPrevious",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Block ExplorersNext",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    }
+  ]
+}

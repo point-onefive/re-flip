@@ -1,0 +1,115 @@
+{
+  "url": "https://docs.base.org/get-started/fund-your-wallet",
+  "title": "Page Not Found",
+  "scraped_at": "2026-02-04T10:26:05.142701",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Page Not Found"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationPage Not FoundGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnIntroductionBaseQuickstartBuild an AppLaunch a TokenDeploy Smart ContractsBuilder SupportGet FundedBase Services HubBase Mentorship ProgramCountry Leads & AmbassadorsBuild with AIMCP ServerStatic Docs FilesPrompt Library404Page Not FoundWe couldn't find the page. Maybe you were looking for one of these pages below?Funding Wallets (Onramps)wallet_getCapabilitieswallet_getCallsStatus⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/get-started/fund-your-wallet#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Base",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Build an App",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Deploy Smart Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "text": "Get Funded",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "text": "Base Services Hub",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "text": "Base Mentorship Program",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Country Leads & Ambassadors",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "text": "MCP Server",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Static Docs Files",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    },
+    {
+      "text": "Funding Wallets (Onramps)",
+      "url": "https://docs.base.org/learn/onchain-concepts/building-onchain-onramps#funding-wallets-onramps"
+    },
+    {
+      "text": "wallet_getCapabilities",
+      "url": "https://docs.base.org/base-account/reference/core/provider-rpc-methods/wallet_getCapabilities#wallet-getcapabilities"
+    },
+    {
+      "text": "wallet_getCallsStatus",
+      "url": "https://docs.base.org/base-account/reference/core/provider-rpc-methods/wallet_getCallsStatus#wallet-getcallsstatus"
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty",
+  "title": "Security and Bug Bounty - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:21.211990",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Security Audits"
+    },
+    {
+      "level": "h2",
+      "text": "​Bug Bounty Program"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationContributeSecurity and Bug BountyGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubSupportIntroductionBase Account OverviewQuickstartWeb (HTML + JS)Web (Next.js)Mobile (React Native)GuidesAuthenticate UsersAccept PaymentsAccept Recurring PaymentsBatch TransactionsSponsor GasUse Sub AccountsUse Spend PermissionsUse Coinbase Balances OnchainSign and Verify Typed DataPay Gas in ERC20 tokensFramework IntegrationsWagmi/ViemPrivyCoinbase Developer PlatformRainbowKitReownThirdwebReferenceAccount SDKProviderUI ElementsOnchain ContractsMoreTroubleshootingBase Gasless CampaignTelemetryMigrate from Coinbase Wallet SDKBasenamesBasenames FAQBasename Transfer GuideContributeContribute to the Base Account DocsSecurity and Bug BountyOn this pageSecurity AuditsBug Bounty Program​Security Audits\nBase Account has undergone multiple security audits. You can find the full list of our audits in the main Base Account repository.\nBase Account audits\n​Bug Bounty Program\nThe Coinbase/Base Bug Bounty program is a crowdsourced initiative that rewards security researchers\nfor responsibly reporting vulnerabilities in Base’s smart contracts and infrastructure.\nTo report a bug, please follow the instructions in\nthe HackerOne Bug Bounty Program.Was this page helpful?YesNoSuggest editsRaise issueContribute to the Base Account DocsPrevious⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Base Account Overview",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Web (HTML + JS)",
+      "url": "https://docs.base.org/base-account/quickstart/web"
+    },
+    {
+      "text": "Web (Next.js)",
+      "url": "https://docs.base.org/base-account/quickstart/web-react"
+    },
+    {
+      "text": "Mobile (React Native)",
+      "url": "https://docs.base.org/base-account/quickstart/mobile-integration"
+    },
+    {
+      "text": "Authenticate Users",
+      "url": "https://docs.base.org/base-account/guides/authenticate-users"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "text": "Accept Recurring Payments",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "text": "Batch Transactions",
+      "url": "https://docs.base.org/base-account/improve-ux/batch-transactions"
+    },
+    {
+      "text": "Sponsor Gas",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/paymasters"
+    },
+    {
+      "text": "Use Sub Accounts",
+      "url": "https://docs.base.org/base-account/improve-ux/sub-accounts"
+    },
+    {
+      "text": "Use Spend Permissions",
+      "url": "https://docs.base.org/base-account/improve-ux/spend-permissions"
+    },
+    {
+      "text": "Use Coinbase Balances Onchain",
+      "url": "https://docs.base.org/base-account/improve-ux/magic-spend"
+    },
+    {
+      "text": "Sign and Verify Typed Data",
+      "url": "https://docs.base.org/base-account/guides/sign-and-verify-typed-data"
+    },
+    {
+      "text": "Pay Gas in ERC20 tokens",
+      "url": "https://docs.base.org/base-account/improve-ux/sponsor-gas/erc20-paymasters"
+    },
+    {
+      "text": "Coinbase Developer Platform",
+      "url": "https://docs.base.org/base-account/framework-integrations/cdp"
+    },
+    {
+      "text": "RainbowKit",
+      "url": "https://docs.base.org/base-account/framework-integrations/rainbowkit"
+    },
+    {
+      "text": "Reown",
+      "url": "https://docs.base.org/base-account/framework-integrations/reown"
+    },
+    {
+      "text": "Thirdweb",
+      "url": "https://docs.base.org/base-account/framework-integrations/thirdweb"
+    },
+    {
+      "text": "Base Gasless Campaign",
+      "url": "https://docs.base.org/base-account/more/base-gasless-campaign"
+    },
+    {
+      "text": "Telemetry",
+      "url": "https://docs.base.org/base-account/more/telemetry"
+    },
+    {
+      "text": "Migrate from Coinbase Wallet SDK",
+      "url": "https://docs.base.org/base-account/guides/migration-guide"
+    },
+    {
+      "text": "Basenames FAQ",
+      "url": "https://docs.base.org/base-account/basenames/basenames-faq"
+    },
+    {
+      "text": "Basename Transfer Guide",
+      "url": "https://docs.base.org/base-account/basenames/basename-transfer"
+    },
+    {
+      "text": "Contribute to the Base Account Docs",
+      "url": "https://docs.base.org/base-account/contribute/contribute-to-base-account-docs"
+    },
+    {
+      "text": "Security and Bug Bounty",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty"
+    },
+    {
+      "text": "Security Audits",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty#security-audits"
+    },
+    {
+      "text": "Bug Bounty Program",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty#bug-bounty-program"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty#security-audits"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty#bug-bounty-program"
+    },
+    {
+      "text": "Contribute to the Base Account DocsPrevious",
+      "url": "https://docs.base.org/base-account/contribute/contribute-to-base-account-docs"
+    }
+  ]
+}

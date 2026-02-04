@@ -1,0 +1,407 @@
+{
+  "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet",
+  "title": "Bridges - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:30.426687",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Ethereum ↔ Base"
+    },
+    {
+      "level": "h3",
+      "text": "​Superbridge"
+    },
+    {
+      "level": "h4",
+      "text": "​Supported Networks"
+    },
+    {
+      "level": "h3",
+      "text": "​Brid.gg"
+    },
+    {
+      "level": "h4",
+      "text": "​Supported Networks"
+    },
+    {
+      "level": "h3",
+      "text": "​Programmatic Bridging (Ethereum)"
+    },
+    {
+      "level": "h3",
+      "text": "​For Token Issuers"
+    },
+    {
+      "level": "h2",
+      "text": "​Solana ↔ Base"
+    },
+    {
+      "level": "h2",
+      "text": "Full Documentation"
+    },
+    {
+      "level": "h2",
+      "text": "Terminally Onchain"
+    },
+    {
+      "level": "h3",
+      "text": "​Contract Addresses"
+    },
+    {
+      "level": "h2",
+      "text": "​Bitcoin → Base"
+    },
+    {
+      "level": "h3",
+      "text": "​Garden"
+    },
+    {
+      "level": "h4",
+      "text": "​Supported Networks"
+    },
+    {
+      "level": "h2",
+      "text": "​Disclaimer"
+    },
+    {
+      "level": "h2",
+      "text": "​FAQ"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationBridgesGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageEthereum ↔ BaseSuperbridgeSupported NetworksBrid.ggSupported NetworksProgrammatic Bridging (Ethereum)For Token IssuersSolana ↔ BaseContract AddressesBitcoin → BaseGardenSupported NetworksDisclaimerFAQBase supports bridging assets from multiple chains including Ethereum, Solana, and Bitcoin. While the bridge on bridge.base.org has been deprecated, there are many bridges that support moving assets between Base and other chains.\nFor questions, see our FAQ.\n\n​Ethereum ↔ Base\n​Superbridge\nSuperbridge enables you to bridge ETH and other supported assets from Ethereum mainnet (L1) directly to Base.\n​Supported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Brid.gg\nBrid.gg is another option that also helps you bridge ETH and supported assets between Ethereum mainnet (L1) and Base.\n​Supported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Programmatic Bridging (Ethereum)\nSee the sample code repository to see how to bridge ETH and ERC-20s from Ethereum to Base.\nDouble check the token address for ERC-20s You can use any ERC-20 that is\nsupported on the network. You can check what assets are on Base and the\ncorresponding contract address via this hub.\nEnsure there is an address for base, example.\nAlways test with small amounts to ensure the system is working as expected.\nThis implementation can only bridge assets to Base. Do not attempt to alter the\ncode to withdraw the assets.\n​For Token Issuers\nIf you have an ERC-20 token deployed on Ethereum and want to enable bridging to Base, see our guide on Bridging an L1 Token to Base. This covers deploying your token on Base using the standard bridge contracts and getting it listed on the Superchain token list.\n\n​Solana ↔ Base\nThe Base-Solana bridge enables bidirectional token transfers and message passing between Base and Solana networks.\nKey Features:\n\nTransfer SOL and SPL tokens between Base and Solana\nSend arbitrary cross-chain messages\nDeploy wrapped tokens on either chain\nOptional auto-relay for instant execution\n\nFull DocumentationComplete guide with code examples and contract addressesTerminally OnchainProduction terminal UI for bridging + contract calls\n​Contract Addresses\nNetworkContractAddressBase MainnetBridge0x3eff766C76a1be2Ce1aCF2B69c78bCae257D5188Base MainnetSOL Token0x311935Cd80B76769bF2ecC9D8Ab7635b2139cf82Solana MainnetBridge ProgramHNCne2FkVaNghhjKXapxJzPaBvAKDG1Ge3gqhZyfVWLM\nFor testnet addresses and full implementation details, see the Base-Solana Bridge documentation.\n\n​Bitcoin → Base\n​Garden\nGarden is a fast non-custodial Bitcoin bridge that enables you to bridge BTC and other supported assets from Ethereum, Solana, and more, directly to Base.\n​Supported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Disclaimer\nCoinbase Technologies, Inc., provides links to these independent service providers for your\nconvenience but assumes no responsibility for their operations. Any interactions with these\nproviders are solely between you and the provider.\n\n​FAQ\nCan I still use the bridge on bridge.base.org?No, the bridge on bridge.base.org has been deprecated.\nI used bridge.base.org in the past, how do I find my deposit or withdrawal?Navigate to one of the Superchain Bridges to look up your transaction.\nWhy has Base deprecated the bridge on bridge.base.org?Base is committed to decentralization and the Superchain vision. Leveraging the community to bootstrap the Superchain bridges is a step in that direction; increasing censorship resistance and decentralization.\nWho operates the Superchain Bridges like Garden.finance, Superbridge.app and Brid.gg?Superchain Bridges are operated by third parties, not by Coinbase Technologies, Inc. (“Coinbase”). Coinbase does not control, operate, or assume any responsibility for the performance of these external platforms. Before using any Superchain Bridge, you may be required to agree to their terms and conditions. We strongly recommend you review these terms carefully, as well as any privacy policies, to understand your rights and obligations. The integration or inclusion of the Superchain Bridges does not imply an endorsement or recommendation of any bridge by Coinbase.\nHow does the Base-Solana bridge work?The Base-Solana bridge uses validators to verify cross-chain messages. When bridging from Solana to Base, tokens are locked on Solana and minted on Base. When bridging from Base to Solana, tokens are burned on Base and unlocked on Solana. See the full documentation for implementation details.\nWhat if I have a question, issue, or problem?The Base Discord community is available around the clock for general questions,\nassistance and support! You can create a support ticket in the #general-support\nchannel.Was this page helpful?YesNoSuggest editsRaise issue⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Ethereum ↔ Base",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#ethereum--base"
+    },
+    {
+      "text": "Superbridge",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#superbridge"
+    },
+    {
+      "text": "Supported Networks",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#supported-networks"
+    },
+    {
+      "text": "Brid.gg",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#brid-gg"
+    },
+    {
+      "text": "Supported Networks",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#supported-networks-2"
+    },
+    {
+      "text": "Programmatic Bridging (Ethereum)",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#programmatic-bridging-ethereum"
+    },
+    {
+      "text": "For Token Issuers",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#for-token-issuers"
+    },
+    {
+      "text": "Solana ↔ Base",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#solana--base"
+    },
+    {
+      "text": "Contract Addresses",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#contract-addresses"
+    },
+    {
+      "text": "Bitcoin → Base",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#bitcoin-%E2%86%92-base"
+    },
+    {
+      "text": "Garden",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#garden"
+    },
+    {
+      "text": "Supported Networks",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#supported-networks-3"
+    },
+    {
+      "text": "Disclaimer",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#disclaimer"
+    },
+    {
+      "text": "FAQ",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#faq"
+    },
+    {
+      "text": "FAQ",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#faq"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#ethereum--base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#superbridge"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#supported-networks"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#brid-gg"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#supported-networks-2"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#programmatic-bridging-ethereum"
+    },
+    {
+      "text": "sample code repository",
+      "url": "https://github.com/base-org/guides/tree/main/bridge/native"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#for-token-issuers"
+    },
+    {
+      "text": "Bridging an L1 Token to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#solana--base"
+    },
+    {
+      "text": "Full DocumentationComplete guide with code examples and contract addresses",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#contract-addresses"
+    },
+    {
+      "text": "Base-Solana Bridge documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge#contract-addresses"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#bitcoin-→-base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#garden"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#supported-networks-3"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#disclaimer"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet#faq"
+    },
+    {
+      "text": "full documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Discord",
+      "url": "https://base.org/discord"
+    }
+  ]
+}

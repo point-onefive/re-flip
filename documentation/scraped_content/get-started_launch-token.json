@@ -1,0 +1,540 @@
+{
+  "url": "https://docs.base.org/get-started/launch-token",
+  "title": "Launch a Token - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:23.766699",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "Platform Launch"
+    },
+    {
+      "level": "h2",
+      "text": "Custom Development"
+    },
+    {
+      "level": "h2",
+      "text": "Choose Your Approach"
+    },
+    {
+      "level": "h2",
+      "text": "Best Practices"
+    },
+    {
+      "level": "h2",
+      "text": "​Choosing Your Launch Approach"
+    },
+    {
+      "level": "h3",
+      "text": "​Platform-Based Launch (Recommended for Most Users)"
+    },
+    {
+      "level": "h3",
+      "text": "​Custom Development (For Developers)"
+    },
+    {
+      "level": "h2",
+      "text": "​Token Launch Platforms on Base"
+    },
+    {
+      "level": "h3",
+      "text": "​Zora"
+    },
+    {
+      "level": "h3",
+      "text": "​Clanker"
+    },
+    {
+      "level": "h3",
+      "text": "​Flaunch"
+    },
+    {
+      "level": "h3",
+      "text": "​Mint Club"
+    },
+    {
+      "level": "h2",
+      "text": "​Technical Implementation with Foundry"
+    },
+    {
+      "level": "h3",
+      "text": "​Prerequisites"
+    },
+    {
+      "level": "h3",
+      "text": "​Project Setup"
+    },
+    {
+      "level": "h3",
+      "text": "​Smart Contract Development"
+    },
+    {
+      "level": "h3",
+      "text": "​Deployment Script"
+    },
+    {
+      "level": "h3",
+      "text": "​Environment Configuration"
+    },
+    {
+      "level": "h3",
+      "text": "​Testing"
+    },
+    {
+      "level": "h3",
+      "text": "​Deployment and Verification"
+    },
+    {
+      "level": "h2",
+      "text": "​Post-Launch Considerations"
+    },
+    {
+      "level": "h3",
+      "text": "​Token Distribution and Economics"
+    },
+    {
+      "level": "h3",
+      "text": "​Community and Social Presence"
+    },
+    {
+      "level": "h3",
+      "text": "​Liquidity and Trading"
+    },
+    {
+      "level": "h3",
+      "text": "​Continued Development"
+    },
+    {
+      "level": "h2",
+      "text": "​Resources"
+    },
+    {
+      "level": "h2",
+      "text": "Base Quickstart Guide"
+    },
+    {
+      "level": "h2",
+      "text": "Base Network Details"
+    },
+    {
+      "level": "h2",
+      "text": "Foundry Documentation"
+    },
+    {
+      "level": "h2",
+      "text": "OpenZeppelin Contracts"
+    },
+    {
+      "level": "h2",
+      "text": "BaseScan Explorer"
+    },
+    {
+      "level": "h2",
+      "text": "Base Faucet"
+    },
+    {
+      "level": "h3",
+      "text": "​Community"
+    },
+    {
+      "level": "h2",
+      "text": "Base Discord"
+    },
+    {
+      "level": "h2",
+      "text": "Base Twitter"
+    },
+    {
+      "level": "h2",
+      "text": "Base GitHub"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartLaunch a TokenGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnStatusFaucetBridgeBlogIntroductionBaseQuickstartBuild an AppLaunch a TokenDeploy Smart ContractsBuilder SupportGet FundedBase Services HubBase Mentorship ProgramCountry Leads & AmbassadorsBuild with AIMCP ServerStatic Docs FilesPrompt LibraryOn this pageChoosing Your Launch ApproachPlatform-Based Launch (Recommended for Most Users)Custom Development (For Developers)Token Launch Platforms on BaseZoraClankerFlaunchMint ClubTechnical Implementation with FoundryPrerequisitesProject SetupSmart Contract DevelopmentDeployment ScriptEnvironment ConfigurationTestingDeployment and VerificationPost-Launch ConsiderationsToken Distribution and EconomicsCommunity and Social PresenceLiquidity and TradingContinued DevelopmentResourcesCommunityLaunching a token on Base can be accomplished through multiple approaches, from no-code platforms to custom smart contract development. This guide helps you choose the right method and provides implementation details for both approaches.\nPlatform LaunchUse existing platforms like Zora, Clanker, or Flaunch for quick deploymentCustom DevelopmentBuild custom ERC-20 tokens with Foundry for maximum controlChoose Your ApproachDecision framework to help you pick the right methodBest PracticesSecurity, community building, and post-launch guidance\nFor most users: Use existing token launch platforms like Zora, Clanker, or Flaunch. These tools handle the technical complexity while providing unique features for different use cases.For developers: Build custom ERC-20 tokens using Foundry and OpenZeppelin’s battle-tested contracts for maximum control and customization.\n​Choosing Your Launch Approach\n​Platform-Based Launch (Recommended for Most Users)\nChoose a platform when you want:\n\nQuick deployment without coding\nBuilt-in community features\nAutomated liquidity management\nSocial integration capabilities\n\n​Custom Development (For Developers)\nBuild your own smart contract when you need:\n\nCustom tokenomics or functionality\nFull control over contract behavior\nIntegration with existing systems\nAdvanced security requirements\n\n​Token Launch Platforms on Base\n​Zora\nBest for: Content creators and social tokens\nZora transforms every post into a tradeable ERC-20 token with automatic Uniswap integration. Each post becomes a “coin” with 1 billion supply, creators receive 10 million tokens, and earn 1% of all trading fees.\nKey Features:\n\nSocial-first token creation\nAutomatic liquidity pools\nRevenue sharing for creators\nBuilt-in trading interface\n\nGet started with Zora →\n​Clanker\nBest for: Quick memecoin launches via social media\nClanker is an AI-driven token deployment tool that operates through Farcaster. Users can create ERC-20 tokens on Base by simply tagging @clanker with their token concept.\nKey Features:\n\nAI-powered automation\nSocial media integration via Farcaster\nInstant deployment\nCommunity-driven discovery\n\nGet started with Clanker → or visit clanker.world\n​Flaunch\nBest for: Advanced memecoin projects with sophisticated tokenomics\nFlaunch leverages Uniswap V4 to enable programmable revenue splits, automated buybacks, and Progressive Bid Walls for price support. Creators can customize fee distributions and treasury management.\nKey Features:\n\nProgrammable revenue sharing\nAutomated buyback mechanisms\nProgressive Bid Wall technology\nTreasury management tools\n\nGet started with Flaunch →\n​Mint Club\nBest for: Token families and community-driven assets\nMint Club enables anyone to launch new tokens or NFTs backed by existing ERC-20 tokens. Each trade locks the parent token in a bonding curve pool, creating onchain, auto-managed liquidity that strengthens the parent token while supporting new community assets.\nKey Features:\n\nLaunch tokens or NFTs from any ERC-20 token\nAutomated liquidity with customizable bonding curves\nIntegrated trading interface with cross-chain swap\nBuilt-in airdrop and lock-up tools\nSimple trading for tokens and NFTs\nCreator revenue sharing\n\nGet started with Mint Club →\n​Technical Implementation with Foundry\nFor developers who want full control over their token implementation, here’s how to create and deploy a custom ERC-20 token on Base using Foundry.\nBefore launching a custom developed token to production, always conduct security reviews by expert smart contract developers.\n​Prerequisites\n1Install FoundryInstall Foundry on your system:TerminalReport incorrect codeCopyAsk AIcurl -L https://foundry.paradigm.xyz | bash\nfoundryup\nFor detailed installation instructions, see the Foundry documentation.2Get Test ETHObtain Base Sepolia ETH for testing from the Base Faucet3Set Up Development EnvironmentConfigure your wallet and development tools for Base testnet deployment\n​Project Setup\nInitialize a new Foundry project and clean up template files:\nTerminalReport incorrect codeCopyAsk AI# Create new project\nforge init my-token-project\ncd my-token-project\n\n# Remove template files we don't need\nrm src/Counter.sol script/Counter.s.sol test/Counter.t.sol\n\nInstall OpenZeppelin contracts for secure, audited ERC-20 implementation:\nTerminalReport incorrect codeCopyAsk AI# Install OpenZeppelin contracts library\nforge install OpenZeppelin/openzeppelin-contracts\n\n​Smart Contract Development\nCreate your token contract using OpenZeppelin’s ERC-20 implementation:\nsrc/MyToken.solReport incorrect codeCopyAsk AI// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport \"@openzeppelin/contracts/token/ERC20/ERC20.sol\";\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\n\n/**\n * @title MyToken\n * @dev ERC-20 token with minting capabilities and supply cap\n */\ncontract MyToken is ERC20, Ownable {\n // Maximum number of tokens that can ever exist\n uint256 public constant MAX_SUPPLY = 1_000_000_000 * 10**18; // 1 billion tokens\n\n constructor(\n string memory name,\n string memory symbol,\n uint256 initialSupply,\n address initialOwner\n ) ERC20(name, symbol) Ownable(initialOwner) {\n require(initialSupply <= MAX_SUPPLY, \"Initial supply exceeds max supply\");\n // Mint initial supply to the contract deployer\n _mint(initialOwner, initialSupply);\n }\n\n /**\n * @dev Mint new tokens (only contract owner can call this)\n * @param to Address to mint tokens to\n * @param amount Amount of tokens to mint\n */\n function mint(address to, uint256 amount) public onlyOwner {\n require(totalSupply() + amount <= MAX_SUPPLY, \"Minting would exceed max supply\");\n _mint(to, amount);\n }\n\n /**\n * @dev Burn tokens from caller's balance\n * @param amount Amount of tokens to burn\n */\n function burn(uint256 amount) public {\n _burn(msg.sender, amount);\n }\n}\n\n​Deployment Script\nCreate a deployment script following Foundry best practices:\nscript/DeployToken.s.solReport incorrect codeCopyAsk AI// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport {Script, console} from \"forge-std/Script.sol\";\nimport {MyToken} from \"../src/MyToken.sol\";\n\ncontract DeployToken is Script {\n function run() external {\n // Load deployer's private key from environment variables\n uint256 deployerPrivateKey = vm.envUint(\"PRIVATE_KEY\");\n address deployerAddress = vm.addr(deployerPrivateKey);\n\n // Token configuration parameters\n string memory name = \"My Token\";\n string memory symbol = \"MTK\";\n uint256 initialSupply = 100_000_000 * 10**18; // 100 million tokens\n\n // Start broadcasting transactions\n vm.startBroadcast(deployerPrivateKey);\n\n // Deploy the token contract\n MyToken token = new MyToken(\n name,\n symbol,\n initialSupply,\n deployerAddress\n );\n\n // Stop broadcasting transactions\n vm.stopBroadcast();\n\n // Log deployment information\n console.log(\"Token deployed to:\", address(token));\n console.log(\"Token name:\", token.name());\n console.log(\"Token symbol:\", token.symbol());\n console.log(\"Initial supply:\", token.totalSupply());\n console.log(\"Deployer balance:\", token.balanceOf(deployerAddress));\n }\n}\n\n​Environment Configuration\nCreate a .env file with your configuration:\n.envReport incorrect codeCopyAsk AIPRIVATE_KEY=your_private_key_here\nBASE_SEPOLIA_RPC_URL=https://sepolia.base.org\nBASE_MAINNET_RPC_URL=https://mainnet.base.org\nBASESCAN_API_KEY=your_basescan_api_key_here\n\nUpdate foundry.toml for Base network configuration:\nfoundry.tomlReport incorrect codeCopyAsk AI[profile.default]\nsrc = \"src\"\nout = \"out\"\nlibs = [\"lib\"]\nremappings = [\"@openzeppelin/=lib/openzeppelin-contracts/\"]\n\n[rpc_endpoints]\nbase_sepolia = \"${BASE_SEPOLIA_RPC_URL}\"\nbase_mainnet = \"${BASE_MAINNET_RPC_URL}\"\n\n[etherscan]\nbase_sepolia = { key = \"${BASESCAN_API_KEY}\", url = \"https://api-sepolia.basescan.org/api\" }\nbase = { key = \"${BASESCAN_API_KEY}\", url = \"https://api.basescan.org/api\" }\n\n​Testing\nCreate comprehensive tests for your token:\ntest/MyToken.t.solReport incorrect codeCopyAsk AI// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport {Test, console} from \"forge-std/Test.sol\";\nimport {MyToken} from \"../src/MyToken.sol\";\n\ncontract MyTokenTest is Test {\n MyToken public token;\n address public owner = address(0x1);\n address public user = address(0x2);\n\n uint256 constant INITIAL_SUPPLY = 100_000_000 * 10**18;\n\n function setUp() public {\n // Deploy token contract before each test\n vm.prank(owner);\n token = new MyToken(\"Test Token\", \"TEST\", INITIAL_SUPPLY, owner);\n }\n\n function testInitialState() public {\n // Verify token was deployed with correct parameters\n assertEq(token.name(), \"Test Token\");\n assertEq(token.symbol(), \"TEST\");\n assertEq(token.totalSupply(), INITIAL_SUPPLY);\n assertEq(token.balanceOf(owner), INITIAL_SUPPLY);\n }\n\n function testMinting() public {\n uint256 mintAmount = 1000 * 10**18;\n\n // Only owner should be able to mint\n vm.prank(owner);\n token.mint(user, mintAmount);\n\n assertEq(token.balanceOf(user), mintAmount);\n assertEq(token.totalSupply(), INITIAL_SUPPLY + mintAmount);\n }\n\n function testBurning() public {\n uint256 burnAmount = 1000 * 10**18;\n\n // Owner burns their own tokens\n vm.prank(owner);\n token.burn(burnAmount);\n\n assertEq(token.balanceOf(owner), INITIAL_SUPPLY - burnAmount);\n assertEq(token.totalSupply(), INITIAL_SUPPLY - burnAmount);\n }\n\n function testFailMintExceedsMaxSupply() public {\n // This test should fail when trying to mint more than max supply\n uint256 excessiveAmount = token.MAX_SUPPLY() + 1;\n\n vm.prank(owner);\n token.mint(user, excessiveAmount);\n }\n\n function testFailUnauthorizedMinting() public {\n // This test should fail when non-owner tries to mint\n vm.prank(user);\n token.mint(user, 1000 * 10**18);\n }\n}\n\nRun your tests:\nTerminalReport incorrect codeCopyAsk AI# Run all tests with verbose output\nforge test -vv\n\n​Deployment and Verification\nDeploy to Base Sepolia testnet:\nTerminalReport incorrect codeCopyAsk AI# Load environment variables\nsource .env\n\n# Deploy to Base Sepolia with automatic verification\nforge script script/DeployToken.s.sol:DeployToken \\\n --rpc-url base_sepolia \\\n --broadcast \\\n --verify\n\nThe --verify flag automatically verifies your contract on BaseScan, making it easier for users to interact with your token.\nTo deploy to Base Mainnet, simply change base_sepolia to base_mainnet in your deployment command. Ensure you have sufficient ETH on Base Mainnet for deployment and gas fees.\n​Post-Launch Considerations\nOnce your token is deployed, here are the key next steps to consider:\n​Token Distribution and Economics\nCarefully consider your token’s supply and distribution settings. Think through how tokens will be distributed to your community, team, and ecosystem participants. Consider factors like vesting schedules, allocation percentages, and long-term incentive alignment.\n​Community and Social Presence\nEstablish a community and social presence around your token and project. This includes creating documentation, setting up social media accounts, engaging with the Base ecosystem, and building relationships with other projects and developers.\n​Liquidity and Trading\nAdd liquidity to decentralized exchanges like Uniswap to enable trading. Note that token launchers will typically handle this for you automatically, but for custom deployments, you’ll need to create trading pairs and provide initial liquidity.\n​Continued Development\nFor comprehensive guidance on growing your project on Base, including marketing strategies, ecosystem integration, and growth tactics, visit the Base Launch Playbook.\nRemember to always prioritize security, transparency, and community value when developing and launching tokens. Consider conducting security audits and following best practices for token distribution.\n​Resources\nBase Quickstart GuideComplete guide to getting started on BaseBase Network DetailsTechnical specifications and network informationFoundry DocumentationComprehensive guide to using FoundryOpenZeppelin ContractsSecurity-focused smart contract libraryBaseScan ExplorerExplore transactions and contracts on BaseBase FaucetGet testnet ETH for development\n​Community\nBase DiscordJoin the Base communityBase TwitterFollow Base updatesBase GitHubContribute to Base development\n\nWhether you choose a platform-based approach for speed and convenience, or custom development for maximum control, Base provides a robust foundation for token launches. Start with the approach that best fits your technical expertise and project requirements, and leverage Base’s growing ecosystem to build successful token projects.Was this page helpful?YesNoSuggest editsRaise issueBuild an AppPreviousDeploy Smart ContractsNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "curl -L https://foundry.paradigm.xyz | bash\nfoundryup"
+    },
+    {
+      "language": "unknown",
+      "code": "# Create new project\nforge init my-token-project\ncd my-token-project\n\n# Remove template files we don't need\nrm src/Counter.sol script/Counter.s.sol test/Counter.t.sol"
+    },
+    {
+      "language": "unknown",
+      "code": "# Install OpenZeppelin contracts library\nforge install OpenZeppelin/openzeppelin-contracts"
+    },
+    {
+      "language": "unknown",
+      "code": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport \"@openzeppelin/contracts/token/ERC20/ERC20.sol\";\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\n\n/**\n * @title MyToken\n * @dev ERC-20 token with minting capabilities and supply cap\n */\ncontract MyToken is ERC20, Ownable {\n    // Maximum number of tokens that can ever exist\n    uint256 public constant MAX_SUPPLY = 1_000_000_000 * 10**18; // 1 billion tokens\n    \n    constructor(\n        string memory name,\n        string memory symbol,\n        uint256 initialSupply,\n        address initialOwner\n    ) ERC20(name, symbol) Ownable(initialOwner) {\n        require(initialSupply <= MAX_SUPPLY, \"Initial supply exceeds max supply\");\n        // Mint initial supply to the contract deployer\n        _mint(initialOwner, initialSupply);\n    }\n    \n    /**\n     * @dev Mint new tokens (only contract owner can call this)\n     * @param to Address to mint tokens to\n     * @param amount Amount of tokens to mint\n     */\n    function mint(address to, uint256 amount) public onlyOwner {\n        require(totalSupply() + amount <= MAX_SUPPLY, \"Minting would exceed max supply\");\n        _mint(to, amount);\n    }\n    \n    /**\n     * @dev Burn tokens from caller's balance\n     * @param amount Amount of tokens to burn\n     */\n    function burn(uint256 amount) public {\n        _burn(msg.sender, amount);\n    }\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport {Script, console} from \"forge-std/Script.sol\";\nimport {MyToken} from \"../src/MyToken.sol\";\n\ncontract DeployToken is Script {\n    function run() external {\n        // Load deployer's private key from environment variables\n        uint256 deployerPrivateKey = vm.envUint(\"PRIVATE_KEY\");\n        address deployerAddress = vm.addr(deployerPrivateKey);\n        \n        // Token configuration parameters\n        string memory name = \"My Token\";\n        string memory symbol = \"MTK\";\n        uint256 initialSupply = 100_000_000 * 10**18; // 100 million tokens\n        \n        // Start broadcasting transactions\n        vm.startBroadcast(deployerPrivateKey);\n        \n        // Deploy the token contract\n        MyToken token = new MyToken(\n            name,\n            symbol,\n            initialSupply,\n            deployerAddress\n        );\n        \n        // Stop broadcasting transactions\n        vm.stopBroadcast();\n        \n        // Log deployment information\n        console.log(\"Token deployed to:\", address(token));\n        console.log(\"Token name:\", token.name());\n        console.log(\"Token symbol:\", token.symbol());\n        console.log(\"Initial supply:\", token.totalSupply());\n        console.log(\"Deployer balance:\", token.balanceOf(deployerAddress));\n    }\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "PRIVATE_KEY=your_private_key_here\nBASE_SEPOLIA_RPC_URL=https://sepolia.base.org\nBASE_MAINNET_RPC_URL=https://mainnet.base.org\nBASESCAN_API_KEY=your_basescan_api_key_here"
+    },
+    {
+      "language": "unknown",
+      "code": "[profile.default]\nsrc = \"src\"\nout = \"out\"\nlibs = [\"lib\"]\nremappings = [\"@openzeppelin/=lib/openzeppelin-contracts/\"]\n\n[rpc_endpoints]\nbase_sepolia = \"${BASE_SEPOLIA_RPC_URL}\"\nbase_mainnet = \"${BASE_MAINNET_RPC_URL}\"\n\n[etherscan]\nbase_sepolia = { key = \"${BASESCAN_API_KEY}\", url = \"https://api-sepolia.basescan.org/api\" }\nbase = { key = \"${BASESCAN_API_KEY}\", url = \"https://api.basescan.org/api\" }"
+    },
+    {
+      "language": "unknown",
+      "code": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.19;\n\nimport {Test, console} from \"forge-std/Test.sol\";\nimport {MyToken} from \"../src/MyToken.sol\";\n\ncontract MyTokenTest is Test {\n    MyToken public token;\n    address public owner = address(0x1);\n    address public user = address(0x2);\n    \n    uint256 constant INITIAL_SUPPLY = 100_000_000 * 10**18;\n    \n    function setUp() public {\n        // Deploy token contract before each test\n        vm.prank(owner);\n        token = new MyToken(\"Test Token\", \"TEST\", INITIAL_SUPPLY, owner);\n    }\n    \n    function testInitialState() public {\n        // Verify token was deployed with correct parameters\n        assertEq(token.name(), \"Test Token\");\n        assertEq(token.symbol(), \"TEST\");\n        assertEq(token.totalSupply(), INITIAL_SUPPLY);\n        assertEq(token.balanceOf(owner), INITIAL_SUPPLY);\n    }\n    \n    function testMinting() public {\n        uint256 mintAmount = 1000 * 10**18;\n        \n        // Only owner should be able to mint\n        vm.prank(owner);\n        token.mint(user, mintAmount);\n        \n        assertEq(token.balanceOf(user), mintAmount);\n        assertEq(token.totalSupply(), INITIAL_SUPPLY + mintAmount);\n    }\n    \n    function testBurning() public {\n        uint256 burnAmount = 1000 * 10**18;\n        \n        // Owner burns their own tokens\n        vm.prank(owner);\n        token.burn(burnAmount);\n        \n        assertEq(token.balanceOf(owner), INITIAL_SUPPLY - burnAmount);\n        assertEq(token.totalSupply(), INITIAL_SUPPLY - burnAmount);\n    }\n    \n    function testFailMintExceedsMaxSupply() public {\n        // This test should fail when trying to mint more than max supply\n        uint256 excessiveAmount = token.MAX_SUPPLY() + 1;\n        \n        vm.prank(owner);\n        token.mint(user, excessiveAmount);\n    }\n    \n    function testFailUnauthorizedMinting() public {\n        // This test should fail when non-owner tries to mint\n        vm.prank(user);\n        token.mint(user, 1000 * 10**18);\n    }\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "# Run all tests with verbose output\nforge test -vv"
+    },
+    {
+      "language": "unknown",
+      "code": "# Load environment variables\nsource .env\n\n# Deploy to Base Sepolia with automatic verification\nforge script script/DeployToken.s.sol:DeployToken \\\n    --rpc-url base_sepolia \\\n    --broadcast \\\n    --verify"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/get-started/launch-token#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Bridge",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet"
+    },
+    {
+      "text": "Base",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Build an App",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Deploy Smart Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "text": "Get Funded",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "text": "Base Services Hub",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "text": "Base Mentorship Program",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Country Leads & Ambassadors",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "text": "MCP Server",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Static Docs Files",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    },
+    {
+      "text": "Choosing Your Launch Approach",
+      "url": "https://docs.base.org/get-started/launch-token#choosing-your-launch-approach"
+    },
+    {
+      "text": "Platform-Based Launch (Recommended for Most Users)",
+      "url": "https://docs.base.org/get-started/launch-token#platform-based-launch-recommended-for-most-users"
+    },
+    {
+      "text": "Custom Development (For Developers)",
+      "url": "https://docs.base.org/get-started/launch-token#custom-development-for-developers"
+    },
+    {
+      "text": "Token Launch Platforms on Base",
+      "url": "https://docs.base.org/get-started/launch-token#token-launch-platforms-on-base"
+    },
+    {
+      "text": "Zora",
+      "url": "https://docs.base.org/get-started/launch-token#zora"
+    },
+    {
+      "text": "Clanker",
+      "url": "https://docs.base.org/get-started/launch-token#clanker"
+    },
+    {
+      "text": "Flaunch",
+      "url": "https://docs.base.org/get-started/launch-token#flaunch"
+    },
+    {
+      "text": "Mint Club",
+      "url": "https://docs.base.org/get-started/launch-token#mint-club"
+    },
+    {
+      "text": "Technical Implementation with Foundry",
+      "url": "https://docs.base.org/get-started/launch-token#technical-implementation-with-foundry"
+    },
+    {
+      "text": "Prerequisites",
+      "url": "https://docs.base.org/get-started/launch-token#prerequisites"
+    },
+    {
+      "text": "Project Setup",
+      "url": "https://docs.base.org/get-started/launch-token#project-setup"
+    },
+    {
+      "text": "Smart Contract Development",
+      "url": "https://docs.base.org/get-started/launch-token#smart-contract-development"
+    },
+    {
+      "text": "Deployment Script",
+      "url": "https://docs.base.org/get-started/launch-token#deployment-script"
+    },
+    {
+      "text": "Environment Configuration",
+      "url": "https://docs.base.org/get-started/launch-token#environment-configuration"
+    },
+    {
+      "text": "Testing",
+      "url": "https://docs.base.org/get-started/launch-token#testing"
+    },
+    {
+      "text": "Deployment and Verification",
+      "url": "https://docs.base.org/get-started/launch-token#deployment-and-verification"
+    },
+    {
+      "text": "Post-Launch Considerations",
+      "url": "https://docs.base.org/get-started/launch-token#post-launch-considerations"
+    },
+    {
+      "text": "Token Distribution and Economics",
+      "url": "https://docs.base.org/get-started/launch-token#token-distribution-and-economics"
+    },
+    {
+      "text": "Community and Social Presence",
+      "url": "https://docs.base.org/get-started/launch-token#community-and-social-presence"
+    },
+    {
+      "text": "Liquidity and Trading",
+      "url": "https://docs.base.org/get-started/launch-token#liquidity-and-trading"
+    },
+    {
+      "text": "Continued Development",
+      "url": "https://docs.base.org/get-started/launch-token#continued-development"
+    },
+    {
+      "text": "Resources",
+      "url": "https://docs.base.org/get-started/launch-token#resources"
+    },
+    {
+      "text": "Community",
+      "url": "https://docs.base.org/get-started/launch-token#community"
+    },
+    {
+      "text": "Platform LaunchUse existing platforms like Zora, Clanker, or Flaunch for quick deployment",
+      "url": "https://docs.base.org/get-started/launch-token#token-launch-platforms-on-base"
+    },
+    {
+      "text": "Custom DevelopmentBuild custom ERC-20 tokens with Foundry for maximum control",
+      "url": "https://docs.base.org/get-started/launch-token#technical-implementation-with-foundry"
+    },
+    {
+      "text": "Choose Your ApproachDecision framework to help you pick the right method",
+      "url": "https://docs.base.org/get-started/launch-token#choosing-your-launch-approach"
+    },
+    {
+      "text": "Best PracticesSecurity, community building, and post-launch guidance",
+      "url": "https://docs.base.org/get-started/launch-token#post-launch-considerations"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#choosing-your-launch-approach"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#platform-based-launch-recommended-for-most-users"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#custom-development-for-developers"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#token-launch-platforms-on-base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#zora"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#clanker"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#flaunch"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#mint-club"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#technical-implementation-with-foundry"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#prerequisites"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Base Faucet",
+      "url": "https://docs.base.org/docs/tools/network-faucets"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#project-setup"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#smart-contract-development"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#deployment-script"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#environment-configuration"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#testing"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#deployment-and-verification"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#post-launch-considerations"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#token-distribution-and-economics"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#community-and-social-presence"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#liquidity-and-trading"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#continued-development"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#resources"
+    },
+    {
+      "text": "Base Quickstart GuideComplete guide to getting started on Base",
+      "url": "https://docs.base.org/quickstart"
+    },
+    {
+      "text": "Base Network DetailsTechnical specifications and network information",
+      "url": "https://docs.base.org/network-information"
+    },
+    {
+      "text": "Base FaucetGet testnet ETH for development",
+      "url": "https://docs.base.org/docs/tools/network-faucets"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/launch-token#community"
+    },
+    {
+      "text": "Base DiscordJoin the Base community",
+      "url": "https://base.org/discord"
+    },
+    {
+      "text": "Base GitHubContribute to Base development",
+      "url": "https://github.com/base-org"
+    },
+    {
+      "text": "Build an AppPrevious",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Deploy Smart ContractsNext",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    }
+  ]
+}

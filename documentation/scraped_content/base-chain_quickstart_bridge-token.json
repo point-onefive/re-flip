@@ -1,0 +1,271 @@
+{
+  "url": "https://docs.base.org/base-chain/quickstart/bridge-token",
+  "title": "Bridging an L1 token to Base - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:23.006023",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Adding your token to the list"
+    },
+    {
+      "level": "h3",
+      "text": "​Step 1: Deploy your token on Base"
+    },
+    {
+      "level": "h3",
+      "text": "​Step 2: Submit details for your token"
+    },
+    {
+      "level": "h3",
+      "text": "​Step 3: Await final approval"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartBridging an L1 token to BaseGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageAdding your token to the listStep 1: Deploy your token on BaseStep 2: Submit details for your tokenStep 3: Await final approvalThis page is intended for token issuers who already have an ERC-20 contract deployed on Ethereum and would like to submit their token for bridging between Ethereum and Base. Base uses the Superchain token list as a reference for tokens that have been deployed on Base.\nDisclaimer: Base does not endorse any of the tokens that are listed in the Github repository and has conducted only preliminary checks, which include automated checks listed here.\n​Adding your token to the list\nThe steps below explain how to get your token on the Base Token List.\n​Step 1: Deploy your token on Base\nSelect your preferred bridging framework and use it to deploy an ERC-20 for your token on Base. We recommend you use the framework provided by Base’s standard bridge contracts, and furthermore deploy your token using the OptimismMintableERC20Factory. You can find the list of contracts addresses here.\nDeploying your token on Base in this manner provides us with guarantees that will smooth the approval process. If you choose a different bridging framework, its interface must be compatible with that of the standard bridge, otherwise it may be difficult for us to support.\n​Step 2: Submit details for your token\nFollow the instructions in the Github repository and submit a PR containing the required details for your token. You must specify in your token’s data.json file a section for ‘base-sepolia’ and/or ‘base’. The change you need to submit is particularly simple if your token has already been added to the Superchain token list. For example, this PR shows the change required for cbETH, which was already on Optimism’s token list and relies on the Base standard bridge.\n​Step 3: Await final approval\nReviews are regularly conducted by the Base team and you should receive a reply within 24-72 hours (depending on if the PR is opened on a weekday, weekend or holiday).Was this page helpful?YesNoSuggest editsRaise issueConnecting to BasePreviousBase-Solana BridgeNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Adding your token to the list",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#adding-your-token-to-the-list"
+    },
+    {
+      "text": "Step 1: Deploy your token on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#step-1-deploy-your-token-on-base"
+    },
+    {
+      "text": "Step 2: Submit details for your token",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#step-2-submit-details-for-your-token"
+    },
+    {
+      "text": "Step 3: Await final approval",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#step-3-await-final-approval"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#adding-your-token-to-the-list"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#step-1-deploy-your-token-on-base"
+    },
+    {
+      "text": "here",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#step-2-submit-details-for-your-token"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token#step-3-await-final-approval"
+    },
+    {
+      "text": "Connecting to BasePrevious",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Solana BridgeNext",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    }
+  ]
+}

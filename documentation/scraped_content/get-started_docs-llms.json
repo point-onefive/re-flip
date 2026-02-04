@@ -1,0 +1,203 @@
+{
+  "url": "https://docs.base.org/get-started/docs-llms",
+  "title": "Static Docs Files - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:04.476019",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Documentation index"
+    },
+    {
+      "level": "h2",
+      "text": "​Full documentation file"
+    },
+    {
+      "level": "h3",
+      "text": "​Setup with Cursor"
+    },
+    {
+      "level": "h3",
+      "text": "​Setup with Claude Code"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationBuild with AIStatic Docs FilesGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnStatusFaucetBridgeBlogIntroductionBaseQuickstartBuild an AppLaunch a TokenDeploy Smart ContractsBuilder SupportGet FundedBase Services HubBase Mentorship ProgramCountry Leads & AmbassadorsBuild with AIMCP ServerStatic Docs FilesPrompt LibraryOn this pageDocumentation indexFull documentation fileSetup with CursorSetup with Claude Code​Documentation index\nFetch the complete documentation index at: https://docs.base.org/llms.txt\nUse this file to discover all available pages before exploring further.\n​Full documentation file\nIf your AI tool doesn’t support MCP yet, you can use a static documentation file instead. This gives your AI assistant the entire Base documentation as one text file.\nThe static llms-full.txt file is a snapshot and may not include the latest updates. Use MCP when possible for always-current docs.\n​Setup with Cursor\nCursor is an AI-powered code editor built as a fork of VS Code with features like AI code completion and natural language editing.\n1Open docs settingsGo to Settings > Features > Docs.2Add Base docsClick Add new doc and paste: https://docs.base.org/llms-full.txt3Reference in chatUse @docs -> Base in your AI chat to reference the documentation.\n​Setup with Claude Code\nClaude Code is an agentic coding tool that lives in your terminal and understands your codebase.\n1Download the docs fileDownload the static documentation file from: https://docs.base.org/llms-full.txt2Add to your projectSave the file in your project directory or a known location on your system.3Reference in chatUse the /read command or drag and drop the file path to include the documentation in your conversation. Claude Code will then have access to the full Base documentation for that session.Was this page helpful?YesNoSuggest editsRaise issueMCP ServerPreviousDeveloper's Guide to Effective AI PromptingNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/get-started/docs-llms#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Bridge",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet"
+    },
+    {
+      "text": "Base",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Build an App",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Deploy Smart Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "text": "Get Funded",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "text": "Base Services Hub",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "text": "Base Mentorship Program",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Country Leads & Ambassadors",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "text": "MCP Server",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Static Docs Files",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    },
+    {
+      "text": "Documentation index",
+      "url": "https://docs.base.org/get-started/docs-llms#documentation-index"
+    },
+    {
+      "text": "Full documentation file",
+      "url": "https://docs.base.org/get-started/docs-llms#full-documentation-file"
+    },
+    {
+      "text": "Setup with Cursor",
+      "url": "https://docs.base.org/get-started/docs-llms#setup-with-cursor"
+    },
+    {
+      "text": "Setup with Claude Code",
+      "url": "https://docs.base.org/get-started/docs-llms#setup-with-claude-code"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/docs-llms#documentation-index"
+    },
+    {
+      "text": "https://docs.base.org/llms.txt",
+      "url": "https://docs.base.org/llms.txt"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/docs-llms#full-documentation-file"
+    },
+    {
+      "text": "MCP",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/docs-llms#setup-with-cursor"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/docs-llms#setup-with-claude-code"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "https://docs.base.org/llms-full.txt",
+      "url": "https://docs.base.org/llms-full.txt"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "MCP ServerPrevious",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Developer's Guide to Effective AI PromptingNext",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    }
+  ]
+}

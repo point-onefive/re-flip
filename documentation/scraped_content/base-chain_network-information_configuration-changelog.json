@@ -1,0 +1,295 @@
+{
+  "url": "https://docs.base.org/base-chain/network-information/configuration-changelog",
+  "title": "Configuration Changelog - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:21.920079",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Base Mainnet"
+    },
+    {
+      "level": "h2",
+      "text": "​Base Sepolia"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationNetwork InformationConfiguration ChangelogGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageBase MainnetBase SepoliaThis page tracks configuration changes to the Base networks, including updates to block building, network fees, and other network parameters.\n​Base Mainnet\nDateChangeDocumentationFebruary 2, 2026Increased Minimum Base Fee to 2,000,000 weiMinimum Base FeeJanuary 22, 2026Increased Minimum Base Fee to 1,000,000 weiMinimum Base FeeDecember 18, 2025Increased Minimum Base Fee to 500,000 weiMinimum Base FeeDecember 4, 2025Enabled Minimum Base Fee (200,000 wei)Minimum Base FeeSeptember 17, 2025Enabled Per-Transaction Gas MaximumPer-Transaction Gas MaximumSeptember 11, 2025Ended testing Per-Transaction Gas MaximumPer-Transaction Gas MaximumSeptember 10, 2025Started testing Per-Transaction Gas MaximumPer-Transaction Gas MaximumJuly 7, 2025Enabled FlashblocksFlashblocksMay 15, 2025Ended testing FlashblocksFlashblocksMay 15, 2025Started testing FlashblocksFlashblocks\n​Base Sepolia\nDateChangeDocumentationNovember 20, 2025Enabled Minimum Base Fee (200,000 wei)Minimum Base FeeSeptember 3, 2025Enabled Per-Transaction Gas MaximumPer-Transaction Gas MaximumFebruary 25, 2025Enabled FlashblocksFlashblocksWas this page helpful?YesNoSuggest editsRaise issueTroubleshooting TransactionsPreviousFlashblocksNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Base Mainnet",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog#base-mainnet"
+    },
+    {
+      "text": "Base Sepolia",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog#base-sepolia"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog#base-mainnet"
+    },
+    {
+      "text": "Minimum Base Fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "Minimum Base Fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "Minimum Base Fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "Minimum Base Fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "Per-Transaction Gas Maximum",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Per-Transaction Gas Maximum",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Per-Transaction Gas Maximum",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog#base-sepolia"
+    },
+    {
+      "text": "Minimum Base Fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "Per-Transaction Gas Maximum",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#per-transaction-gas-maximum"
+    },
+    {
+      "text": "Flashblocks",
+      "url": "https://docs.base.org/base-chain/network-information/block-building#flashblocks"
+    },
+    {
+      "text": "Troubleshooting TransactionsPrevious",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "FlashblocksNext",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app",
+  "title": "Building for The Base App - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:02.336036",
+  "headings": [
+    {
+      "level": "h3",
+      "text": "​Featured Guidelines"
+    },
+    {
+      "level": "h2",
+      "text": "Product Guidelines"
+    },
+    {
+      "level": "h2",
+      "text": "Design Guidelines"
+    },
+    {
+      "level": "h2",
+      "text": "Technical Guidelines"
+    },
+    {
+      "level": "h2",
+      "text": "Notification Guidelines"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartBuilding for The Base AppGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnQuickstartMigrate an Existing AppCreate a Mini AppBuild ChecklistBuilding for The Base AppMini App TemplatesNEWCore ConceptsManifestContextEmbeds & PreviewsBase AccountNotificationsAuthenticationNavigationTechnical GuidesSign Your ManifestGenerate Dynamic Embed ImagesSend Notifications (Neynar)Accept PaymentsFeatured GuidelinesFeatured ChecklistProduct GuidelinesDesign GuidelinesNotification GuidelinesTechnical GuidelinesGrowth PlaybookWhy Mini AppsOptimize OnboardingIdeating Viral AppsRewardsTroubleshootingCommon Issues & DebuggingBase App CompatibilityHow Search worksTest Your AppResourcesTemplatesDesign resourcesLlms full.txtOn this pageFeatured GuidelinesThe best apps are simple, focused, and easy to understand.\n1Ask yourself\n\nWhat’s the one thing my app does really well?\n\nWhy would someone use it every day?\n\nWhy and when would someone share it with a friend?\n\n2Audience fitBase users are social, onchain-native, and interested in creating, earning, trading, and connecting.3Successful apps\n\nHelp people earn (e.g. rewards, yield, creator income)\n\nHelp people create (e.g. minting, designing, storytelling)\n\nHelp people have fun (games, collectibles, quizzes, social experiences with onchain elements)\n\nAre simple, easy and satisfying to use\n\nHave low friction onboarding — avoid:\n\nCollecting personal info (address, phone number, etc.)\n\nRequiring upfront deposits or complex setup steps\n\n4Group chat focusWe’re especially excited about mini apps that make group chats more fun, functional, or rewarding — from games with onchain buy-ins, to tools like dinner-bill splitting with USDC.\n​Featured Guidelines\nWhen building mini apps for the Base app, follow the Featured Guidelines:\nProduct GuidelinesDesign GuidelinesTechnical GuidelinesNotification GuidelinesWas this page helpful?YesNoSuggest editsRaise issueBuild ChecklistPreviousMini App TemplatesNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Migrate an Existing App",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "Create a Mini App",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "Build Checklist",
+      "url": "https://docs.base.org/mini-apps/quickstart/build-checklist"
+    },
+    {
+      "text": "Building for The Base App",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "Manifest",
+      "url": "https://docs.base.org/mini-apps/core-concepts/manifest"
+    },
+    {
+      "text": "Context",
+      "url": "https://docs.base.org/mini-apps/core-concepts/context"
+    },
+    {
+      "text": "Embeds & Previews",
+      "url": "https://docs.base.org/mini-apps/core-concepts/embeds-and-previews"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/mini-apps/core-concepts/base-account"
+    },
+    {
+      "text": "Notifications",
+      "url": "https://docs.base.org/mini-apps/core-concepts/notifications"
+    },
+    {
+      "text": "Authentication",
+      "url": "https://docs.base.org/mini-apps/core-concepts/authentication"
+    },
+    {
+      "text": "Navigation",
+      "url": "https://docs.base.org/mini-apps/core-concepts/navigation"
+    },
+    {
+      "text": "Sign Your Manifest",
+      "url": "https://docs.base.org/mini-apps/technical-guides/sign-manifest"
+    },
+    {
+      "text": "Generate Dynamic Embed Images",
+      "url": "https://docs.base.org/mini-apps/technical-guides/dynamic-embeds"
+    },
+    {
+      "text": "Send Notifications (Neynar)",
+      "url": "https://docs.base.org/mini-apps/technical-guides/neynar-notifications"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/mini-apps/technical-guides/accept-payments"
+    },
+    {
+      "text": "Featured Checklist",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/overview"
+    },
+    {
+      "text": "Product Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/product-guidelines"
+    },
+    {
+      "text": "Design Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/design-guidelines"
+    },
+    {
+      "text": "Notification Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/notification-guidelines"
+    },
+    {
+      "text": "Technical Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/technical-guidelines"
+    },
+    {
+      "text": "Why Mini Apps",
+      "url": "https://docs.base.org/mini-apps/introduction/overview"
+    },
+    {
+      "text": "Optimize Onboarding",
+      "url": "https://docs.base.org/mini-apps/growth/optimize-onboarding"
+    },
+    {
+      "text": "Ideating Viral Apps",
+      "url": "https://docs.base.org/mini-apps/growth/build-viral-mini-apps"
+    },
+    {
+      "text": "Rewards",
+      "url": "https://docs.base.org/mini-apps/growth/rewards"
+    },
+    {
+      "text": "Common Issues & Debugging",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/common-issues"
+    },
+    {
+      "text": "Base App Compatibility",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/base-app-compatibility"
+    },
+    {
+      "text": "How Search works",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/how-search-works"
+    },
+    {
+      "text": "Test Your App",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/testing"
+    },
+    {
+      "text": "Templates",
+      "url": "https://docs.base.org/mini-apps/resources/templates"
+    },
+    {
+      "text": "Design resources",
+      "url": "https://docs.base.org/mini-apps/resources/design-resources"
+    },
+    {
+      "text": "Llms full.txt",
+      "url": "https://docs.base.org/mini-apps/llms-full.txt"
+    },
+    {
+      "text": "Featured Guidelines",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app#featured-guidelines"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app#featured-guidelines"
+    },
+    {
+      "text": "Featured Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/overview"
+    },
+    {
+      "text": "Product Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/product-guidelines"
+    },
+    {
+      "text": "Design Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/design-guidelines"
+    },
+    {
+      "text": "Technical Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/technical-guidelines"
+    },
+    {
+      "text": "Notification Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/notification-guidelines"
+    },
+    {
+      "text": "Build ChecklistPrevious",
+      "url": "https://docs.base.org/mini-apps/quickstart/build-checklist"
+    },
+    {
+      "text": "Mini App TemplatesNext",
+      "url": "https://docs.base.org/mini-apps/quickstart/template"
+    }
+  ]
+}

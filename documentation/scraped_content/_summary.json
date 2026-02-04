@@ -1,0 +1,290 @@
+{
+  "total_pages_scraped": 71,
+  "scraped_at": "2026-02-04T10:27:32.728340",
+  "pages": [
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/oracles"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/data-indexers"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/get-started/fund-your-wallet"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/building-with-base/deployment-quickstart"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/building-with-base/quickstart"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/differences"
+    },
+    {
+      "title": "Base | Builders",
+      "url": "https://www.base.org/build"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/node-providers"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/bridges"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/contracts/overview"
+    },
+    {
+      "title": "Base - Base Documentation",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/get-started/connect-wallet"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/foundry"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/security"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/hardhat"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/onramps"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/building-with-base/overview"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/faucets"
+    },
+    {
+      "title": "Connecting to Base - Base Documentation",
+      "url": "https://docs.base.org/network-information"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/overview"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/building-with-base/guides"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/fees"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/block-explorers"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/tools/thirdweb"
+    },
+    {
+      "title": "Page Not Found",
+      "url": "https://docs.base.org/get-started/contracts"
+    },
+    {
+      "title": "Connecting to Base - Base Documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "title": "Differences between Ethereum and Base - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "title": "Ecosystem Contracts - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "title": "Contract Addresses - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "title": "Onchain Registry API - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "title": "Data Indexers - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "title": "Building for The Base App - Base Documentation",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "title": "Build an App - Base Documentation",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "title": "Node Providers - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "title": "Static Docs Files - Base Documentation",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "title": "Block Building - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "title": "Reporting Vulnerabilities - Base Documentation",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "title": "Base Products - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "title": "Deploy on Base - Base Documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "title": "Deploy Smart Contracts - Base Documentation",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "title": "Create a Mini App - Base Documentation",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "title": "Accept Payments - Base Documentation",
+      "url": "https://docs.base.org/base-account/guides/accept-payments"
+    },
+    {
+      "title": "How to avoid getting your app flagged as malicious - Base Documentation",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "title": "Onramps - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "title": "Accept Recurring Payments - Base Documentation",
+      "url": "https://docs.base.org/base-account/guides/accept-recurring-payments"
+    },
+    {
+      "title": "Base Services Hub - Base Documentation",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "title": "Transaction Finality - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "title": "Account Abstraction - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "title": "Block Explorers - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "title": "Get Funded - Base Documentation",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "title": "Troubleshooting Transactions - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "title": "Web (HTML + JS) - Base Documentation",
+      "url": "https://docs.base.org/base-account/quickstart/web"
+    },
+    {
+      "title": "Oracles - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "title": "Why Base? - Base Documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "title": "Base Mentorship Program - Base Documentation",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "title": "Base-Solana Bridge - Base Documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "title": "Country Leads & Ambassadors - Base Documentation",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "title": "Security and Bug Bounty - Base Documentation",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty"
+    },
+    {
+      "title": "Configuration Changelog - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "title": "Bridging an L1 token to Base - Base Documentation",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "title": "Launch a Token - Base Documentation",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "title": "Security Council for Base - Base Documentation",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "title": "Network Faucets - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "title": "User Onboarding - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "title": "Cross-chain - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "title": "Migrate an Existing App - Base Documentation",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "title": "Network Fees - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "title": "MCP Server - Base Documentation",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "title": "Tokens in Coinbase Wallet - Base Documentation",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "title": "Bridges - Base Documentation",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet"
+    },
+    {
+      "title": "Developer's Guide to Effective AI Prompting - Base Documentation",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    }
+  ]
+}

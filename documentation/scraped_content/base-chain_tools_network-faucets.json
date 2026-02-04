@@ -1,0 +1,351 @@
+{
+  "url": "https://docs.base.org/base-chain/tools/network-faucets",
+  "title": "Network Faucets - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:25.188554",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Coinbase Developer Platform"
+    },
+    {
+      "level": "h2",
+      "text": "​thirdweb Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​Superchain Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​Alchemy Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​Bware Labs Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​Chainstack Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​ethfaucet.com"
+    },
+    {
+      "level": "h2",
+      "text": "​Ponzifun Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​QuickNode Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​LearnWeb3 Faucet"
+    },
+    {
+      "level": "h2",
+      "text": "​Ethereum Ecosystem Faucet"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationToolsNetwork FaucetsGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageCoinbase Developer Platformthirdweb FaucetSuperchain FaucetAlchemy FaucetBware Labs FaucetChainstack Faucetethfaucet.comPonzifun FaucetQuickNode FaucetLearnWeb3 FaucetEthereum Ecosystem Faucet​Coinbase Developer Platform\nThe Coinbase Developer Platform Faucet provides free testnet ETH on Base Sepolia - one claim per 24 hours.\nRequests to Coinbase Developer Platform’s Faucet are limited to one claim per 24 hours.\n​thirdweb Faucet\nThe thirdweb Faucet provides free testnet ETH on Base Sepolia - one claim per 24 hours.\nThe thirdweb faucet allows developers to connect their wallet through EOA or social logins and claim Base Sepolia testnet funds.\n​Superchain Faucet\nThe Superchain Faucet provides testnet ETH for all OP Chains, including Base.\nThe Superchain faucet allows developers to authenticate via their onchain identity. Developers that choose to authenticate via their onchain identity can claim more testnet ETH versus traditional faucets. For more information, see the FAQ.\n​Alchemy Faucet\nThe Alchemy Faucet is a fast and reliable network faucet that allows users with a free Alchemy account to request testnet ETH on Base Sepolia.\nRequests to Alchemy’s Base Sepolia Faucet are limited to one claim per 24 hours.\n​Bware Labs Faucet\nBware Labs Faucet is an easy to use faucet with no registration required. You can use Bware Labs Faucet to claim Base Sepolia testnet ETH for free - one claim per 24 hours.\nRequests to Bware Labs Faucet are limited to one claim per 24 hours.\n​Chainstack Faucet\nChainstack Faucet dispenses Base ETH based on your Chainstack platform API key.\nChainstack faucet drips 0.5 ETH every 24 hours.\n​ethfaucet.com\nethfaucet.com provides developers with free Base Sepolia testnet ETH and small amounts of Base mainnet ETH for contract deployment.\nIt is operated and maintained by BringID.\nBase Sepolia claims are rate-limited per 24 hours, and Base Mainnet ETH can only be claimed once.\n​Ponzifun Faucet\nPonzifun Faucet is a simple and fast Base Sepolia faucet. You can use PonziFun Faucet to claim free testnet ETH, 1 ETH every 48 hours, no captcha, no sign-up.\nPonzifun faucet drips 1 ETH every 48 hours.\n​QuickNode Faucet\nQuickNode Faucet is an easy to use Multi-Chain Faucet. You can use QuickNode Faucet to claim Base Sepolia testnet ETH for free - one drip per network every 12 hours.\nRequests to QuickNode Faucet are limited to one drip every 12 hours.\n​LearnWeb3 Faucet\nLearnWeb3 Faucet is a multi-chain faucet by LearnWeb3. You can use the LearnWeb3 faucet to claim Base Sepolia testnet ETH for free - one claim every 24 hours.\nRequests to LearnWeb3 faucet are limited to one claim per 24 hours.\n​Ethereum Ecosystem Faucet\nThe Base Sepolia Faucet is a free & easy to use testnet faucet for Base Sepolia with very generous drips that doesn’t require users to log in. It’s run by Ethereum Ecosystem.\nEach wallet is restricted to receiving 0.5 ETH from this faucet every 24 hours.\nWas this page helpful?YesNoSuggest editsRaise issueBlock ExplorersPreviousOraclesNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Coinbase Developer Platform",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#coinbase-developer-platform"
+    },
+    {
+      "text": "thirdweb Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#thirdweb-faucet"
+    },
+    {
+      "text": "Superchain Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#superchain-faucet"
+    },
+    {
+      "text": "Alchemy Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#alchemy-faucet"
+    },
+    {
+      "text": "Bware Labs Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#bware-labs-faucet"
+    },
+    {
+      "text": "Chainstack Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#chainstack-faucet"
+    },
+    {
+      "text": "ethfaucet.com",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#ethfaucet-com"
+    },
+    {
+      "text": "Ponzifun Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#ponzifun-faucet"
+    },
+    {
+      "text": "QuickNode Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#quicknode-faucet"
+    },
+    {
+      "text": "LearnWeb3 Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#learnweb3-faucet"
+    },
+    {
+      "text": "Ethereum Ecosystem Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#ethereum-ecosystem-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#coinbase-developer-platform"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#thirdweb-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#superchain-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#alchemy-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#bware-labs-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#chainstack-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#ethfaucet-com"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#ponzifun-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#quicknode-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#learnweb3-faucet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets#ethereum-ecosystem-faucet"
+    },
+    {
+      "text": "Block ExplorersPrevious",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "OraclesNext",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "url": "https://docs.base.org/get-started/deploy-smart-contracts",
+  "title": "Deploy Smart Contracts - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:08.086787",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​What You’ll Achieve"
+    },
+    {
+      "level": "h2",
+      "text": "​Set Up Your Development Environment"
+    },
+    {
+      "level": "h2",
+      "text": "​Configure Foundry with Base"
+    },
+    {
+      "level": "h3",
+      "text": "​1. Set up your node connection"
+    },
+    {
+      "level": "h3",
+      "text": "​2. Secure your private key"
+    },
+    {
+      "level": "h2",
+      "text": "​Deploy Your Contracts"
+    },
+    {
+      "level": "h3",
+      "text": "​Verify Your Deployment"
+    },
+    {
+      "level": "h2",
+      "text": "​Next Steps"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartDeploy Smart ContractsGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnStatusFaucetBridgeBlogIntroductionBaseQuickstartBuild an AppLaunch a TokenDeploy Smart ContractsBuilder SupportGet FundedBase Services HubBase Mentorship ProgramCountry Leads & AmbassadorsBuild with AIMCP ServerStatic Docs FilesPrompt LibraryOn this pageWhat You’ll AchieveSet Up Your Development EnvironmentConfigure Foundry with Base1. Set up your node connection2. Secure your private keyDeploy Your ContractsVerify Your DeploymentNext StepsWelcome to the Base deployment quickstart guide! This comprehensive walkthrough will help you set up your environment and deploy smart contracts on Base. Whether you’re a seasoned developer or just starting out, this guide has got you covered.\n​What You’ll Achieve\nBy the end of this quickstart, you’ll be able to:\n\nSet up your development environment to deploy on Base\nDeploy your smart contracts to Base\nConnect your frontend to your smart contracts\n\nWhy Base?Base is a fast, low-cost, builder-friendly Ethereum L2 built to bring the next billion users onchain. By following this guide, you’ll join a vibrant ecosystem of developers, creators, and innovators who are building a global onchain economy.\n​Set Up Your Development Environment\n\nCreate a new project directory\n\nReport incorrect codeCopyAsk AImkdir my-base-project && cd my-base-project\n\nInstall Foundry, a powerful framework for smart contract development\n\nReport incorrect codeCopyAsk AIcurl -L https://foundry.paradigm.xyz | bash\nfoundryup\n\nThis installs Foundry and updates it to the latest version.\n\nInitialize a new Solidity project\n\nReport incorrect codeCopyAsk AIforge init\n\nYour Foundry project is now ready. You’ll find an example contract in the src directory, which you can replace with your own contracts. For the purposes of this guide, we’ll use the Counter contract provided in /src/Counter.sol\nFoundry provides a suite of tools for Ethereum application development, including Forge (for testing), Cast (for interacting with the chain), and Anvil (for setting up a local node). You can learn more about Foundry here.\n​Configure Foundry with Base\nTo deploy your smart contracts to Base, you need two key components:\n\nA node connection to interact with the Base network\nA funded private key to deploy the contract\n\nLet’s set up both of these:\n​1. Set up your node connection\n\nCreate a .env file in your project’s root directory\nAdd the Base network RPC URL to your .env file\n\nReport incorrect codeCopyAsk AIBASE_RPC_URL=\"https://mainnet.base.org\"\nBASE_SEPOLIA_RPC_URL=\"https://sepolia.base.org\"\n\nLoad your environment variables\n\nReport incorrect codeCopyAsk AIsource .env\n\nBase Sepolia is the test network for Base, which we will use for the rest of this guide. You can obtain free Base Sepolia ETH from one of the faucets listed here.\n​2. Secure your private key\n\nStore your private key in Foundry’s secure keystore\n\nReport incorrect codeCopyAsk AIcast wallet import deployer --interactive\n\nWhen prompted enter your private key and a password.\n\nYour private key is stored in ~/.foundry/keystores which is not tracked by git.\nNever share or commit your private key. Always keep it secure and handle with care.\n​Deploy Your Contracts\nNow that your environment is set up, let’s deploy your contracts to Base Sepolia.\n\nUse the following command to compile and deploy your contract\n\nReport incorrect codeCopyAsk AIforge create ./src/Counter.sol:Counter --rpc-url $BASE_SEPOLIA_RPC_URL --account deployer\n\nNote the format of the contract being deployed is <contract-path>:<contract-name>.\n\nAfter successful deployment, the transaction hash will be printed to the console output\n\nCopy the deployed contract address and add it to your .env file\n\nReport incorrect codeCopyAsk AICOUNTER_CONTRACT_ADDRESS=\"0x...\"\n\nLoad the new environment variable\n\nReport incorrect codeCopyAsk AIsource .env\n\n​Verify Your Deployment\nTo ensure your contract was deployed successfully:\n\nCheck the transaction on Sepolia Basescan.\nUse the cast command to interact with your deployed contract from the command line\n\nReport incorrect codeCopyAsk AIcast call $COUNTER_CONTRACT_ADDRESS \"number()(uint256)\" --rpc-url $BASE_SEPOLIA_RPC_URL\n\nThis will return the initial value of the Counter contract’s number storage variable, which will be 0.\nCongratulations! You’ve deployed your smart contracts to Base Sepolia!\n​Next Steps\n\nUse Onchainkit to connect your frontend to your contracts! Onchainkit is a library of ready-to-use React components and Typescript utilities.\nLearn more about interacting with your contracts in the command line using Foundry from our Foundry tutorial.\nWas this page helpful?YesNoSuggest editsRaise issueLaunch a TokenPreviousGet FundedNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "mkdir my-base-project && cd my-base-project"
+    },
+    {
+      "language": "unknown",
+      "code": "curl -L https://foundry.paradigm.xyz | bash\nfoundryup"
+    },
+    {
+      "language": "unknown",
+      "code": "forge init"
+    },
+    {
+      "language": "unknown",
+      "code": "BASE_RPC_URL=\"https://mainnet.base.org\"\nBASE_SEPOLIA_RPC_URL=\"https://sepolia.base.org\""
+    },
+    {
+      "language": "unknown",
+      "code": "source .env"
+    },
+    {
+      "language": "unknown",
+      "code": "cast wallet import deployer --interactive"
+    },
+    {
+      "language": "unknown",
+      "code": "forge create ./src/Counter.sol:Counter --rpc-url $BASE_SEPOLIA_RPC_URL --account deployer"
+    },
+    {
+      "language": "unknown",
+      "code": "COUNTER_CONTRACT_ADDRESS=\"0x...\""
+    },
+    {
+      "language": "unknown",
+      "code": "source .env"
+    },
+    {
+      "language": "unknown",
+      "code": "cast call $COUNTER_CONTRACT_ADDRESS \"number()(uint256)\" --rpc-url $BASE_SEPOLIA_RPC_URL"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Faucet",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Bridge",
+      "url": "https://docs.base.org/base-chain/network-information/bridges-mainnet"
+    },
+    {
+      "text": "Base",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Build an App",
+      "url": "https://docs.base.org/get-started/build-app"
+    },
+    {
+      "text": "Launch a Token",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Deploy Smart Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts"
+    },
+    {
+      "text": "Get Funded",
+      "url": "https://docs.base.org/get-started/get-funded"
+    },
+    {
+      "text": "Base Services Hub",
+      "url": "https://docs.base.org/get-started/base-services-hub"
+    },
+    {
+      "text": "Base Mentorship Program",
+      "url": "https://docs.base.org/get-started/base-mentorship-program"
+    },
+    {
+      "text": "Country Leads & Ambassadors",
+      "url": "https://docs.base.org/get-started/country-leads-and-ambassadors"
+    },
+    {
+      "text": "MCP Server",
+      "url": "https://docs.base.org/get-started/docs-mcp"
+    },
+    {
+      "text": "Static Docs Files",
+      "url": "https://docs.base.org/get-started/docs-llms"
+    },
+    {
+      "text": "Prompt Library",
+      "url": "https://docs.base.org/get-started/prompt-library"
+    },
+    {
+      "text": "What You’ll Achieve",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#what-you%E2%80%99ll-achieve"
+    },
+    {
+      "text": "Set Up Your Development Environment",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#set-up-your-development-environment"
+    },
+    {
+      "text": "Configure Foundry with Base",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#configure-foundry-with-base"
+    },
+    {
+      "text": "1. Set up your node connection",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#1-set-up-your-node-connection"
+    },
+    {
+      "text": "2. Secure your private key",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#2-secure-your-private-key"
+    },
+    {
+      "text": "Deploy Your Contracts",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#deploy-your-contracts"
+    },
+    {
+      "text": "Verify Your Deployment",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#verify-your-deployment"
+    },
+    {
+      "text": "Next Steps",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#next-steps"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#what-you’ll-achieve"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#set-up-your-development-environment"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#configure-foundry-with-base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#1-set-up-your-node-connection"
+    },
+    {
+      "text": "faucets listed here",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#2-secure-your-private-key"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#deploy-your-contracts"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#verify-your-deployment"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/get-started/deploy-smart-contracts#next-steps"
+    },
+    {
+      "text": "Foundry tutorial",
+      "url": "https://docs.base.org/learn/foundry/deploy-with-foundry"
+    },
+    {
+      "text": "Launch a TokenPrevious",
+      "url": "https://docs.base.org/get-started/launch-token"
+    },
+    {
+      "text": "Get FundedNext",
+      "url": "https://docs.base.org/get-started/get-funded"
+    }
+  ]
+}

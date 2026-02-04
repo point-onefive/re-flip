@@ -1,0 +1,383 @@
+{
+  "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base",
+  "title": "Connecting to Base - Base Documentation",
+  "scraped_at": "2026-02-04T10:26:58.091400",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Base Mainnet"
+    },
+    {
+      "level": "h2",
+      "text": "​Base Testnet (Sepolia)"
+    },
+    {
+      "level": "h1",
+      "text": "​Using Base with your wallet"
+    },
+    {
+      "level": "h3",
+      "text": "​Coinbase Wallet"
+    },
+    {
+      "level": "h3",
+      "text": "​Other wallets"
+    },
+    {
+      "level": "h4",
+      "text": "​MetaMask"
+    },
+    {
+      "level": "h2",
+      "text": "​Testnet"
+    },
+    {
+      "level": "h4",
+      "text": "​Coinbase Wallet browser extension provides support for Base Sepolia testnet by default."
+    },
+    {
+      "level": "h4",
+      "text": "​Other wallets"
+    },
+    {
+      "level": "h4",
+      "text": "​MetaMask"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartConnecting to BaseGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageBase MainnetBase Testnet (Sepolia)Using Base with your walletCoinbase WalletOther walletsMetaMaskTestnetCoinbase Wallet browser extension provides support for Base Sepolia testnet by default.Other walletsMetaMask​Base Mainnet\nNameValueNetwork NameBase MainnetDescriptionThe public mainnet for Base.RPC Endpointhttps://mainnet.base.orgRate limited and not for production systems.Flashblocks RPC Endpoint https://mainnet-preconf.base.orgRate limited and not for production systems.Chain ID8453Currency SymbolETHBlock Explorerhttps://base.blockscout.com/\n​Base Testnet (Sepolia)\nNameValueNetwork NameBase SepoliaDescriptionA public testnet for Base.RPC Endpointhttps://sepolia.base.orgRate limited and not for production systems.Flashblocks RPC Endpoint https://sepolia-preconf.base.orgRate limited and not for production systems.Chain ID84532Currency SymbolETHBlock Explorerhttps://sepolia-explorer.base.org\nL1 & L2 protocol and network-related smart contract deployments can be found on the Base Contracts page.\nFor production systems, we recommend using a node from one of our node partners, or running your own Base node.\n​Using Base with your wallet\n​Coinbase Wallet\nThe Coinbase Wallet browser extension provides support for Base by default.\nTo use Base with Coinbase Wallet:\n\nOpen the Coinbase Wallet browser extension and log in to your account.\nConnect to an app using Coinbase Wallet.\nOpen the network selection menu by clicking the network icon in the upper right-hand corner.\nSelect Base.\n\nYour active network should now be switched to Base.\n​Other wallets\nBase can be added as a custom network to any EVM-compatible wallet (i.e. MetaMask).\n​MetaMask\nTo add Base as a custom network to MetaMask:\n\nOpen the MetaMask browser extension.\n\nOpen the network selection dropdown menu by clicking the dropdown button at the top of the extension.\n\nClick the Add network button.\n\nClick Add a network manually.\n\nIn the Add a network manually dialog that appears, enter the following information for Base mainnet:\nNameValueNetwork NameBase MainnetDescriptionThe public mainnet for Base.RPC Endpointhttps://mainnet.base.orgChain ID8453Currency SymbolETHBlock Explorerhttps://base.blockscout.com/\n\nTap the Save button to save Base as a network.\n\nYou should now be able to connect to the Base by selecting it from the network selection dropdown menu.\n​Testnet\n​Coinbase Wallet browser extension provides support for Base Sepolia testnet by default.\nTo use Base Sepolia with Coinbase Wallet:\n\nOpen the Coinbase Wallet browser extension and log in to your account.\nConnect to an app using Coinbase Wallet.\nOpen the network selection menu by clicking the network icon in the upper right-hand corner.\nClick the More networks button.\nNavigate to the Testnets tab.\nSelect Base Sepolia.\n\nYour active network should now be switched to Base testnet.\n​Other wallets\nBase Sepolia can be added as a custom network to any EVM-compatible wallet (e.g., MetaMask).\n​MetaMask\nTo add Base Sepolia as a custom network in MetaMask:\n\nOpen the MetaMask browser extension.\n\nOpen the network selection dropdown menu by clicking the dropdown button at the top of the extension.\n\nClick the Add network button.\n\nClick Add a network manually.\n\nIn the Add a network manually dialog that appears, enter the following information for the Base Sepolia testnet:\nNameSepoliaNetwork NameBase SepoliaRPC Endpointhttps://sepolia.base.orgChain ID84532Currency SymbolETHBlock Explorerhttps://sepolia-explorer.base.org\n\nTap the Save button to save Base Sepolia as a network.\n\nYou should now be able to connect to the Base testnet by selecting it from the network selection dropdown menu.Was this page helpful?YesNoSuggest editsRaise issueDeploy on BasePreviousBridging an L1 token to BaseNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Base Mainnet",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#base-mainnet"
+    },
+    {
+      "text": "Base Testnet (Sepolia)",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#base-testnet-sepolia"
+    },
+    {
+      "text": "Using Base with your wallet",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#using-base-with-your-wallet"
+    },
+    {
+      "text": "Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#coinbase-wallet"
+    },
+    {
+      "text": "Other wallets",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#other-wallets"
+    },
+    {
+      "text": "MetaMask",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#metamask"
+    },
+    {
+      "text": "Testnet",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#testnet"
+    },
+    {
+      "text": "Coinbase Wallet browser extension provides support for Base Sepolia testnet by default.",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#coinbase-wallet-browser-extension-provides-support-for-base-sepolia-testnet-by-default"
+    },
+    {
+      "text": "Other wallets",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#other-wallets-2"
+    },
+    {
+      "text": "MetaMask",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#metamask-2"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#base-mainnet"
+    },
+    {
+      "text": "https://mainnet.base.org",
+      "url": "https://mainnet.base.org"
+    },
+    {
+      "text": "https://mainnet-preconf.base.org",
+      "url": "https://mainnet-preconf.base.org"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#base-testnet-sepolia"
+    },
+    {
+      "text": "https://sepolia.base.org",
+      "url": "https://sepolia.base.org"
+    },
+    {
+      "text": "https://sepolia-preconf.base.org",
+      "url": "https://sepolia-preconf.base.org"
+    },
+    {
+      "text": "https://sepolia-explorer.base.org",
+      "url": "https://sepolia-explorer.base.org"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "node partners",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "running your own Base node",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#using-base-with-your-wallet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#coinbase-wallet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#other-wallets"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#metamask"
+    },
+    {
+      "text": "https://mainnet.base.org",
+      "url": "https://mainnet.base.org"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#testnet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#coinbase-wallet-browser-extension-provides-support-for-base-sepolia-testnet-by-default"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#other-wallets-2"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base#metamask-2"
+    },
+    {
+      "text": "https://sepolia.base.org",
+      "url": "https://sepolia.base.org"
+    },
+    {
+      "text": "https://sepolia-explorer.base.org",
+      "url": "https://sepolia-explorer.base.org"
+    },
+    {
+      "text": "Deploy on BasePrevious",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Bridging an L1 token to BaseNext",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    }
+  ]
+}

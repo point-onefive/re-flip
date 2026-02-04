@@ -1,0 +1,71 @@
+{
+  "url": "https://docs.base.org/security",
+  "title": "Page Not Found",
+  "scraped_at": "2026-02-04T10:26:32.783665",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "Page Not Found"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationPage Not FoundGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearn404Page Not FoundWe couldn't find the page. Maybe you were looking for one of these pages below?Security Council for BaseSending messages from Base to other chains using LayerZero V2Security and Bug Bounty⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/security#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council#security-council-for-base"
+    },
+    {
+      "text": "Sending messages from Base to other chains using LayerZero V2",
+      "url": "https://docs.base.org/learn/onchain-app-development/cross-chain/bridge-tokens-with-layerzero#security-stack-dvns"
+    },
+    {
+      "text": "Security and Bug Bounty",
+      "url": "https://docs.base.org/base-account/contribute/security-and-bug-bounty"
+    }
+  ]
+}

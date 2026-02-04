@@ -1,0 +1,351 @@
+{
+  "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet",
+  "title": "Tokens in Coinbase Wallet - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:29.636439",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "​How to ensure ERC-20 tokens show in Coinbase Wallet as a token issuer"
+    },
+    {
+      "level": "h2",
+      "text": "​Adding your token to the list"
+    },
+    {
+      "level": "h3",
+      "text": "​Step 1: Deploy your ERC-20 Token on Base Mainnet"
+    },
+    {
+      "level": "h3",
+      "text": "​Step 2: Prepare your metadata and asset images"
+    },
+    {
+      "level": "h3",
+      "text": "​Step 3: List your cryptocurrency on a listing aggregator"
+    },
+    {
+      "level": "h2",
+      "text": "​Why does my token display in the “Newer tokens” section in the swap flow?"
+    },
+    {
+      "level": "h2",
+      "text": "​How can I update my token logo or description?"
+    },
+    {
+      "level": "h1",
+      "text": "​Sharing your token"
+    },
+    {
+      "level": "h2",
+      "text": "​Custom trading links"
+    },
+    {
+      "level": "h2",
+      "text": "​Trending Swaps on Base"
+    },
+    {
+      "level": "h2",
+      "text": "​Send via text"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationToolsTokens in Coinbase WalletGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageHow to ensure ERC-20 tokens show in Coinbase Wallet as a token issuerAdding your token to the listStep 1: Deploy your ERC-20 Token on Base MainnetStep 2: Prepare your metadata and asset imagesStep 3: List your cryptocurrency on a listing aggregatorWhy does my token display in the “Newer tokens” section in the swap flow?How can I update my token logo or description?Sharing your tokenCustom trading linksTrending Swaps on BaseSend via text​How to ensure ERC-20 tokens show in Coinbase Wallet as a token issuer\nThis page is intended for developers that will or have recently deployed ERC-20 token contracts on Base Mainnet and would like their token details to display as quickly as possible on Coinbase Wallet.\nCoinbase Wallet makes any ERC-20 token instantly available for swapping seconds from when the contract is deployed.\nFollow the instructions below to ensure your token logo, asset name, and other metadata also appear on Coinbase Wallet.\nDisclaimerBase does not endorse any specific token that is deployed on mainnet and made available for swapping.\n\n​Adding your token to the list\nThe steps below explain how to have your token display quickly on Coinbase Wallet. These instructions work not only for Base, but for any EVM chain supported by Coinbase Wallet (Optimism, Arbitrum, Polygon, Avalanche, Fantom, BNB).\n​Step 1: Deploy your ERC-20 Token on Base Mainnet\nWrite and deploy a compliant ERC-20 token smart contract. Test it and then deploy on Base Mainnet. If you’re not a developer, you can use available token launcher tools in the Base ecosystem.\n​Step 2: Prepare your metadata and asset images\nPrepare a high-resolution image of your token’s logo. Ensure it is clear, identifiable, and representative of your token.\n​Step 3: List your cryptocurrency on a listing aggregator\nYou can list for free on CoinGecko following these instructions\nYou can pay to be listed on CoinMarketCap following these instructions.\nRemember, once your ERC-20 contract is deployed, your asset will immediately be available for native swapping in Coinbase Wallet.\nHowever, you’ll still need to list your token on Birdeye, CoinGecko, or CoinMarketCap for the asset’s logo and other metadata to flow into Coinbase Wallet and be seen by users. It can take 24-48 hours for metadata changes to update.\n​Why does my token display in the “Newer tokens” section in the swap flow?\nTokens that are newly launched and haven’t had significant trading volume appear in the newer token section. Once your token reaches a market cap of at least $1M it will no longer be displayed in this section.\nDisclaimerNew assets with low liquidity may result in failed swaps or may result in a user receiving less of the destination token due to slippage. An important responsibility of the token creator is to communicate to the community these risks.\n​How can I update my token logo or description?\nERC20 metadata can be updated quickly and easily by navigating to the asset’s page on the Coinbase Wallet desktop site (wallet.coinbase.com). Note that any changes you make there will be reflected on Coinbase Wallet only (desktop and mobile).\nStep 1: Search for your token on wallet.coinbase.com\nStep 2: Scroll to the bottom and click “Update here”\nStep 3: Select your logo image or enter the description you want to show\nStep 4: Choose the address you want to submit with and click submit\nStep 5: Submissions will be reviewed within 5 business days. To expedite approval, we recommend taking the following steps:\n\nMake a post from your official X or Farcaster account documenting the change. The Coinbase Wallet team may reach out to you if they have questions.\n\nSubmit the change with the same deployed address that the token contract was deployed with.\n\nIf the above guidance doesn’t resolve your issue, please submit more information using this Deform.\n​Sharing your token\n​Custom trading links\nBy sharing a unique link to your token’s asset page, your community can easily and safely get your token.\nHow to get your custom link:\nStep 1: Grab your custom link for your token by navigating to the asset page on Coinbase Wallet\nStep 2: Click the share button\n\nStep 4: Share it with your community – either by posting it as an official link on your social accounts or as a CTA on your website.\n​Trending Swaps on Base\nThe Trending Swaps on Base module reflects the top tokens traded through the Coinbase Wallet mobile app, browser extension, and website app over the past 24 hours.\nBy encouraging your community to use Coinbase Wallet, your token can appear on Trending Swaps and reach a wider audience.\n​Send via text\nWith send via text, you can send crypto as easily as sending a text. The crypto you want to send will be retrievable using a claim link, and the link can be shared over text, Twitter, Farcaster, Telegram – anywhere.\nRecipients will be prompted to make a Coinbase Wallet to claim the crypto. Whether you’re onboarding people to crypto or looking to easily reward your community, send via text has you covered.\nHow to send crypto via text:\nStep 1: Go to the Send flow in Coinbase Wallet\nStep 2: Enter the amount you want to send\n\nStep 3: Click “Send via text” in the upper right hand corner\nStep 4: Enter the amount and type of crypto you wish to send, and click “Create”Copy the link\n\nStep 5: Copy the link and Share it on any platform.\n\nClicking the link will prompt the recipient to open Coinbase Wallet or download Coinbase Wallet to claim the crypto\nIf the crypto isn’t claimed within 14 weeks, it will be returned to your wallet.\n\nSend via text currently supports the top 100 tokens on Base. We’re in the process of adding support for all tokens on Base.\n\nIf you’re encountering an issue with token support on Coinbase Wallet, submit this form and we’ll aim to resolve your issue within 5 business days.Was this page helpful?YesNoSuggest editsRaise issueOnrampsPreviousSecurity Council for BaseNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "How to ensure ERC-20 tokens show in Coinbase Wallet as a token issuer",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#how-to-ensure-erc-20-tokens-show-in-coinbase-wallet-as-a-token-issuer"
+    },
+    {
+      "text": "Adding your token to the list",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#adding-your-token-to-the-list"
+    },
+    {
+      "text": "Step 1: Deploy your ERC-20 Token on Base Mainnet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#step-1-deploy-your-erc-20-token-on-base-mainnet"
+    },
+    {
+      "text": "Step 2: Prepare your metadata and asset images",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#step-2-prepare-your-metadata-and-asset-images"
+    },
+    {
+      "text": "Step 3: List your cryptocurrency on a listing aggregator",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#step-3-list-your-cryptocurrency-on-a-listing-aggregator"
+    },
+    {
+      "text": "Why does my token display in the “Newer tokens” section in the swap flow?",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#why-does-my-token-display-in-the-%E2%80%9Cnewer-tokens%E2%80%9D-section-in-the-swap-flow"
+    },
+    {
+      "text": "How can I update my token logo or description?",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#how-can-i-update-my-token-logo-or-description"
+    },
+    {
+      "text": "Sharing your token",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#sharing-your-token"
+    },
+    {
+      "text": "Custom trading links",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#custom-trading-links"
+    },
+    {
+      "text": "Trending Swaps on Base",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#trending-swaps-on-base"
+    },
+    {
+      "text": "Send via text",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#send-via-text"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#how-to-ensure-erc-20-tokens-show-in-coinbase-wallet-as-a-token-issuer"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#adding-your-token-to-the-list"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#step-1-deploy-your-erc-20-token-on-base-mainnet"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#step-2-prepare-your-metadata-and-asset-images"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#step-3-list-your-cryptocurrency-on-a-listing-aggregator"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#why-does-my-token-display-in-the-“newer-tokens”-section-in-the-swap-flow"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#how-can-i-update-my-token-logo-or-description"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#sharing-your-token"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#custom-trading-links"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#trending-swaps-on-base"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet#send-via-text"
+    },
+    {
+      "text": "OnrampsPrevious",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Security Council for BaseNext",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    }
+  ]
+}

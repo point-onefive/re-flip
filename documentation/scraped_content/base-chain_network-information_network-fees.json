@@ -1,0 +1,283 @@
+{
+  "url": "https://docs.base.org/base-chain/network-information/network-fees",
+  "title": "Network Fees - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:28.167936",
+  "headings": [
+    {
+      "level": "h1",
+      "text": "​Fees"
+    },
+    {
+      "level": "h2",
+      "text": "​How do network fees on Base work?"
+    },
+    {
+      "level": "h2",
+      "text": "​Minimum Base Fee"
+    },
+    {
+      "level": "h3",
+      "text": "​Benefits"
+    },
+    {
+      "level": "h3",
+      "text": "​Current Configuration"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationNetwork InformationNetwork FeesGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageFeesHow do network fees on Base work?Minimum Base FeeBenefitsCurrent Configuration​Fees\n​How do network fees on Base work?\nEvery Base transaction consists of two costs: an L2 (execution) fee and an L1\n(security) fee. The L2 fee is the cost to execute your transaction on the L2,\nand the L1 fee is the estimated cost to publish the transaction on the L1.\nTypically the L1 security fee is higher than the L2 execution fee.\nThe L1 fee will vary depending on the amount of transactions on the L1. If the\ntiming of your transaction is flexible, you can save costs by submitting\ntransactions during periods of lower gas on the L1 (for example, over the\nweekend)\nSimilarly, the L2 fee can increase and decrease depending on how many\ntransactions are being submitted to the L2. This adjustment mechanism has the\nsame implementation as the L1; you can read more about it\nhere.\nFor additional details about fee calculation on Base, please refer to the\nop-stack developer\ndocumentation.\n​Minimum Base Fee\nAs part of the Jovian upgrade, Base introduced a minimum base fee. This feature sets a floor for the L2 base fee, preventing it from dropping to extremely low levels during periods of low network activity.\nThe minimum base fee for Base Mainnet is 2,000,000 wei (0.002 gwei). This value may be periodically adjusted as we gather data on how it affects the chain. For reference, a minimum base fee of 0.002 gwei results in a cost of approximately 0.001foratypical200,000gastransactionatanETHpriceof0.001 for a typical 200,000 gas transaction at an ETH price of 0.001foratypical200,000gastransactionatanETHpriceof2500.\n​Benefits\n\nFaster Transaction Inclusion: Previously, when low activity caused the base fee to drop very low, spikes in demand could lead to extended periods of congestion before fees rose enough to clear the backlog. With a minimum base fee, transactions are typically included more quickly without users needing to manually adjust priority fees.\nMore Predictable Fees: During normal operation, the base fee will remain at or near the minimum. During congestion, the base fee rises above the minimum. This creates a more predictable fee structure similar to surge pricing.\nSpam Prevention: Extremely low fees can incentivize spam transactions that don’t provide value to the network. The minimum base fee helps price out such activity while keeping fees affordable for legitimate use.\n\n​Current Configuration\nNetworkMinimum Base FeeBase Mainnet2,000,000 wei (0.002 gwei)Base Sepolia200,000 wei (0.0002 gwei)\nSee the Configuration Changelog for a history of changes to the minimum base fee and other network parameters.Was this page helpful?YesNoSuggest editsRaise issueEcosystem ContractsPreviousBlock BuildingNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#fees"
+    },
+    {
+      "text": "How do network fees on Base work?",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#how-do-network-fees-on-base-work"
+    },
+    {
+      "text": "Minimum Base Fee",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "Benefits",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#benefits"
+    },
+    {
+      "text": "Current Configuration",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#current-configuration"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#fees"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#how-do-network-fees-on-base-work"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#minimum-base-fee"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#benefits"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees#current-configuration"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Ecosystem ContractsPrevious",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Block BuildingNext",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    }
+  ]
+}

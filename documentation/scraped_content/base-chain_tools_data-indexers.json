@@ -1,0 +1,399 @@
+{
+  "url": "https://docs.base.org/base-chain/tools/data-indexers",
+  "title": "Data Indexers - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:01.645038",
+  "headings": [
+    {
+      "level": "h2",
+      "text": "​Allium"
+    },
+    {
+      "level": "h2",
+      "text": "​Arkham"
+    },
+    {
+      "level": "h2",
+      "text": "​Covalent"
+    },
+    {
+      "level": "h2",
+      "text": "​DipDup"
+    },
+    {
+      "level": "h2",
+      "text": "​Envio"
+    },
+    {
+      "level": "h2",
+      "text": "​GhostGraph"
+    },
+    {
+      "level": "h2",
+      "text": "​The Indexing Company"
+    },
+    {
+      "level": "h2",
+      "text": "​Moralis"
+    },
+    {
+      "level": "h2",
+      "text": "​Nexandria"
+    },
+    {
+      "level": "h2",
+      "text": "​Shovel"
+    },
+    {
+      "level": "h2",
+      "text": "​Subsquid"
+    },
+    {
+      "level": "h2",
+      "text": "​SubQuery"
+    },
+    {
+      "level": "h2",
+      "text": "​The Graph"
+    },
+    {
+      "level": "h2",
+      "text": "​Flair"
+    },
+    {
+      "level": "h2",
+      "text": "​Space and Time"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationToolsData IndexersGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnGitHubStatusChain StatsExplorerSupportBlogQuickstartWhy Base?Deploy on BaseConnecting to BaseBase-Mainnet BridgeBase-Solana BridgeNetwork InformationBase ContractsEcosystem ContractsNetwork FeesBlock BuildingTransaction FinalityDifferences: Ethereum & BaseTroubleshooting TransactionsConfiguration ChangelogFlashblocksAppsNode ProvidersFlashblocks FAQNode OperatorsGetting StartedPerformance TuningSnapshotsTroubleshootingBuilder CodesBase Builder CodesBuilder Codes FAQToolsBase ProductsOnchain Registry APINode ProvidersBlock ExplorersNetwork FaucetsOraclesUser OnboardingData IndexersCross-chainAccount AbstractionOnrampsTokens in Coinbase WalletSecuritySecurity Council for BaseAvoid Malicious FlagsReport a VulnerabilityOn this pageAlliumArkhamCovalentDipDupEnvioGhostGraphThe Indexing CompanyMoralisNexandriaShovelSubsquidSubQueryThe GraphFlairSpace and Time​Allium\nAllium is an Enterprise Data Platform that serves accurate, fast, and simple blockchain data. Currently serving 15 blockchains and over 100+ schemas, Allium offers near real-time Base data for infrastructure needs and enriched Base data (NFT, DEX, Decoded, Wallet360) for research and analytics.\nAllium supports data delivery to multiple destinations, including Snowflake, Bigquery, Databricks, and AWS S3.\nDocumentation:\n\nReal-time\nBatch-enriched\n\nTo get started, contact Allium here.\n​Arkham\nArkham is a crypto intelligence platform that systematically analyzes blockchain transactions, showing users the people and companies behind blockchain activity, with a suite of advanced tools for analyzing their activity.\nReferences:\n\nPlatform guide\nWhitepaper\nCodex\nDemos\n\n​Covalent\nCovalent is a hosted blockchain data solution providing access to historical and current on-chain data for 100+ supported blockchains, including Base.\nCovalent maintains a full archival copy of every supported blockchain, meaning every balance, transaction, log event, and NFT asset data is available from the genesis block. This data is available via:\n\nUnified API - Incorporate blockchain data into your app with a familiar REST API\nIncrement - Create and embed custom charts with no-code analytics\n\nTo get started, sign up and visit the developer documentation.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​DipDup\nDipDup is a Python framework for building smart contract indexers. It helps developers focus on business logic instead of writing a boilerplate to store and serve data. DipDup-based indexers are selective, which means only required data is requested. This approach allows to achieve faster indexing times and decreased load on underlying APIs.\nTo get started, visit the documentation or follow the quickstart guide.\n​Envio\nEnvio is a full-featured data indexing solution that provides application developers with a seamless and efficient way to index and aggregate real-time and historical blockchain data for any EVM. The indexed data is easily accessible through custom GraphQL queries, providing developers with the flexibility and power to retrieve specific information.\nEnvio HyperSync is an indexed layer of the Base blockchain for the hyper-speed syncing of historical data (JSON-RPC bypass). What would usually take hours to sync ~100,000 events can now be done in the order of less than a minute.\nDesigned to optimize the user experience, Envio offers automatic code generation, flexible language support, multi-chain data aggregation, and a reliable, cost-effective hosted service.\nTo get started, visit the documentation or follow the quickstart guide.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​GhostGraph\nGhostGraph makes it easy to build blazingly fast indexers (subgraphs) for smart contracts.\nGhostGraph is the first indexing solution that lets you write your index transformations in Solidity. Base dApps can query data with GraphQL using our hosted endpoints.\nTo get started, you can sign up for an account and follow this quickstart guide on how to create, deploy, and query a GhostGraph.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​The Indexing Company\nThe Indexing Company provides indexing as a service, capable of indexing any chain (EVM and non-EVM) with an RPC endpoint and integrating off-chain data within the same infrastructure.\nOur services include data transformations, aggregations, and streamlined data flows, allowing teams to develop their products faster while saving on developer resources, time, and money. Our solution is ideal for teams needing advanced data engineering for modular chain setups, multi-chain products, L1/L2/L3 chains and AI.\nTo get started contact us here.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Moralis\nMoralis offers comprehensive data APIs for crypto, offering both indexed and real-time data across 15+ chains. Moralis’ APIs include portfolio and wallet balances, NFT data, token data, price data, candlestick data, net worth data, and a lot more. All of the data is enriched with things like metadata, parsed events and address labels.\nTo get started with Moralis, you can sign up for an account, visit the Moralis documentation, or check out their tutorials on Youtube.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Nexandria\nNexandria API offers access to complete historical on-chain data at blazing speeds, arbitrary granularity (as low as block-level) and at viable unit economics (think web2 level costs). Our technology lets you generate subgraphs on the fly, unlocking unique endpoints like a statement of all the balance transfers for all the tokens, or a list of all the neighbors of an address with all the historical interaction details or a portfolio balance graph covering all the tokens across arbitrary time/block ranges.\nReferences:\n\nAPI Documentation\nSign-up\n\nSupported Networks\n\nBase Mainnet\n\n​Shovel\nShovel is an open source tool for synchronizing Ethereum data to your Postgres database. Shovel can index block data, transaction data, and decoded event data. A single Shovel can index multiple chains simultaneously. Shovel is configured via a declarative JSON config file – no custom functions to save indexed data to your database.\nFind out more in the Shovel Docs\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Subsquid\nSubsquid is a decentralized hyper-scalable data platform optimized for providing efficient, permissionless access to large volumes of data.\nIt currently serves historical on-chain data, including event logs, transaction receipts, traces, and per-transaction state diffs.\nSubsquid offers a powerful toolkit for creating custom data extraction and processing pipelines, achieving an indexing speed of up to 150k blocks per second.\nTo get started, visit the documentation or see this quickstart with examples on how to easily create subgraphs via Subsquid.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​SubQuery\nSubQuery is a data indexer that provides developers with fast, reliable, decentralized, and customized APIs for accessing rich indexed data from over 80+ ecosystems (including Base) within their projects.\nSubQuery provides the ability to aggregate this data across multiple blockchains, all within a single project.\nOther advantages of SubQuery includes performance with multiple RPC endpoint configurations, multi-worker capabilities and a configurable caching architecture.\nTo get started, visit the developer documentation or follow this step-by-step guide on how to index any smart contract on Base.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​The Graph\nThe Graph is an indexing protocol that provides an easy way to query blockchain data through APIs known as subgraphs.\nWith The Graph, you can benefit from:\n\nDecentralized Indexing: Enables indexing blockchain data through multiple indexers, thus eliminating any single point of failure\nGraphQL Queries: Provides a powerful GraphQL interface for querying indexed data, making data retrieval super simple.\nCustomization: Define your own logic for transforming & storing blockchain data. Reuse subgraphs published by other developers on The Graph Network.\n\nFollow this quick-start guide to create, deploy, and query a subgraph within 5 minutes.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\nSee all supported networks\n​Flair\nFlair is a real-time and historical custom data indexing for any EVM chain.\nIt offers reusable indexing primitives (such as fault-tolerant RPC ingestors, custom processors and aggregations, re-org aware database integrations) to make it easy to receive, transform, store and access your on-chain data.\nTo get started, visit the documentation or clone the starter boilerplate template and follow the instructions.\nSupported Networks\n\nBase Mainnet\nBase Sepolia (Testnet)\n\n​Space and Time\nSpace and Time is the blockchain for ZK-proven data. It provides data indexing services for all major chains including Bitcoin, Ethereum, ZKsync, Polygon, Avalanche etc.\nSpace and Time offers a way to query indexed blockchain data from major blockchains like Bitcoin, Ethereum, Base etc., giving smart contracts a way to ask questions about onchain and offchain activity, in a trustless way.\nsign up here\nSupported Networks\n\nBitcoin\nEthereum\nZKsync\nPolygon\nSui\nOptimism\nAvalanche\nArbitrum\nBase\n\nWas this page helpful?YesNoSuggest editsRaise issueUser OnboardingPreviousCross-chainNext⌘I",
+  "code_blocks": [],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Status",
+      "url": "https://status.base.org/"
+    },
+    {
+      "text": "Chain Stats",
+      "url": "https://www.base.org/stats"
+    },
+    {
+      "text": "Why Base?",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Deploy on Base",
+      "url": "https://docs.base.org/base-chain/quickstart/deploy-on-base"
+    },
+    {
+      "text": "Connecting to Base",
+      "url": "https://docs.base.org/base-chain/quickstart/connecting-to-base"
+    },
+    {
+      "text": "Base-Mainnet Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/bridge-token"
+    },
+    {
+      "text": "Base-Solana Bridge",
+      "url": "https://docs.base.org/base-chain/quickstart/base-solana-bridge"
+    },
+    {
+      "text": "Base Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/base-contracts"
+    },
+    {
+      "text": "Ecosystem Contracts",
+      "url": "https://docs.base.org/base-chain/network-information/ecosystem-contracts"
+    },
+    {
+      "text": "Network Fees",
+      "url": "https://docs.base.org/base-chain/network-information/network-fees"
+    },
+    {
+      "text": "Block Building",
+      "url": "https://docs.base.org/base-chain/network-information/block-building"
+    },
+    {
+      "text": "Transaction Finality",
+      "url": "https://docs.base.org/base-chain/network-information/transaction-finality"
+    },
+    {
+      "text": "Differences: Ethereum & Base",
+      "url": "https://docs.base.org/base-chain/network-information/diffs-ethereum-base"
+    },
+    {
+      "text": "Troubleshooting Transactions",
+      "url": "https://docs.base.org/base-chain/network-information/troubleshooting-transactions"
+    },
+    {
+      "text": "Configuration Changelog",
+      "url": "https://docs.base.org/base-chain/network-information/configuration-changelog"
+    },
+    {
+      "text": "Apps",
+      "url": "https://docs.base.org/base-chain/flashblocks/apps"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/flashblocks/node-providers"
+    },
+    {
+      "text": "Flashblocks FAQ",
+      "url": "https://docs.base.org/base-chain/flashblocks/docs"
+    },
+    {
+      "text": "Getting Started",
+      "url": "https://docs.base.org/base-chain/node-operators/run-a-base-node"
+    },
+    {
+      "text": "Performance Tuning",
+      "url": "https://docs.base.org/base-chain/node-operators/performance-tuning"
+    },
+    {
+      "text": "Snapshots",
+      "url": "https://docs.base.org/base-chain/node-operators/snapshots"
+    },
+    {
+      "text": "Troubleshooting",
+      "url": "https://docs.base.org/base-chain/node-operators/troubleshooting"
+    },
+    {
+      "text": "Base Builder Codes",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes"
+    },
+    {
+      "text": "Builder Codes FAQ",
+      "url": "https://docs.base.org/base-chain/builder-codes/builder-codes-faq"
+    },
+    {
+      "text": "Base Products",
+      "url": "https://docs.base.org/base-chain/tools/base-products"
+    },
+    {
+      "text": "Onchain Registry API",
+      "url": "https://docs.base.org/base-chain/tools/onchain-registry-api"
+    },
+    {
+      "text": "Node Providers",
+      "url": "https://docs.base.org/base-chain/tools/node-providers"
+    },
+    {
+      "text": "Block Explorers",
+      "url": "https://docs.base.org/base-chain/tools/block-explorers"
+    },
+    {
+      "text": "Network Faucets",
+      "url": "https://docs.base.org/base-chain/tools/network-faucets"
+    },
+    {
+      "text": "Oracles",
+      "url": "https://docs.base.org/base-chain/tools/oracles"
+    },
+    {
+      "text": "User Onboarding",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Data Indexers",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers"
+    },
+    {
+      "text": "Cross-chain",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    },
+    {
+      "text": "Account Abstraction",
+      "url": "https://docs.base.org/base-chain/tools/account-abstraction"
+    },
+    {
+      "text": "Onramps",
+      "url": "https://docs.base.org/base-chain/tools/onramps"
+    },
+    {
+      "text": "Tokens in Coinbase Wallet",
+      "url": "https://docs.base.org/base-chain/tools/tokens-in-wallet"
+    },
+    {
+      "text": "Security Council for Base",
+      "url": "https://docs.base.org/base-chain/security/security-council"
+    },
+    {
+      "text": "Avoid Malicious Flags",
+      "url": "https://docs.base.org/base-chain/security/avoid-malicious-flags"
+    },
+    {
+      "text": "Report a Vulnerability",
+      "url": "https://docs.base.org/base-chain/security/report-vulnerability"
+    },
+    {
+      "text": "Allium",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#allium"
+    },
+    {
+      "text": "Arkham",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#arkham"
+    },
+    {
+      "text": "Covalent",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#covalent"
+    },
+    {
+      "text": "DipDup",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#dipdup"
+    },
+    {
+      "text": "Envio",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#envio"
+    },
+    {
+      "text": "GhostGraph",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#ghostgraph"
+    },
+    {
+      "text": "The Indexing Company",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#the-indexing-company"
+    },
+    {
+      "text": "Moralis",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#moralis"
+    },
+    {
+      "text": "Nexandria",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#nexandria"
+    },
+    {
+      "text": "Shovel",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#shovel"
+    },
+    {
+      "text": "Subsquid",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#subsquid"
+    },
+    {
+      "text": "SubQuery",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#subquery"
+    },
+    {
+      "text": "The Graph",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#the-graph"
+    },
+    {
+      "text": "Flair",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#flair"
+    },
+    {
+      "text": "Space and Time",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#space-and-time"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#allium"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#arkham"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#covalent"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#dipdup"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#envio"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#ghostgraph"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#the-indexing-company"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#moralis"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#nexandria"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#shovel"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#subsquid"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#subquery"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#the-graph"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#flair"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/base-chain/tools/data-indexers#space-and-time"
+    },
+    {
+      "text": "User OnboardingPrevious",
+      "url": "https://docs.base.org/base-chain/tools/onboarding"
+    },
+    {
+      "text": "Cross-chainNext",
+      "url": "https://docs.base.org/base-chain/tools/cross-chain"
+    }
+  ]
+}

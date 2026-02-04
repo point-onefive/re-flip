@@ -1,0 +1,264 @@
+{
+  "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps",
+  "title": "Migrate an Existing App - Base Documentation",
+  "scraped_at": "2026-02-04T10:27:27.402465",
+  "headings": [
+    {
+      "level": "h3",
+      "text": "​Example Manifest"
+    }
+  ],
+  "content": "Base Documentation home pageSearch...⌘KAsk AISearch...NavigationQuickstartMigrate an Existing AppGet StartedBase ChainBase AccountBase AppMini AppsOnchainKitCookbookShowcaseLearnQuickstartMigrate an Existing AppCreate a Mini AppBuild ChecklistBuilding for The Base AppMini App TemplatesNEWCore ConceptsManifestContextEmbeds & PreviewsBase AccountNotificationsAuthenticationNavigationTechnical GuidesSign Your ManifestGenerate Dynamic Embed ImagesSend Notifications (Neynar)Accept PaymentsFeatured GuidelinesFeatured ChecklistProduct GuidelinesDesign GuidelinesNotification GuidelinesTechnical GuidelinesGrowth PlaybookWhy Mini AppsOptimize OnboardingIdeating Viral AppsRewardsTroubleshootingCommon Issues & DebuggingBase App CompatibilityHow Search worksTest Your AppResourcesTemplatesDesign resourcesLlms full.txtPrerequisites\n\nYou have an existing web app\nYou have a Base app account\n\n1Add the MiniApp SDKnpmpnpmyarnReport incorrect codeCopyAsk AInpm install @farcaster/miniapp-sdk\n2Trigger App DisplayOnce your app has loaded, call sdk.actions.ready() to hide the loading splash screen and display your app. Vanilla JS Reactapp.jsReport incorrect codeCopyAsk AIimport { sdk } from '@farcaster/miniapp-sdk';\n\n// Once app is ready to be displayed\nawait sdk.actions.ready();\nIn React apps, call ready() inside a useEffect hook to prevent it from running on every re-render. Call ready() as soon as possible and avoid jitter and content reflows.app.tsxReport incorrect codeCopyAsk AIimport { sdk } from '@farcaster/miniapp-sdk';\nimport { useEffect } from 'react';\n\nfunction App() {\n useEffect(() => {\n sdk.actions.ready();\n }, []);\n\n return(...your app content goes here...)\n}\n\nexport default App;\n\n3Host the ManifestCreate a file available at https://www.your-domain.com/.well-known/farcaster.json. Vanilla JS Next.jsCreate the manifest file in your project at /public/.well-known/farcaster.json.Create a Next.js route to host your manifest fileapp/.well-known/farcaster.json/route.tsReport incorrect codeCopyAsk AIfunction withValidProperties(properties: Record<string, undefined | string | string[]>) {\nreturn Object.fromEntries(\n Object.entries(properties).filter(([_, value]) => (Array.isArray(value) ? value.length > 0 : !!value))\n);\n}\n\nexport async function GET() {\nconst URL = process.env.NEXT_PUBLIC_URL as string;\nreturn Response.json(paste_manifest_json_object_here); // see the next step for the manifest_json_object\n}\n4Update the ManifestCopy the example manifest below and add it to the file created in the previous step. Update each field in the miniapp.For details on each field, see the field reference​Example Manifest/.well-known/farcaster.jsonReport incorrect codeCopyAsk AI{\n \"accountAssociation\": { // these will be added in step 5\n \"header\": \"\",\n \"payload\": \"\",\n \"signature\": \"\"\n },\n \"miniapp\": {\n \"version\": \"1\",\n \"name\": \"Example Mini App\",\n \"homeUrl\": \"https://ex.co\",\n \"iconUrl\": \"https://ex.co/i.png\",\n \"splashImageUrl\": \"https://ex.co/l.png\",\n \"splashBackgroundColor\": \"#000000\",\n \"webhookUrl\": \"https://ex.co/api/webhook\",\n \"subtitle\": \"Fast, fun, social\",\n \"description\": \"A fast, fun way to challenge friends in real time.\",\n \"screenshotUrls\": [\n \"https://ex.co/s1.png\",\n \"https://ex.co/s2.png\",\n \"https://ex.co/s3.png\"\n ],\n \"primaryCategory\": \"social\",\n \"tags\": [\"example\", \"miniapp\", \"baseapp\"],\n \"heroImageUrl\": \"https://ex.co/og.png\",\n \"tagline\": \"Play instantly\",\n \"ogTitle\": \"Example Mini App\",\n \"ogDescription\": \"Challenge friends in real time.\",\n \"ogImageUrl\": \"https://ex.co/og.png\",\n \"noindex\": true\n }\n}\n5Create accountAssociation CredentialsThe accountAssociation fields in the manifest are used to verify ownership of your app. You can generate these fields on Base Build.\nEnsure all changes are live so that the Manifest file is available at your app’s url.\nNavigate to the Base Build Account association tool.\nPaste your domain in the App URL field (ex: sample-url.vercel.app) and click “Submit”\nClick on the “Verify” button that appears and follow the instructions to generate the accountAssociation fields.\nCopy the accountAssociation fields and paste them into the manifest file you added in the previous step.\n/.well-known/farcaster.jsonReport incorrect codeCopyAsk AI{\n \"accountAssociation\": {\n \"header\": \"eyJmaWQiOjkxNTIsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgwMmVmNzkwRGQ3OTkzQTM1ZkQ4NDdDMDUzRURkQUU5NDBEMDU1NTk2In0\",\n \"payload\": \"eyJkb21haW4iOiJhcHAuZXhhbXBsZS5jb20ifQ\",\n \"signature\": \"MHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwYzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxNzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEyNDdhNDhlZGJmMTMwZDU0MmIzMWQzZTg1ZDUyOTAwMmEwNDNkMjM5NjZiNWVjNTNmYjhlNzUzZmIyYzc1MWFmNTI4MWFiYTgxY2I5ZDE3NDAyY2YxMzQxOGI2MTcwYzFiODY3OTExZDkxN2UxMzU3MmVkMWIwYzNkYzEyM2Q1ODAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjVmMTk4MDg2YjJkYjE3MjU2NzMxYmM0NTY2NzNiOTZiY2VmMjNmNTFkMWZiYWNkZDdjNDM3OWVmNjU0NjU1NzJmMWQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwOGE3YjIyNzQ3OTcwNjUyMjNhMjI3NzY1NjI2MTc1NzQ2ODZlMmU2NzY1NzQyMjJjMjI2MzY4NjE2YzZjNjU2ZTY3NjUyMjNhMjI2NDJkMzQ0YjMzMzMzNjUyNDY3MDc0MzE0NTYxNjQ2Yjc1NTE0ODU3NDg2ZDc5Mzc1Mzc1Njk2YjQ0MzI0ZjM1NGE2MzRhNjM2YjVhNGM3NDUzMzczODIyMmMyMjZmNzI2OTY3Njk2ZTIyM2EyMjY4NzQ3NDcwNzMzYTJmMmY2YjY1Nzk3MzJlNjM2ZjY5NmU2MjYxNzM2NTJlNjM2ZjZkMjIyYzIyNjM3MjZmNzM3MzRmNzI2OTY3Njk2ZTIyM2E2NjYxNmM3MzY1N2QwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA\"\n },\n \"miniapp\": {...} // these fields remain the same\n}\nNote: Because you are signing with your Base Account, the signature field will be significantly longer than if you were to sign directly with your Farcaster custody wallet.6Add Embed MetadataUpdate your index.html file to include the fc:miniapp metadata. This is used to generate the rich embeds when your app is shared and is required for your app to display. Vanilla JS Next.jsAdd directly to your index.html file.index.htmlReport incorrect codeCopyAsk AI <meta name=\"fc:miniapp\" content='{\n \"version\":\"next\",\n \"imageUrl\":\"https://your-app.com/embed-image\",\n \"button\":{\n \"title\":\"Play Now\",\n \"action\":{\n \"type\":\"launch_miniapp\",\n \"name\":\"Your App Name\",\n \"url\":\"https://your-app.com\"\n }\n }\n }' />\nUse the generateMetadata function to add the fc:miniapp metadata.app/layout.tsxReport incorrect codeCopyAsk AI export async function generateMetadata(): Promise<Metadata> {\n return {\n other: {\n 'fc:miniapp': JSON.stringify({\n version: 'next',\n imageUrl: 'https://your-app.com/embed-image',\n button: {\n title: `Launch Your App Name`,\n action: {\n type: 'launch_miniapp',\n name: 'Your App Name',\n url: 'https://your-app.com',\n splashImageUrl: 'https://your-app.com/splash-image',\n splashBackgroundColor: '#000000',\n },\n },\n }),\n },\n };\n }\n7Push to ProductionEnsure all changes are live.8Preview Your AppUse the Base Build Preview tool to validate your app.\nAdd your app URL to view the embeds and click the launch button to verify the app launches as expected.\nUse the “Account association” tab to verify the association credentials were created correctly.\nUse the “Metadata” to see the metadata added from the manifest and identify any missing fields.\n9Post to PublishTo publish your app, create a post in the Base app with your app’s URL.Was this page helpful?YesNoSuggest editsRaise issueCreate a Mini AppNext⌘I",
+  "code_blocks": [
+    {
+      "language": "unknown",
+      "code": "npm install @farcaster/miniapp-sdk"
+    },
+    {
+      "language": "unknown",
+      "code": "import { sdk } from '@farcaster/miniapp-sdk';\n\n// Once app is ready to be displayed\nawait sdk.actions.ready();"
+    },
+    {
+      "language": "unknown",
+      "code": "import { sdk } from '@farcaster/miniapp-sdk';\nimport { useEffect } from 'react';\n\nfunction App() {\n    useEffect(() => {\n        sdk.actions.ready();\n    }, []);\n\n    return(...your app content goes here...)\n}\n\nexport default App;"
+    },
+    {
+      "language": "unknown",
+      "code": "function withValidProperties(properties: Record<string, undefined | string | string[]>) {\nreturn Object.fromEntries(\n    Object.entries(properties).filter(([_, value]) => (Array.isArray(value) ? value.length > 0 : !!value))\n);\n}\n\nexport async function GET() {\nconst URL = process.env.NEXT_PUBLIC_URL as string;\nreturn Response.json(paste_manifest_json_object_here); // see the next step for the manifest_json_object\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "{\n  \"accountAssociation\": {  // these will be added in step 5\n    \"header\": \"\",\n    \"payload\": \"\",\n    \"signature\": \"\"\n  },\n  \"miniapp\": {\n    \"version\": \"1\",\n    \"name\": \"Example Mini App\",\n    \"homeUrl\": \"https://ex.co\",\n    \"iconUrl\": \"https://ex.co/i.png\",\n    \"splashImageUrl\": \"https://ex.co/l.png\",\n    \"splashBackgroundColor\": \"#000000\",\n    \"webhookUrl\": \"https://ex.co/api/webhook\",\n    \"subtitle\": \"Fast, fun, social\",\n    \"description\": \"A fast, fun way to challenge friends in real time.\",\n    \"screenshotUrls\": [\n      \"https://ex.co/s1.png\",\n      \"https://ex.co/s2.png\",\n      \"https://ex.co/s3.png\"\n    ],\n    \"primaryCategory\": \"social\",\n    \"tags\": [\"example\", \"miniapp\", \"baseapp\"],\n    \"heroImageUrl\": \"https://ex.co/og.png\",\n    \"tagline\": \"Play instantly\",\n    \"ogTitle\": \"Example Mini App\",\n    \"ogDescription\": \"Challenge friends in real time.\",\n    \"ogImageUrl\": \"https://ex.co/og.png\",\n    \"noindex\": true\n  }\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "{\n  \"accountAssociation\": {\n    \"header\": \"eyJmaWQiOjkxNTIsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgwMmVmNzkwRGQ3OTkzQTM1ZkQ4NDdDMDUzRURkQUU5NDBEMDU1NTk2In0\",\n    \"payload\": \"eyJkb21haW4iOiJhcHAuZXhhbXBsZS5jb20ifQ\",\n    \"signature\": \"MHgwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwNDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAyMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwYzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMTIwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAxNzAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDEyNDdhNDhlZGJmMTMwZDU0MmIzMWQzZTg1ZDUyOTAwMmEwNDNkMjM5NjZiNWVjNTNmYjhlNzUzZmIyYzc1MWFmNTI4MWFiYTgxY2I5ZDE3NDAyY2YxMzQxOGI2MTcwYzFiODY3OTExZDkxN2UxMzU3MmVkMWIwYzNkYzEyM2Q1ODAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMjVmMTk4MDg2YjJkYjE3MjU2NzMxYmM0NTY2NzNiOTZiY2VmMjNmNTFkMWZiYWNkZDdjNDM3OWVmNjU0NjU1NzJmMWQwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwOGE3YjIyNzQ3OTcwNjUyMjNhMjI3NzY1NjI2MTc1NzQ2ODZlMmU2NzY1NzQyMjJjMjI2MzY4NjE2YzZjNjU2ZTY3NjUyMjNhMjI2NDJkMzQ0YjMzMzMzNjUyNDY3MDc0MzE0NTYxNjQ2Yjc1NTE0ODU3NDg2ZDc5Mzc1Mzc1Njk2YjQ0MzI0ZjM1NGE2MzRhNjM2YjVhNGM3NDUzMzczODIyMmMyMjZmNzI2OTY3Njk2ZTIyM2EyMjY4NzQ3NDcwNzMzYTJmMmY2YjY1Nzk3MzJlNjM2ZjY5NmU2MjYxNzM2NTJlNjM2ZjZkMjIyYzIyNjM3MjZmNzM3MzRmNzI2OTY3Njk2ZTIyM2E2NjYxNmM3MzY1N2QwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMA\"\n  },\n  \"miniapp\": {...} // these fields remain the same\n}"
+    },
+    {
+      "language": "unknown",
+      "code": "<meta name=\"fc:miniapp\" content='{\n  \"version\":\"next\",\n  \"imageUrl\":\"https://your-app.com/embed-image\",\n  \"button\":{\n      \"title\":\"Play Now\",\n      \"action\":{\n      \"type\":\"launch_miniapp\",\n      \"name\":\"Your App Name\",\n      \"url\":\"https://your-app.com\"\n      }\n  }\n  }' />"
+    },
+    {
+      "language": "unknown",
+      "code": "export async function generateMetadata(): Promise<Metadata> {\n    return {\n        other: {\n        'fc:miniapp': JSON.stringify({\n            version: 'next',\n            imageUrl: 'https://your-app.com/embed-image',\n            button: {\n                title: `Launch Your App Name`,\n                action: {\n                    type: 'launch_miniapp',\n                    name: 'Your App Name',\n                    url: 'https://your-app.com',\n                    splashImageUrl: 'https://your-app.com/splash-image',\n                    splashBackgroundColor: '#000000',\n                },\n            },\n        }),\n        },\n    };\n    }"
+    }
+  ],
+  "links": [
+    {
+      "text": "Skip to main content",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps#content-area"
+    },
+    {
+      "text": "Base Documentationhome page",
+      "url": "https://docs.base.org/"
+    },
+    {
+      "text": "Get Started",
+      "url": "https://docs.base.org/get-started/base"
+    },
+    {
+      "text": "Base Chain",
+      "url": "https://docs.base.org/base-chain/quickstart/why-base"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/base-account/overview/what-is-base-account"
+    },
+    {
+      "text": "Base App",
+      "url": "https://docs.base.org/base-app/introduction/beta-faq"
+    },
+    {
+      "text": "Mini Apps",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "OnchainKit",
+      "url": "https://docs.base.org/onchainkit/latest/getting-started/overview"
+    },
+    {
+      "text": "Cookbook",
+      "url": "https://docs.base.org/cookbook/onboard-any-user"
+    },
+    {
+      "text": "Showcase",
+      "url": "https://docs.base.org/showcase"
+    },
+    {
+      "text": "Learn",
+      "url": "https://docs.base.org/learn/welcome"
+    },
+    {
+      "text": "Migrate an Existing App",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "Create a Mini App",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    },
+    {
+      "text": "Build Checklist",
+      "url": "https://docs.base.org/mini-apps/quickstart/build-checklist"
+    },
+    {
+      "text": "Building for The Base App",
+      "url": "https://docs.base.org/mini-apps/quickstart/building-for-the-base-app"
+    },
+    {
+      "text": "Manifest",
+      "url": "https://docs.base.org/mini-apps/core-concepts/manifest"
+    },
+    {
+      "text": "Context",
+      "url": "https://docs.base.org/mini-apps/core-concepts/context"
+    },
+    {
+      "text": "Embeds & Previews",
+      "url": "https://docs.base.org/mini-apps/core-concepts/embeds-and-previews"
+    },
+    {
+      "text": "Base Account",
+      "url": "https://docs.base.org/mini-apps/core-concepts/base-account"
+    },
+    {
+      "text": "Notifications",
+      "url": "https://docs.base.org/mini-apps/core-concepts/notifications"
+    },
+    {
+      "text": "Authentication",
+      "url": "https://docs.base.org/mini-apps/core-concepts/authentication"
+    },
+    {
+      "text": "Navigation",
+      "url": "https://docs.base.org/mini-apps/core-concepts/navigation"
+    },
+    {
+      "text": "Sign Your Manifest",
+      "url": "https://docs.base.org/mini-apps/technical-guides/sign-manifest"
+    },
+    {
+      "text": "Generate Dynamic Embed Images",
+      "url": "https://docs.base.org/mini-apps/technical-guides/dynamic-embeds"
+    },
+    {
+      "text": "Send Notifications (Neynar)",
+      "url": "https://docs.base.org/mini-apps/technical-guides/neynar-notifications"
+    },
+    {
+      "text": "Accept Payments",
+      "url": "https://docs.base.org/mini-apps/technical-guides/accept-payments"
+    },
+    {
+      "text": "Featured Checklist",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/overview"
+    },
+    {
+      "text": "Product Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/product-guidelines"
+    },
+    {
+      "text": "Design Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/design-guidelines"
+    },
+    {
+      "text": "Notification Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/notification-guidelines"
+    },
+    {
+      "text": "Technical Guidelines",
+      "url": "https://docs.base.org/mini-apps/featured-guidelines/technical-guidelines"
+    },
+    {
+      "text": "Why Mini Apps",
+      "url": "https://docs.base.org/mini-apps/introduction/overview"
+    },
+    {
+      "text": "Optimize Onboarding",
+      "url": "https://docs.base.org/mini-apps/growth/optimize-onboarding"
+    },
+    {
+      "text": "Ideating Viral Apps",
+      "url": "https://docs.base.org/mini-apps/growth/build-viral-mini-apps"
+    },
+    {
+      "text": "Rewards",
+      "url": "https://docs.base.org/mini-apps/growth/rewards"
+    },
+    {
+      "text": "Common Issues & Debugging",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/common-issues"
+    },
+    {
+      "text": "Base App Compatibility",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/base-app-compatibility"
+    },
+    {
+      "text": "How Search works",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/how-search-works"
+    },
+    {
+      "text": "Test Your App",
+      "url": "https://docs.base.org/mini-apps/troubleshooting/testing"
+    },
+    {
+      "text": "Templates",
+      "url": "https://docs.base.org/mini-apps/resources/templates"
+    },
+    {
+      "text": "Design resources",
+      "url": "https://docs.base.org/mini-apps/resources/design-resources"
+    },
+    {
+      "text": "Llms full.txt",
+      "url": "https://docs.base.org/mini-apps/llms-full.txt"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "field reference",
+      "url": "https://docs.base.org/mini-apps/features/manifest#field-reference"
+    },
+    {
+      "text": "​",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps#example-manifest"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "",
+      "url": "https://docs.base.org/mini-apps/quickstart/migrate-existing-apps"
+    },
+    {
+      "text": "Create a Mini AppNext",
+      "url": "https://docs.base.org/mini-apps/quickstart/create-new-miniapp"
+    }
+  ]
+}
