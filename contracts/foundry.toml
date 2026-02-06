@@ -6,6 +6,10 @@ via_ir = true
 optimizer = true
 optimizer_runs = 200
 
+remappings = [
+    "@chainlink/contracts/=lib/chainlink-brownie-contracts/contracts/"
+]
+
 [profile.default.fuzz]
 runs = 256
 

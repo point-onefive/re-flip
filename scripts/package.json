@@ -1,0 +1,14 @@
+{
+  "name": "re-flip-scripts",
+  "version": "1.0.0",
+  "description": "NFT collection analysis scripts for re:flip",
+  "type": "module",
+  "scripts": {
+    "analyze": "npx tsx analyze-collection.ts",
+    "upload-deck": "npx tsx upload-deck.ts"
+  },
+  "dependencies": {
+    "tsx": "^4.7.0",
+    "viem": "^2.21.0"
+  }
+}
