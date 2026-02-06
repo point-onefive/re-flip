@@ -17,8 +17,8 @@ const BattleLobbyContent = dynamic(
         <header className="border-b border-gray-800">
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-3xl">⚔️</span>
-              <span className="text-xl font-bold">re:battle</span>
+              <img src="/assets/regen_226.png" alt="re:match" className="w-8 h-8 rounded-lg" />
+              <span className="text-xl font-bold">re:match</span>
             </div>
             <div className="bg-gray-800 text-white text-sm py-2 px-4 rounded-lg animate-pulse">
               Loading...

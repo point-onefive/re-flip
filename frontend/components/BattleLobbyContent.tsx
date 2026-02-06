@@ -23,8 +23,8 @@ export function BattleLobbyContent() {
       <header className="border-b border-gray-800 sticky top-0 bg-gray-950 z-40">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
           <Link href="/" className="flex items-center gap-1 sm:gap-2 shrink-0">
-            <span className="text-2xl sm:text-3xl">⚔️</span>
-            <span className="text-lg sm:text-xl font-bold">re:battle</span>
+            <img src="/assets/regen_226.png" alt="re:match" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg" />
+            <span className="text-lg sm:text-xl font-bold">re:match</span>
           </Link>
           <WalletConnect />
         </div>

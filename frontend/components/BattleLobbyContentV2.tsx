@@ -6,12 +6,14 @@ import { WalletConnect } from "@/components/WalletConnect";
 import { CreateBattleModalV2 } from "@/components/CreateBattleModalV2";
 import { BattleListV2 } from "@/components/BattleListV2";
 import { LeaderboardPanel } from "@/components/LeaderboardPanel";
+import { NetworkGuard, useNetworkStatus } from "@/components/NetworkGuard";
 import Link from "next/link";
 import { nftBattleV2Abi, NFT_BATTLE_V2_ADDRESS, formatTimeRemaining } from "@/lib/nftBattleV2Contract";
 import { RecentGamesPanel } from "@/components/RecentGamesPanel";
 
 export function BattleLobbyContentV2() {
   const { address, isConnected } = useAccount();
+  const { isWrongNetwork } = useNetworkStatus();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"open" | "my-games" | "recent" | "leaderboard">("open");
   const [refreshKey, setRefreshKey] = useState(0);
@@ -34,13 +36,14 @@ export function BattleLobbyContentV2() {
   };
 
   return (
+    <NetworkGuard>
     <div className="min-h-screen">
       {/* Header */}
       <header className="border-b border-gray-800 sticky top-0 bg-gray-950 z-40">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
           <Link href="/" className="flex items-center gap-1 sm:gap-2 shrink-0">
-            <span className="text-2xl sm:text-3xl">⚔️</span>
-            <span className="text-lg sm:text-xl font-bold">re:battle</span>
+            <img src="/assets/regen_226.png" alt="re:match" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg" />
+            <span className="text-lg sm:text-xl font-bold">re:match</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">
             <Link 
@@ -79,7 +82,8 @@ export function BattleLobbyContentV2() {
           {isConnected ? (
             <button
               onClick={() => setShowCreateModal(true)}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors"
+              disabled={isWrongNetwork}
+              className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors"
             >
               Create New Battle
             </button>
@@ -197,5 +201,6 @@ export function BattleLobbyContentV2() {
         </div>
       </footer>
     </div>
+    </NetworkGuard>
   );
 }

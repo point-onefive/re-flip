@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { useEthPrice, formatUsd } from "@/hooks/useEthPrice";
 import Link from "next/link";
 import { BattleRevealModal } from "./BattleRevealModal";
+import { NetworkGuard, useNetworkStatus } from "./NetworkGuard";
 
 interface BattleGamePlayV2Props {
   gameId: string;
@@ -29,6 +30,7 @@ interface BattleGamePlayV2Props {
 export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   const router = useRouter();
   const { address, isConnected } = useAccount();
+  const { isWrongNetwork } = useNetworkStatus();
   const { ethPrice } = useEthPrice();
   const [mounted, setMounted] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
@@ -455,6 +457,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   }
 
   return (
+    <NetworkGuard>
     <div className="max-w-xl mx-auto px-2">
       {/* Battle Reveal Modal */}
       {game && (
@@ -652,10 +655,11 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
         {canJoin && (
           <button
             onClick={handleJoinGame}
-            disabled={isJoining || isJoinConfirming || !!joinHash}
+            disabled={isJoining || isJoinConfirming || !!joinHash || isWrongNetwork}
             className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            {isJoining ? "Confirm in Wallet..." : 
+            {isWrongNetwork ? "Switch Network to Join" :
+             isJoining ? "Confirm in Wallet..." : 
              (isJoinConfirming || joinHash) ? "Preparing Battle..." : 
              `Join Battle (${formatEther(game.wagerAmount)} ETH)`}
           </button>
@@ -747,6 +751,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
         </Link>
       </div>
     </div>
+    </NetworkGuard>
   );
 }
 

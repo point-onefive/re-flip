@@ -28,8 +28,8 @@ export default function BattleGamePage({
       <header className="border-b border-gray-800 sticky top-0 bg-gray-900/95 backdrop-blur z-40">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-2xl">⚔️</span>
-            <span className="text-xl font-bold">re:battle</span>
+            <img src="/assets/regen_226.png" alt="re:match" className="w-8 h-8 rounded-lg" />
+            <span className="text-xl font-bold">re:match</span>
           </Link>
           <Link href="/" className="text-gray-400 hover:text-white text-sm">
             ← Back to Lobby
