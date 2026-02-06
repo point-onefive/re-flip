@@ -41,23 +41,23 @@ export function BattleLobbyContentV2() {
       {/* Header */}
       <header className="border-b border-gray-800 sticky top-0 bg-gray-950 z-40">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
-          <Link href="/" className="flex items-center gap-1 sm:gap-2 shrink-0">
-            <img src="/assets/regen_226.png" alt="re:match" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg" />
-            <span className="text-lg sm:text-xl font-bold">re:match</span>
+          <Link href="/" className="flex items-center gap-2 shrink-0 h-10">
+            <img src="/assets/regen_226.png" alt="re:match" className="w-8 h-8 rounded-lg" />
+            <span className="text-lg font-bold">re:match</span>
           </Link>
-          <div className="flex items-center gap-2 sm:gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <Link 
               href="/decks" 
-              className="text-gray-400 hover:text-white text-sm hidden sm:block"
+              className="h-10 flex items-center text-gray-400 hover:text-white text-sm hidden sm:flex"
             >
-              🎴 Decks
+              Decks
             </Link>
             {isConnected && (
               <Link 
                 href="/history" 
-                className="text-gray-400 hover:text-white text-sm hidden sm:block"
+                className="h-10 flex items-center text-gray-400 hover:text-white text-sm hidden sm:flex"
               >
-                📜 History
+                History
               </Link>
             )}
             <WalletConnect />
