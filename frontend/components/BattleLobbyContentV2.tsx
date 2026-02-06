@@ -43,6 +43,12 @@ export function BattleLobbyContentV2() {
             <span className="text-lg sm:text-xl font-bold">re:battle</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">
+            <Link 
+              href="/decks" 
+              className="text-gray-400 hover:text-white text-sm hidden sm:block"
+            >
+              🎴 Decks
+            </Link>
             {isConnected && (
               <Link 
                 href="/history" 

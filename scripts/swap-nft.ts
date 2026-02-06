@@ -3,6 +3,7 @@
  * 
  * Adds your NFT to the deck by swapping out an equivalent-tier card.
  * Ensures fair power assignment based on actual rarity.
+ * Also downloads and caches the image locally.
  * 
  * Usage: npx tsx swap-nft.ts <tokenId> [--dry-run]
  * 
@@ -16,6 +17,7 @@ import { privateKeyToAccount } from 'viem/accounts';
 import { baseSepolia } from 'viem/chains';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as https from 'https';
 
 // Configuration
 const CONFIG = {
@@ -23,8 +25,11 @@ const CONFIG = {
   deckId: 1n,
   privateKey: process.env.DEPLOYER_PRIVATE_KEY as `0x${string}`,
   cacheDir: './cache',
-  powerMapFile: '../frontend/data/decks/re_generates_power_map.json',
-  fullDeckFile: '../frontend/data/decks/re_generates_v3.json',
+  // Local paths for power map and metadata
+  powerMapFile: './frontend/public/data/decks/re_generates_power_map.json',
+  metadataFile: './frontend/public/data/decks/re_generates_metadata.json',
+  imagesDir: './frontend/public/images/decks/1',
+  fullDeckFile: './frontend/data/decks/re_generates_v3.json',
   powerMin: 100,
   powerMax: 999,
 };
@@ -54,6 +59,57 @@ interface DeckCard {
 }
 
 type Gender = 'male' | 'female' | 'one-of-one';
+
+function getImageExtension(url: string): string {
+  if (url.includes('.png')) return '.png';
+  if (url.includes('.jpg') || url.includes('.jpeg')) return '.jpg';
+  if (url.includes('.gif')) return '.gif';
+  if (url.includes('.webp')) return '.webp';
+  if (url.includes('.svg')) return '.svg';
+  return '.png';
+}
+
+function downloadFile(url: string, destPath: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const file = fs.createWriteStream(destPath);
+    
+    const request = https.get(url, (response) => {
+      if (response.statusCode === 301 || response.statusCode === 302) {
+        const redirectUrl = response.headers.location;
+        if (redirectUrl) {
+          file.close();
+          fs.unlinkSync(destPath);
+          downloadFile(redirectUrl, destPath).then(resolve).catch(reject);
+          return;
+        }
+      }
+      
+      if (response.statusCode !== 200) {
+        file.close();
+        fs.unlinkSync(destPath);
+        reject(new Error(`HTTP ${response.statusCode}`));
+        return;
+      }
+      
+      response.pipe(file);
+      file.on('finish', () => {
+        file.close();
+        resolve();
+      });
+    });
+    
+    request.on('error', (err) => {
+      file.close();
+      if (fs.existsSync(destPath)) fs.unlinkSync(destPath);
+      reject(err);
+    });
+    
+    request.setTimeout(30000, () => {
+      request.destroy();
+      reject(new Error('Timeout'));
+    });
+  });
+}
 
 function classifyNFT(nft: NFTMetadata): Gender {
   if (!nft.attributes || nft.attributes.length === 0) return 'one-of-one';
@@ -321,34 +377,82 @@ async function main() {
   // Update local files
   console.log(`\n💾 Updating local deck files...`);
   
-  // Update power map
+  // Step 3: Download and cache the new image
+  console.log(`   Downloading image for #${tokenId}...`);
+  const ext = getImageExtension(targetNFT.image);
+  const localImagePath = path.join(CONFIG.imagesDir, `${tokenId}${ext}`);
+  const publicImagePath = `/images/decks/1/${tokenId}${ext}`;
+  
+  try {
+    await downloadFile(targetNFT.image, localImagePath);
+    console.log(`   ✅ Image cached locally`);
+  } catch (error: any) {
+    console.error(`   ⚠️  Failed to download image: ${error.message}`);
+    console.log(`   The swap succeeded but image may not display correctly.`);
+  }
+  
+  // Step 4: Update power map (public)
   const powerMap = JSON.parse(fs.readFileSync(CONFIG.powerMapFile, 'utf-8'));
   delete powerMap[swapOut.tokenId.toString()];
   powerMap[tokenId.toString()] = power;
   fs.writeFileSync(CONFIG.powerMapFile, JSON.stringify(powerMap, null, 2));
+  console.log(`   ✅ Power map updated`);
   
-  // Update full deck
-  fullDeck.deck = fullDeck.deck.filter((c: any) => c.tokenId !== swapOut.tokenId);
-  fullDeck.deck.push({
-    tokenId,
+  // Step 5: Update metadata cache (public)
+  const metadataCache = JSON.parse(fs.readFileSync(CONFIG.metadataFile, 'utf-8'));
+  delete metadataCache[swapOut.tokenId.toString()];
+  metadataCache[tokenId.toString()] = {
     name: targetNFT.name,
-    image: targetNFT.image,
+    image: publicImagePath,
     attributes: targetNFT.attributes,
-    gender,
-    rawScore: gender === 'one-of-one' ? 999999 : 0,
-    rank,
-    percentile: gender === 'one-of-one' ? 0 : rank / total,
-    power,
-    tier,
-  });
-  fullDeck.deck.sort((a: any, b: any) => b.power - a.power);
-  fs.writeFileSync(CONFIG.fullDeckFile, JSON.stringify(fullDeck, null, 2));
+  };
+  fs.writeFileSync(CONFIG.metadataFile, JSON.stringify(metadataCache, null, 2));
+  console.log(`   ✅ Metadata cache updated`);
   
-  console.log(`   ✅ Local files updated`);
+  // Step 6: Remove old image
+  const oldImageFiles = fs.readdirSync(CONFIG.imagesDir).filter(f => f.startsWith(`${swapOut.tokenId}.`));
+  for (const oldFile of oldImageFiles) {
+    fs.unlinkSync(path.join(CONFIG.imagesDir, oldFile));
+  }
+  if (oldImageFiles.length > 0) {
+    console.log(`   ✅ Old image removed`);
+  }
+  
+  // Step 7: Update full deck file (if exists)
+  if (fs.existsSync(CONFIG.fullDeckFile)) {
+    fullDeck.deck = fullDeck.deck.filter((c: any) => c.tokenId !== swapOut.tokenId);
+    fullDeck.deck.push({
+      tokenId,
+      name: targetNFT.name,
+      image: publicImagePath,
+      attributes: targetNFT.attributes,
+      gender,
+      rawScore: gender === 'one-of-one' ? 999999 : 0,
+      rank,
+      percentile: gender === 'one-of-one' ? 0 : rank / total,
+      power,
+      tier,
+    });
+    fullDeck.deck.sort((a: any, b: any) => b.power - a.power);
+    fs.writeFileSync(CONFIG.fullDeckFile, JSON.stringify(fullDeck, null, 2));
+    console.log(`   ✅ Full deck file updated`);
+  }
+  
+  // Verify the new image exists
+  if (fs.existsSync(localImagePath)) {
+    const stats = fs.statSync(localImagePath);
+    if (stats.size < 100) {
+      console.log(`   ⚠️  Warning: Image file seems too small (${stats.size} bytes)`);
+    }
+  }
   
   console.log(`\n✅ SWAP COMPLETE!`);
   console.log(`   #${tokenId} is now in the deck with power ${power} (${tier})`);
+  console.log(`   Image cached at: ${publicImagePath}`);
   console.log('═══════════════════════════════════════════════════════════\n');
+  
+  // Run verification
+  console.log(`💡 Run verification: npx ts-node scripts/verify-deck-images.ts`);
 }
 
 main().catch(console.error);

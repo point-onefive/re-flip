@@ -17,6 +17,8 @@ A PvP wagering game on Base blockchain where players battle using NFT-powered ca
 - [Local Development](#local-development)
 - [Scripts Reference](#scripts-reference)
 - [Admin Operations](#admin-operations)
+- [Deck Explorer](#deck-explorer)
+- [Image & Metadata Caching](#image--metadata-caching)
 - [Design Decisions](#design-decisions)
 - [AI/Copilot Quick Reference](#aicopilot-quick-reference)
 
@@ -192,6 +194,10 @@ re-flip/
 │   │   │   └── [gameId]/        # Individual game pages
 │   │   └── history/
 │   │       └── page.tsx         # Player battle history
+│   ├── app/
+│   │   ├── decks/
+│   │   │   ├── page.tsx         # Deck library listing ⭐
+│   │   │   └── [id]/page.tsx    # Individual deck explorer ⭐
 │   ├── components/
 │   │   ├── BattleGamePlay.tsx   # Main game component ⭐
 │   │   ├── BattleGamePlayV2.tsx # V2 game component ⭐
@@ -207,16 +213,25 @@ re-flip/
 │   │   ├── nftBattleV2Contract.ts # V2 ABI & address ⭐
 │   │   ├── traitPowerData.ts    # Collection trait rarities
 │   │   └── wagmi.ts             # Web3 config (Base, Coinbase Wallet)
+│   └── public/
+│       ├── data/decks/          # Public deck data (served to browser)
+│       │   ├── re_generates_power_map.json  # tokenId → power (200 entries)
+│       │   └── re_generates_metadata.json   # tokenId → {name, image, attributes} ⭐
+│       └── images/decks/1/      # Cached NFT images (200 files) ⭐
+│           ├── 10.png
+│           ├── 16.png
+│           └── ... (all 200 card images)
 │   └── data/
-│       └── decks/               # Power mapping JSON files
-│           ├── re_generates_power_map.json  # Active deck (200 cards)
+│       └── decks/               # Source deck files
 │           └── re_generates_v3.json         # Full deck with metadata
 │
 ├── scripts/                      # Utility scripts (TypeScript)
 │   ├── analyze-collection-v2.ts # Calculate power levels (percentile-based) ⭐
 │   ├── upload-deck-v2.ts        # Upload deck to V2 contract ⭐
-│   ├── swap-nft.ts              # Swap NFT into deck ⭐
+│   ├── swap-nft.ts              # Swap NFT into deck + cache image ⭐
 │   ├── check-nft-power.ts       # Check any NFT's calculated power
+│   ├── cache-deck-images.ts     # Download all deck images locally ⭐
+│   ├── verify-deck-images.ts    # Validate all images are cached ⭐
 │   ├── upload-deck.ts           # V1 deck upload (legacy)
 │   └── analyze-collection.ts    # V1 analyzer (legacy)
 │
@@ -230,6 +245,8 @@ re-flip/
 | `/` | BattleLobbyContentV2 | Main lobby with 4 tabs (Open, Recent, My Battles, Leaderboard) |
 | `/battle` | Redirect | Redirects to `/` |
 | `/battle/[gameId]` | BattleGamePlayV2 | Individual game page |
+| `/decks` | DecksPage | Deck library (list all available decks) ⭐ |
+| `/decks/[id]` | DeckDetailPage | Deck explorer with all cards, stats, filtering ⭐ |
 | `/history` | History Page | Player's battle history |
 
 ### Frontend Environment Variables
@@ -265,6 +282,9 @@ NEXT_PUBLIC_NETWORK="sepolia"  # or "mainnet"
 | re:generates deck | ✅ | 200 cards, percentile-based power |
 | Frontend V2 components | ✅ | Lobby, game, history |
 | Recent Games panel | ✅ | Platform stats + activity feed |
+| **Deck Explorer** | ✅ | `/decks` - browse all cards with filtering |
+| **Local Image Caching** | ✅ | All 200 images cached in `public/` |
+| **Image Verification** | ✅ | 100% verified before deployment |
 
 ### 🔧 V2 Contract Functions
 
@@ -628,12 +648,51 @@ DEPLOYER_PRIVATE_KEY=$DEPLOYER_PRIVATE_KEY npx tsx swap-nft.ts 1234
 2. Finds equivalent-tier card to swap out (preserves balance)
 3. Removes old card from contract
 4. Adds new card with calculated power
-5. Updates local JSON files
+5. **Downloads and caches the new NFT's image locally**
+6. Updates metadata cache and power map
+7. Removes the swapped-out card's image
 
 **Swap logic:**
 - 1/1 artwork → Power 999 (LEGENDARY), swaps with another 1/1
 - Regular NFT → Power based on rarity rank, swaps same tier + gender
 - Maintains deck balance (no tier inflation)
+
+### cache-deck-images.ts
+**Downloads all NFT images for a deck and caches them locally**
+
+```bash
+npx ts-node scripts/cache-deck-images.ts
+```
+
+**What it does:**
+1. Reads the power map to get all token IDs
+2. Fetches metadata from collection API (Bueno, OpenSea, etc.)
+3. Downloads each image to `frontend/public/images/decks/{deckId}/`
+4. Creates metadata cache at `frontend/public/data/decks/{collection}_metadata.json`
+5. Skips already-cached images on re-run
+
+**Why local caching?**
+- ⚡ Instant image loading (no external API calls during gameplay)
+- 🛡️ No rate limiting or API availability issues
+- 📦 Deployable anywhere (images bundled with app)
+- 🔍 Guaranteed availability for deck explorer
+
+### verify-deck-images.ts
+**Validates that all deck images are properly cached**
+
+```bash
+npx ts-node scripts/verify-deck-images.ts
+```
+
+**What it checks:**
+- All tokens in power map have metadata entries
+- All metadata entries have valid local image paths
+- All image files exist on disk
+- No empty or corrupted image files
+
+**Exit codes:**
+- `0` - All images verified successfully
+- `1` - One or more images missing or invalid
 
 ### check-nft-power.ts
 **Check any NFT's calculated power without adding to deck**
@@ -648,6 +707,110 @@ npx tsx check-nft-power.ts 1234
 - Calculated power and tier
 - Trait-by-trait rarity breakdown
 - Command to add to deck
+
+---
+
+## Deck Explorer
+
+The Deck Explorer provides full transparency into all available decks and their cards.
+
+### Routes
+
+| Route | Description |
+|-------|-------------|
+| `/decks` | Library of all available decks |
+| `/decks/1` | re:generates deck (200 cards) |
+
+### Features
+
+- 📊 **Power Distribution Chart** - Visual breakdown by tier (LEGENDARY → BASIC)
+- 🔍 **Filter by Tier** - Quick filter to see only LEGENDARY, EPIC, etc.
+- 🔄 **Sort Options** - By power (high/low) or Token ID
+- 🔎 **Search** - Find specific cards by token ID or name
+- 🎴 **Card Grid** - All cards with power badges and tier colors
+- 📋 **Card Detail Modal** - Click any card to see full image + all traits
+
+### Data Flow
+
+```
+Frontend loads from local cache (no external API calls):
+
+/public/data/decks/re_generates_power_map.json    → tokenId → power
+/public/data/decks/re_generates_metadata.json     → tokenId → {name, image, attributes}
+/public/images/decks/1/*.png                      → actual image files
+```
+
+### Adding to Header
+
+The Deck Explorer is linked from the main lobby header:
+- 🎴 **Decks** link in header (visible on desktop)
+- Links to `/decks` → individual deck pages
+
+---
+
+## Image & Metadata Caching
+
+All deck images and metadata are cached locally for performance and reliability.
+
+### Cache Architecture
+
+```
+frontend/public/
+├── data/decks/
+│   ├── re_generates_power_map.json     # tokenId → power (read by contract uploader)
+│   └── re_generates_metadata.json      # tokenId → {name, localImagePath, attributes}
+└── images/decks/1/
+    ├── 10.png
+    ├── 16.png
+    └── ... (200 images, one per card)
+```
+
+### Cache Workflow
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        DECK CREATION                                │
+├─────────────────────────────────────────────────────────────────────┤
+│  1. Run analyze-collection-v2.ts    → Generate power levels         │
+│  2. Run cache-deck-images.ts        → Download all images locally   │
+│  3. Run verify-deck-images.ts       → Confirm 100% cached           │
+│  4. Run upload-deck-v2.ts           → Push power map to contract    │
+└─────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                        CARD SWAP                                    │
+├─────────────────────────────────────────────────────────────────────┤
+│  1. Run swap-nft.ts 1234           → Calculates power               │
+│  2. → Downloads new image           → Caches locally                │
+│  3. → Updates metadata cache        → Updates power map             │
+│  4. → Removes old image             → Contract updated              │
+│  5. Run verify-deck-images.ts      → Confirm still 100%             │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Benefits
+
+| Benefit | Description |
+|---------|-------------|
+| **Speed** | Images load instantly from local files |
+| **Reliability** | No dependency on external APIs during gameplay |
+| **Volume Ready** | Can handle high traffic without API rate limits |
+| **Verifiable** | 100% of deck verified before deployment |
+| **Self-Contained** | Deploy to any host (Vercel, Fly.io) with images bundled |
+
+### Verification
+
+Always verify before deploying:
+
+```bash
+npx ts-node scripts/verify-deck-images.ts
+# Expected output:
+# 📦 Deck has 200 tokens in power map
+# 📄 Metadata has 200 entries
+# 🖼️  Images directory has 200 files
+# ✅ OK: 200/200
+# 🎉 All tokens verified successfully!
+```
 
 ---
 
