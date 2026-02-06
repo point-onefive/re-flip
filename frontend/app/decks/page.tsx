@@ -49,11 +49,21 @@ export default function DecksPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-purple-900/20 to-gray-900">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <Link href="/" className="text-purple-400 hover:text-purple-300 mb-4 inline-block">
+      {/* Header */}
+      <header className="border-b border-gray-800 sticky top-0 bg-gray-900/95 backdrop-blur z-40">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <span className="text-2xl">⚔️</span>
+            <span className="text-xl font-bold">re:battle</span>
+          </Link>
+          <Link href="/" className="text-gray-400 hover:text-white text-sm">
             ← Back to Lobby
           </Link>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">🎴 Deck Library</h1>
           <p className="text-gray-400">
             Explore all available decks and their cards. Full transparency on power levels.

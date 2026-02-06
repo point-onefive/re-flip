@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   useAccount,
   useReadContract,
   useWriteContract,
   useWaitForTransactionReceipt,
+  useWatchContractEvent,
 } from "wagmi";
 import { formatEther, parseEther } from "viem";
 import {
@@ -19,6 +20,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEthPrice, formatUsd } from "@/hooks/useEthPrice";
 import Link from "next/link";
+import { BattleRevealModal } from "./BattleRevealModal";
 
 interface BattleGamePlayV2Props {
   gameId: string;
@@ -30,6 +32,10 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   const { ethPrice } = useEthPrice();
   const [mounted, setMounted] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
+  const [showBattleReveal, setShowBattleReveal] = useState(false);
+  const hasShownReveal = useRef(false);
+  const [rematchCountdown, setRematchCountdown] = useState<number | null>(null);
+  const rematchTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [transitionOverlay, setTransitionOverlay] = useState<{
     show: boolean;
     emoji: string;
@@ -67,7 +73,16 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
     },
   });
 
-  const deck = deckData as Deck | undefined;
+  // Parse deck tuple: wagmi returns [collection, name, version, active, cardCount]
+  const deck: Deck | undefined = deckData && Array.isArray(deckData) && deckData.length >= 5
+    ? {
+        collection: deckData[0] as `0x${string}`,
+        name: deckData[1] as string,
+        version: deckData[2] as bigint,
+        active: deckData[3] as boolean,
+        cardCount: deckData[4] as bigint,
+      }
+    : undefined;
 
   // Join game
   const {
@@ -100,21 +115,13 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   const { isLoading: isRematchConfirming, isSuccess: rematchSuccess } =
     useWaitForTransactionReceipt({ hash: rematchHash });
 
-  // Handle join success
+  // Handle join success - just refetch to update the lobby view (don't show overlay)
   useEffect(() => {
     if (joinSuccess) {
-      setTransitionOverlay({
-        show: true,
-        emoji: "⚔️",
-        title: "Battle Started!",
-        subtitle: game?.wagerAmount && Number(game.wagerAmount) >= parseEther("0.02") 
-          ? "Waiting for VRF randomness..." 
-          : "Determining winner..."
-      });
-      setTimeout(() => setTransitionOverlay(null), 2000);
+      // Just refetch - let the lobby show both players before the battle modal
       refetch();
     }
-  }, [joinSuccess, refetch, game?.wagerAmount]);
+  }, [joinSuccess, refetch]);
 
   // Handle cancel success
   useEffect(() => {
@@ -129,26 +136,100 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
     }
   }, [cancelSuccess, router]);
 
-  // Handle rematch success
+  // Handle rematch success - start 30 second countdown
   useEffect(() => {
     if (rematchSuccess) {
-      setTransitionOverlay({
-        show: true,
-        emoji: "🔄",
-        title: "Rematch Requested!",
-        subtitle: "Waiting for opponent..."
-      });
-      setTimeout(() => setTransitionOverlay(null), 2000);
+      // Start 30 second countdown
+      setRematchCountdown(30);
       refetch();
     }
   }, [rematchSuccess, refetch]);
 
-  // Detect game completion - show result modal
+  // Rematch countdown timer
   useEffect(() => {
-    if (game && Number(game.status) === GameStatus.Complete && !showResultModal) {
-      setShowResultModal(true);
+    if (rematchCountdown === null) return;
+    
+    if (rematchCountdown <= 0) {
+      // Time expired - go back to lobby
+      setRematchCountdown(null);
+      setTransitionOverlay({
+        show: true,
+        emoji: "⏰",
+        title: "Rematch Expired",
+        subtitle: "Opponent didn't accept in time..."
+      });
+      setTimeout(() => router.push("/"), 2000);
+      return;
     }
-  }, [game, showResultModal]);
+    
+    rematchTimerRef.current = setTimeout(() => {
+      setRematchCountdown(prev => prev !== null ? prev - 1 : null);
+    }, 1000);
+    
+    return () => {
+      if (rematchTimerRef.current) clearTimeout(rematchTimerRef.current);
+    };
+  }, [rematchCountdown, router]);
+
+  // Watch for RematchCreated event - redirect to new game
+  useWatchContractEvent({
+    address: NFT_BATTLE_V2_ADDRESS,
+    abi: nftBattleV2Abi,
+    eventName: 'RematchCreated',
+    onLogs(logs) {
+      for (const log of logs) {
+        const oldGameId = (log as any).args?.oldGameId;
+        const newGameId = (log as any).args?.newGameId;
+        
+        if (oldGameId && BigInt(oldGameId) === BigInt(gameId)) {
+          // Clear countdown
+          setRematchCountdown(null);
+          if (rematchTimerRef.current) clearTimeout(rematchTimerRef.current);
+          
+          // Show migration overlay
+          setTransitionOverlay({
+            show: true,
+            emoji: "⚔️",
+            title: "Rematch Starting!",
+            subtitle: `Moving to Battle #${newGameId}...`
+          });
+          
+          // Navigate to new game after brief delay
+          setTimeout(() => {
+            router.push(`/battle/${newGameId}`);
+          }, 1500);
+        }
+      }
+    },
+  });
+
+  // Also detect when opponent requests rematch (stop our countdown)
+  useEffect(() => {
+    if (game) {
+      const isPlayer1 = address?.toLowerCase() === game.player1.toLowerCase();
+      const isPlayer2 = address?.toLowerCase() === game.player2.toLowerCase();
+      const bothWantRematch = game.player1WantsRematch && game.player2WantsRematch;
+      
+      // If both want rematch, the event handler will catch the redirect
+      if (bothWantRematch && rematchCountdown !== null) {
+        // Keep countdown running until event fires
+      }
+    }
+  }, [game, address, rematchCountdown]);
+
+  // Detect game completion - show both players in lobby first, then battle reveal modal
+  useEffect(() => {
+    if (game && Number(game.status) === GameStatus.Complete && !hasShownReveal.current) {
+      // Clear any transition overlay to show the lobby with both players
+      setTransitionOverlay(null);
+      hasShownReveal.current = true;
+      
+      // Wait 2 seconds to let players see both cards in lobby, then show battle reveal
+      setTimeout(() => {
+        setShowBattleReveal(true);
+      }, 2000);
+    }
+  }, [game]);
 
   // Handlers
   const handleJoinGame = async () => {
@@ -229,7 +310,28 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   }
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="max-w-xl mx-auto px-2">
+      {/* Battle Reveal Modal */}
+      {game && (
+        <BattleRevealModal
+          isOpen={showBattleReveal}
+          onClose={() => {
+            setShowBattleReveal(false);
+            setShowResultModal(true);
+          }}
+          player1Address={game.player1}
+          player2Address={game.player2}
+          player1TokenId={Number(game.player1TokenId)}
+          player2TokenId={Number(game.player2TokenId)}
+          player1Power={Number(game.player1Power)}
+          player2Power={Number(game.player2Power)}
+          winner={game.winner}
+          wagerAmount={game.wagerAmount}
+          deckId={Number(game.deckId)}
+          currentUserAddress={address}
+        />
+      )}
+
       {/* Transition Overlay */}
       {transitionOverlay?.show && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
@@ -239,41 +341,52 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
             {transitionOverlay.subtitle && (
               <div className="text-gray-400">{transitionOverlay.subtitle}</div>
             )}
+            <div className="mt-4 flex justify-center">
+              <div className="flex gap-1">
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       {/* Game Header */}
-      <div className="bg-gray-800 rounded-xl p-4 sm:p-6 mb-4">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-white">
+      <div className="bg-gray-800 rounded-xl p-3 sm:p-4 mb-3">
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex items-center gap-3">
+            <h1 className="text-lg sm:text-xl font-bold text-white">
               Battle #{gameId}
             </h1>
-            <p className="text-gray-400 text-sm">
-              {deck?.name || `Deck #${game.deckId}`}
-            </p>
+            <span className="text-gray-500 text-sm">{deck?.name || `Deck #${game.deckId}`}</span>
           </div>
           <StatusBadge status={Number(game.status)} />
         </div>
 
-        {/* Wager Info */}
-        <div className="bg-gray-700/50 rounded-lg p-4 mb-4">
-          <div className="text-center">
-            <div className="text-gray-400 text-sm mb-1">Total Pot</div>
-            <div className="text-2xl sm:text-3xl font-bold text-white">
-              {formatEther(game.wagerAmount * BigInt(2))} ETH
-            </div>
+        {/* Wager Info - Compact */}
+        <div className="bg-gray-700/50 rounded-lg p-2 mb-3">
+          <div className="flex items-center justify-center gap-2">
+            <span className="text-gray-400 text-sm">
+              {Number(game.status) === GameStatus.Open ? "Wager:" : "Pot:"}
+            </span>
+            <span className="text-xl font-bold text-white">
+              {Number(game.status) === GameStatus.Open 
+                ? formatEther(game.wagerAmount)
+                : formatEther(game.wagerAmount * BigInt(2))} ETH
+            </span>
             {ethPrice && (
-              <div className="text-gray-400 text-sm">
-                {formatUsd(parseFloat(formatEther(game.wagerAmount * BigInt(2))), ethPrice)}
-              </div>
+              <span className="text-gray-500 text-sm">
+                ({Number(game.status) === GameStatus.Open
+                  ? formatUsd(parseFloat(formatEther(game.wagerAmount)), ethPrice)
+                  : formatUsd(parseFloat(formatEther(game.wagerAmount * BigInt(2))), ethPrice)})
+              </span>
             )}
           </div>
         </div>
 
         {/* Players */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <PlayerCard
             label="Host"
             address={game.player1}
@@ -299,8 +412,8 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
               wantsRematch={game.player2WantsRematch}
             />
           ) : (
-            <div className="bg-gray-700/30 border border-dashed border-gray-600 rounded-lg p-4 text-center">
-              <span className="text-gray-400">Waiting for challenger...</span>
+            <div className="bg-gray-700/30 border border-dashed border-gray-600 rounded-lg p-3 text-center">
+              <span className="text-gray-400 text-sm">Waiting for challenger...</span>
             </div>
           )}
         </div>
@@ -308,84 +421,58 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
 
       {/* VRF Status */}
       {Number(game.status) === GameStatus.WaitingVRF && (
-        <div className="bg-purple-900/20 border border-purple-500/30 rounded-xl p-4 mb-4">
-          <div className="flex items-center gap-3">
-            <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-purple-500"></div>
-            <div>
-              <div className="text-purple-400 font-medium">Waiting for VRF Randomness</div>
-              <div className="text-gray-400 text-sm">
-                Chainlink VRF is generating provably fair random numbers...
-              </div>
-            </div>
+        <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-2 mb-3">
+          <div className="flex items-center gap-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-purple-500"></div>
+            <span className="text-purple-400 text-sm">Waiting for VRF randomness...</span>
           </div>
         </div>
       )}
 
       {/* VRF Verified Badge */}
       {Number(game.status) === GameStatus.Complete && game.usedVRF && (
-        <div className="bg-green-900/20 border border-green-500/30 rounded-xl p-4 mb-4">
-          <div className="flex items-center gap-2 text-green-400">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-2 mb-3">
+          <div className="flex items-center gap-2 text-green-400 text-sm">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
             </svg>
-            <span className="font-medium">VRF Verified Result</span>
+            <span>VRF Verified</span>
           </div>
-          <p className="text-gray-400 text-sm mt-1">
-            This battle used Chainlink VRF for provably fair randomness.
-          </p>
         </div>
       )}
 
       {/* Result Modal */}
       {showResultModal && Number(game.status) === GameStatus.Complete && (
-        <div className="bg-gray-800 rounded-xl p-6 mb-4 text-center">
-          <div className="text-5xl mb-4">
-            {isTie ? "🤝" : isWinner ? "🎉" : "😔"}
+        <div className="bg-gray-800 rounded-lg p-3 mb-3 text-center">
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <span className="text-2xl">{isTie ? "🤝" : isWinner ? "🎉" : "😔"}</span>
+            <h2 className="text-lg font-bold text-white">
+              {isTie ? "It's a Tie!" : isWinner ? "You Won!" : isParticipant ? "You Lost" : "Battle Complete"}
+            </h2>
           </div>
-          <h2 className="text-2xl font-bold text-white mb-2">
-            {isTie ? "It's a Tie!" : isWinner ? "You Won!" : isParticipant ? "You Lost" : "Battle Complete"}
-          </h2>
-          
-          <div className="text-gray-400 mb-4">
+          <div className="text-gray-400 text-sm">
             {isTie ? (
-              "Equal power scores - wagers refunded."
+              "Equal power - wagers refunded"
             ) : isWinner ? (
-              <>
-                You won{" "}
-                <span className="text-green-400 font-bold">
-                  {(parseFloat(formatEther(game.wagerAmount)) * 2 * 0.975).toFixed(4)} ETH
-                </span>
-              </>
+              <>Won <span className="text-green-400 font-bold">{(parseFloat(formatEther(game.wagerAmount)) * 2 * 0.975).toFixed(4)} ETH</span></>
             ) : isParticipant ? (
               "Better luck next time!"
             ) : (
               <>Winner: {truncateAddress(game.winner)}</>
             )}
+            <span className="text-gray-600 ml-2">({Number(game.player1Power)} vs {Number(game.player2Power)})</span>
           </div>
-
-          <div className="text-gray-500 text-sm mb-4">
-            Power: {Number(game.player1Power)} vs {Number(game.player2Power)}
-          </div>
-
-          {!showResultModal && (
-            <button
-              onClick={() => setShowResultModal(false)}
-              className="text-gray-400 hover:text-white text-sm"
-            >
-              Close
-            </button>
-          )}
         </div>
       )}
 
       {/* Action Buttons */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         {/* Join Button */}
         {canJoin && (
           <button
             onClick={handleJoinGame}
             disabled={isJoining || isJoinConfirming}
-            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
             {isJoining ? "Confirm in Wallet..." : 
              isJoinConfirming ? "Joining..." : 
@@ -398,7 +485,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
           <button
             onClick={handleCancelGame}
             disabled={isCancelling || isCancelConfirming}
-            className="w-full bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-gray-700 hover:bg-gray-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
             {isCancelling || isCancelConfirming ? "Cancelling..." : "Cancel Battle"}
           </button>
@@ -409,7 +496,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
           <button
             onClick={handleRequestRematch}
             disabled={isRequesting || isRematchConfirming}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
             {isRequesting ? "Confirm in Wallet..." : 
              isRematchConfirming ? "Requesting..." : 
@@ -419,9 +506,8 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
 
         {/* Waiting for opponent states */}
         {Number(game.status) === GameStatus.Open && isCreator && (
-          <div className="text-center text-gray-400 py-4">
-            <div className="animate-pulse mb-2">⏳</div>
-            Waiting for a challenger to join...
+          <div className="text-center text-gray-400 text-sm py-2">
+            <span className="animate-pulse">⏳</span> Waiting for challenger...
           </div>
         )}
 
@@ -431,6 +517,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
             game={game} 
             isPlayer1={isPlayer1} 
             isPlayer2={isPlayer2}
+            countdown={rematchCountdown}
           />
         )}
 
@@ -498,52 +585,69 @@ function PlayerCard({
   };
 
   return (
-    <div className={`bg-gray-700/50 rounded-lg p-4 ${isWinner && gameStatus === GameStatus.Complete ? 'ring-2 ring-green-500' : ''}`}>
-      <div className="flex justify-between items-start mb-2">
-        <div>
-          <span className="text-gray-400 text-sm">{label}</span>
-          {isCurrentUser && <span className="ml-2 text-purple-400 text-xs">(You)</span>}
+    <div className={`bg-gray-700/50 rounded-lg p-2 ${isWinner && gameStatus === GameStatus.Complete ? 'ring-2 ring-green-500' : ''}`}>
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <span className="text-gray-400 text-xs">{label}:</span>
+          <span className="font-mono text-white text-sm">{truncate(address)}</span>
+          {isCurrentUser && <span className="text-purple-400 text-xs">(You)</span>}
         </div>
-        {wantsRematch && (
-          <span className="text-xs text-blue-400">🔄 Wants rematch</span>
-        )}
+        <div className="flex items-center gap-2">
+          {gameStatus === GameStatus.Complete && power > 0 && (
+            <>
+              <span className="text-gray-400 text-xs">#{tokenId}</span>
+              <span className={`text-sm font-bold ${isWinner ? 'text-green-400' : 'text-white'}`}>
+                {isWinner && '👑 '}{power}
+              </span>
+            </>
+          )}
+          {wantsRematch && <span className="text-xs text-blue-400">🔄</span>}
+        </div>
       </div>
-      <div className="font-mono text-white">{truncate(address)}</div>
-      {gameStatus === GameStatus.Complete && power > 0 && (
-        <div className="flex justify-between items-center mt-2 text-sm">
-          <span className="text-gray-400">Power: {power}</span>
-          {tokenId > 0 && <span className="text-gray-500">Token #{tokenId}</span>}
-          {isWinner && <span className="text-green-400">👑 Winner</span>}
-        </div>
-      )}
     </div>
   );
 }
 
-function RematchStatus({ game, isPlayer1, isPlayer2 }: { game: GameV2; isPlayer1: boolean; isPlayer2: boolean }) {
+function RematchStatus({ game, isPlayer1, isPlayer2, countdown }: { game: GameV2; isPlayer1: boolean; isPlayer2: boolean; countdown: number | null }) {
   const weRequestedRematch = (isPlayer1 && game.player1WantsRematch) || (isPlayer2 && game.player2WantsRematch);
   const opponentRequestedRematch = (isPlayer1 && game.player2WantsRematch) || (isPlayer2 && game.player1WantsRematch);
   
   if (weRequestedRematch && !opponentRequestedRematch) {
     return (
-      <div className="text-center text-blue-400 text-sm py-2">
-        ⏳ Waiting for opponent to accept rematch...
+      <div className="bg-blue-900/30 border border-blue-500/30 rounded-lg p-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-blue-400">
+            <span className="animate-pulse">⏳</span>
+            <span className="text-sm">Waiting for opponent...</span>
+          </div>
+          {countdown !== null && (
+            <div className={`text-lg font-bold ${countdown <= 5 ? 'text-red-400' : 'text-blue-400'}`}>
+              {countdown}s
+            </div>
+          )}
+        </div>
+        {countdown !== null && countdown <= 5 && (
+          <div className="text-xs text-red-400 mt-1">
+            Rematch will expire soon!
+          </div>
+        )}
       </div>
     );
   }
   
   if (opponentRequestedRematch && !weRequestedRematch) {
     return (
-      <div className="text-center text-blue-400 text-sm py-2">
-        🔄 Opponent wants a rematch!
+      <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
+        <div className="text-green-400 font-medium">🔄 Opponent wants a rematch!</div>
+        <div className="text-gray-400 text-xs mt-1">Click "Request Rematch" to accept</div>
       </div>
     );
   }
   
   if (weRequestedRematch && opponentRequestedRematch) {
     return (
-      <div className="text-center text-green-400 text-sm py-2">
-        ✅ Both players agreed! Creating rematch...
+      <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3 text-center animate-pulse">
+        <div className="text-purple-400 font-medium">✅ Creating rematch...</div>
       </div>
     );
   }

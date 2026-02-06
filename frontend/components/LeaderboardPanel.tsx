@@ -24,14 +24,14 @@ export function LeaderboardPanel() {
     address: NFT_BATTLE_V2_ADDRESS,
     abi: nftBattleV2Abi,
     functionName: "getLeaderboard",
-    args: [BigInt(10)], // Top 10
+    // No args - contract returns all players for current epoch
   });
 
   // Get user's stats
   const { data: userStats } = useReadContract({
     address: NFT_BATTLE_V2_ADDRESS,
     abi: nftBattleV2Abi,
-    functionName: "getPlayerStats",
+    functionName: "getPlayerEpochStats",
     args: [address as `0x${string}`],
     query: {
       enabled: !!address,
@@ -44,8 +44,34 @@ export function LeaderboardPanel() {
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
-  const leaderboard = leaderboardData as LeaderboardEntry[] | undefined;
-  const stats = userStats as { wins: bigint; gamesPlayed: bigint } | undefined;
+  // Parse leaderboard data: contract returns [players[], wins[], gamesPlayed[]]
+  const leaderboard: LeaderboardEntry[] = (() => {
+    if (!leaderboardData || !Array.isArray(leaderboardData) || leaderboardData.length < 3) {
+      return [];
+    }
+    const [players, wins, gamesPlayed] = leaderboardData as [
+      readonly `0x${string}`[],
+      readonly bigint[],
+      readonly bigint[]
+    ];
+    
+    // Build entries and sort by games played (points) descending
+    const entries: LeaderboardEntry[] = players.map((player, i) => ({
+      player,
+      wins: wins[i],
+      gamesPlayed: gamesPlayed[i],
+    }));
+    
+    return entries
+      .filter(e => e.player !== "0x0000000000000000000000000000000000000000")
+      .sort((a, b) => Number(b.gamesPlayed) - Number(a.gamesPlayed))
+      .slice(0, 10); // Top 10
+  })();
+
+  // Parse user stats: contract returns [wins, gamesPlayed]
+  const stats = userStats && Array.isArray(userStats) && userStats.length >= 2
+    ? { wins: userStats[0] as bigint, gamesPlayed: userStats[1] as bigint }
+    : undefined;
 
   const getMedalEmoji = (position: number) => {
     switch (position) {
@@ -90,15 +116,15 @@ export function LeaderboardPanel() {
           <h3 className="text-lg font-semibold text-white mb-4">Your Stats This Season</h3>
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center">
+              <div className="text-2xl font-bold text-purple-400">{Number(stats.gamesPlayed)}</div>
+              <div className="text-gray-400 text-sm">Points</div>
+            </div>
+            <div className="text-center">
               <div className="text-2xl font-bold text-green-400">{Number(stats.wins)}</div>
               <div className="text-gray-400 text-sm">Wins</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">{Number(stats.gamesPlayed)}</div>
-              <div className="text-gray-400 text-sm">Games</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">
+              <div className="text-2xl font-bold text-white">
                 {getWinRate(stats.wins, stats.gamesPlayed)}
               </div>
               <div className="text-gray-400 text-sm">Win Rate</div>
@@ -144,13 +170,13 @@ export function LeaderboardPanel() {
                         {truncateAddress(entry.player)}
                       </span>
                       <div className="text-xs text-gray-500">
-                        {Number(entry.gamesPlayed)} games • {getWinRate(entry.wins, entry.gamesPlayed)} win rate
+                        {Number(entry.wins)} wins • {getWinRate(entry.wins, entry.gamesPlayed)} win rate
                       </div>
                     </div>
                   </div>
                   <div className="text-right">
                     <div className={`text-lg font-bold ${index === 0 ? "text-yellow-400" : index === 1 ? "text-gray-300" : index === 2 ? "text-orange-400" : "text-white"}`}>
-                      {Number(entry.wins)} wins
+                      {Number(entry.gamesPlayed)} pts
                     </div>
                   </div>
                 </div>
@@ -170,11 +196,11 @@ export function LeaderboardPanel() {
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-400">•</span>
-            <span>Win battles to climb the leaderboard</span>
+            <span>Earn 1 point per game (min 0.001 ETH wager)</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-400">•</span>
-            <span>Higher value battles may earn bonus points (coming soon)</span>
+            <span>Play more games to climb the leaderboard</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="text-purple-400">•</span>

@@ -18,7 +18,7 @@ const CONFIG = {
   collectionAddress: '0x56dFE6ae26bf3043DC8Fdf33bF739B4fF4B3BC4A',
   totalSupply: 6666,
   metadataBaseUrl: 'https://app.bueno.art/api/contract/JLK3PYMUlbiFqxCjWTj1F/chain/8453/metadata',
-  deckSize: 200,
+  deckSize: 6666, // All tokens
   batchSize: 50,
   delayBetweenBatches: 1000,
   outputDir: '../frontend/data/decks',

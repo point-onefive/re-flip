@@ -60,18 +60,35 @@ export function CreateBattleModalV2({ isOpen, onClose, onGameCreated }: CreateBa
     args: [BigInt(3)],
   });
 
+  // Helper to parse deck tuple into Deck object
+  // wagmi returns struct as array: [collection, name, version, active, cardCount]
+  const parseDeck = (data: unknown): Deck | null => {
+    if (!data || !Array.isArray(data) || data.length < 5) return null;
+    return {
+      collection: data[0] as `0x${string}`,
+      name: data[1] as string,
+      version: data[2] as bigint,
+      active: data[3] as boolean,
+      cardCount: data[4] as bigint,
+    };
+  };
+
   // Build decks list
   useEffect(() => {
     const newDecks = new Map<bigint, Deck>();
     
-    if (deck1 && (deck1 as Deck).active) {
-      newDecks.set(BigInt(1), deck1 as Deck);
+    const parsedDeck1 = parseDeck(deck1);
+    const parsedDeck2 = parseDeck(deck2);
+    const parsedDeck3 = parseDeck(deck3);
+    
+    if (parsedDeck1 && parsedDeck1.active) {
+      newDecks.set(BigInt(1), parsedDeck1);
     }
-    if (deck2 && (deck2 as Deck).active) {
-      newDecks.set(BigInt(2), deck2 as Deck);
+    if (parsedDeck2 && parsedDeck2.active) {
+      newDecks.set(BigInt(2), parsedDeck2);
     }
-    if (deck3 && (deck3 as Deck).active) {
-      newDecks.set(BigInt(3), deck3 as Deck);
+    if (parsedDeck3 && parsedDeck3.active) {
+      newDecks.set(BigInt(3), parsedDeck3);
     }
     
     setDecks(newDecks);

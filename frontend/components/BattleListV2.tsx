@@ -65,12 +65,19 @@ export function BattleListV2({ currentAddress, filter, onRefresh }: BattleListV2
     args: [BigInt(3)],
   });
 
+  // Helper to parse deck tuple into name
+  // wagmi returns struct as array: [collection, name, version, active, cardCount]
+  const getDeckName = (data: unknown, fallback: string): string => {
+    if (!data || !Array.isArray(data) || data.length < 2) return fallback;
+    return (data[1] as string) || fallback;
+  };
+
   // Build deck names map
   useEffect(() => {
     const names = new Map<bigint, string>();
-    if (deck1) names.set(BigInt(1), (deck1 as Deck).name || "Deck #1");
-    if (deck2) names.set(BigInt(2), (deck2 as Deck).name || "Deck #2");
-    if (deck3) names.set(BigInt(3), (deck3 as Deck).name || "Deck #3");
+    if (deck1) names.set(BigInt(1), getDeckName(deck1, "Deck #1"));
+    if (deck2) names.set(BigInt(2), getDeckName(deck2, "Deck #2"));
+    if (deck3) names.set(BigInt(3), getDeckName(deck3, "Deck #3"));
     setDeckNames(names);
   }, [deck1, deck2, deck3]);
 

@@ -67,6 +67,44 @@ Re-Flip NFT Battle is a simple, fast, and transparent wagering game where:
 └─────────────────┘    └─────────────────┘
 ```
 
+### Battle Reveal Animation
+
+When a game completes, players see an animated reveal sequence:
+
+```
+Phase 1: COUNTDOWN (3 seconds)
+  - "3... 2... 1..." countdown
+  - Spinning card placeholders visible
+
+Phase 2: CARDS REVEALED (2 seconds)
+  - NFT images appear
+  - Power values still hidden
+
+Phase 3: POWER REVEALED (2 seconds)
+  - Power numbers appear
+  - Traits shown with individual power contributions
+  
+Phase 4: WINNER (1 second)
+  - Winner highlighted with glow effect
+  - Loser faded
+
+Phase 5: COMPLETE
+  - "Continue to Lobby" button
+  - Rematch option available
+```
+
+### Trait Power Display
+
+Each trait shows its power contribution with rarity-based coloring:
+
+| Color | Power Range | Rarity |
+|-------|-------------|--------|
+| 🟡 **Yellow** | +50 or higher | Ultra Rare |
+| 🟣 **Purple** | +30 to +49 | Rare |
+| 🟢 **Green** | +1 to +29 | Common |
+
+Traits are sorted by power (highest first) so the rarest traits that contributed most to the card's strength are always visible at the top.
+
 ### Power Level Calculation (Percentile-Based v3)
 
 Power levels are assigned using a **percentile-based ranking system** that guarantees consistent power distributions across ALL collections, enabling fair cross-collection battles.
@@ -207,20 +245,16 @@ re-flip/
 │   │   ├── BattleCard.tsx
 │   │   ├── CreateBattleModal.tsx
 │   │   ├── NFTReveal.tsx        # Card reveal animation
+│   │   ├── BattleRevealModal.tsx # Battle countdown + reveal animation ⭐
 │   │   └── TraitBreakdown.tsx   # Power calculation display
 │   ├── lib/
 │   │   ├── nftBattleContract.ts # V1 ABI & address
 │   │   ├── nftBattleV2Contract.ts # V2 ABI & address ⭐
-│   │   ├── traitPowerData.ts    # Collection trait rarities
+│   │   ├── traitPowerData.ts    # Full deck power data (6271 tokens) ⭐
 │   │   └── wagmi.ts             # Web3 config (Base, Coinbase Wallet)
 │   └── public/
-│       ├── data/decks/          # Public deck data (served to browser)
-│       │   ├── re_generates_power_map.json  # tokenId → power (200 entries)
-│       │   └── re_generates_metadata.json   # tokenId → {name, image, attributes} ⭐
-│       └── images/decks/1/      # Cached NFT images (200 files) ⭐
-│           ├── 10.png
-│           ├── 16.png
-│           └── ... (all 200 card images)
+│       └── data/decks/          # Public deck data (served to browser)
+│           └── re_generates_power_map.json  # tokenId → power (6271 entries)
 │   └── data/
 │       └── decks/               # Source deck files
 │           └── re_generates_v3.json         # Full deck with metadata
@@ -277,14 +311,15 @@ NEXT_PUBLIC_NETWORK="sepolia"  # or "mainnet"
 | Multi-deck architecture | ✅ | Multiple collections supported |
 | Deck management | ✅ | Add/remove/swap individual cards |
 | Winner payout | ✅ | Minus 2.5% fee (basis points) |
-| Rematch system | ✅ | Same deck, new game |
+| Rematch system | ✅ | 30-second window, same deck |
 | Cancel open game | ✅ | Full refund |
-| re:generates deck | ✅ | 200 cards, percentile-based power |
+| re:generates deck | ✅ | 6271 cards, percentile-based power |
 | Frontend V2 components | ✅ | Lobby, game, history |
 | Recent Games panel | ✅ | Platform stats + activity feed |
 | **Deck Explorer** | ✅ | `/decks` - browse all cards with filtering |
-| **Local Image Caching** | ✅ | All 200 images cached in `public/` |
-| **Image Verification** | ✅ | 100% verified before deployment |
+| **Local Image Caching** | ✅ | NFT images fetched on-demand |
+| **Battle Reveal Modal** | ✅ | Animated countdown + card reveal |
+| **Trait Power Display** | ✅ | Shows power per trait with rarity colors |
 
 ### 🔧 V2 Contract Functions
 
@@ -467,14 +502,14 @@ struct DeckCard {
 | Fee | 2.5% (250 basis points) | Of total pot |
 | VRF Threshold | 0.02 ETH | Games ≥ this use Chainlink VRF |
 | Epoch Duration | 7 days | Lazy reset on first game after |
-| Min Wager for Points | 0.0004 ETH | ~$1 minimum for leaderboard |
+| Min Wager for Points | 0.001 ETH | Minimum for leaderboard |
 | VRF Coordinator | `0x5C210eF41CD1a72de73bF76eC39637bB0d3d7BEE` | Base Sepolia |
 
 ### Active Decks
 
 | Deck ID | Collection | Address | Cards | Power Range |
 |---------|------------|---------|-------|-------------|
-| 1 | re:generates | `0x56dFE6ae26bf3043DC8Fdf33bF739B4fF4B3BC4A` | 200 | 100-999 |
+| 1 | re:generates | `0x56dFE6ae26bf3043DC8Fdf33bF739B4fF4B3BC4A` | 6271 | 100-999 |
 
 ### Base Mainnet (Production)
 *Not yet deployed*
@@ -610,7 +645,7 @@ const CONFIG = {
   collectionName: 're:generates',
   collectionAddress: '0x56dFE...',
   totalSupply: 6666,
-  deckSize: 200,
+  deckSize: 6666, // All tokens
   // ...
 };
 ```
@@ -719,7 +754,7 @@ The Deck Explorer provides full transparency into all available decks and their 
 | Route | Description |
 |-------|-------------|
 | `/decks` | Library of all available decks |
-| `/decks/1` | re:generates deck (200 cards) |
+| `/decks/1` | re:generates deck (6271 cards) |
 
 ### Features
 
@@ -1045,11 +1080,13 @@ This section helps AI assistants understand the codebase quickly.
 | Task | Primary File | Notes |
 |------|--------------|-------|
 | V2 Contract ABI | `frontend/lib/nftBattleV2Contract.ts` | Types + ABI for V2 |
-| Game creation | `frontend/components/CreateBattleModal.tsx` | Uses deck ID |
-| Game gameplay | `frontend/components/BattleGamePlayV2.tsx` | V2 game logic |
+| Game creation | `frontend/components/CreateBattleModalV2.tsx` | Uses deck ID |
+| Game gameplay | `frontend/components/BattleGamePlayV2.tsx` | V2 game logic + rematch |
+| **Battle reveal** | `frontend/components/BattleRevealModal.tsx` | Animated countdown + reveal |
 | Lobby display | `frontend/components/BattleLobbyContentV2.tsx` | 4-tab layout |
 | Recent games | `frontend/components/RecentGamesPanel.tsx` | Platform stats |
-| Power calculation | `scripts/analyze-collection-v2.ts` | Percentile algorithm |
+| **Trait power data** | `frontend/lib/traitPowerData.ts` | Full deck (6271 tokens) |
+| Power calculation | `scripts/analyze-collection.ts` | Generates traitPowers |
 | Deck upload | `scripts/upload-deck-v2.ts` | Batch upload |
 | Card swap | `scripts/swap-nft.ts` | Individual card management |
 | Power check | `scripts/check-nft-power.ts` | Query single NFT |
@@ -1107,7 +1144,14 @@ PRIVATE_KEY=$DEPLOYER_PRIVATE_KEY forge script script/DeployNFTBattleV2.s.sol:De
 
 ## Changelog
 
-### V2 (Current - February 2026)
+### V2.1 (Current - February 6, 2026)
+- **Full deck support** - All 6271 re:generates tokens with trait power data
+- **Battle Reveal Modal** - Animated countdown → card flip → power reveal sequence
+- **Trait Power Display** - Shows power per trait with rarity coloring (yellow/purple/green)
+- **30-second rematch window** - Extended from 15 seconds for better UX
+- **Min wager for leaderboard** - Set to 0.001 ETH
+
+### V2 (February 2026)
 - **NFTBattleV2 contract** deployed to Base Sepolia
 - **Chainlink VRF integration** for high-value games (≥0.02 ETH)
 - **Epoch-based leaderboard** with lazy reset (7-day epochs)
@@ -1117,7 +1161,7 @@ PRIVATE_KEY=$DEPLOYER_PRIVATE_KEY forge script script/DeployNFTBattleV2.s.sol:De
 - **removeDeckCard()** function for individual card swaps
 - **Frontend V2 components** (lobby, game, history)
 - **Recent Games panel** with platform stats
-- **Scripts updated**: analyze-collection-v2.ts, upload-deck-v2.ts, swap-nft.ts
+- **Scripts updated**: analyze-collection.ts, upload-deck-v2.ts, swap-nft.ts
 
 ### V1 (Deprecated - January 2026)
 - Initial NFTBattle contract
