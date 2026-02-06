@@ -341,4 +341,4 @@ documentation/scraped_content/
 
 ---
 
-*Good luck building Re-Flip! 🪙*
+*Good luck building re:match! 🎴*
