@@ -315,7 +315,7 @@ function calculateAllPowerLevels(
         attributes: nft.attributes || [],
         totalPower: CONFIG.oneOfOnePower,
         gender: 'one-of-one',
-        traitPowers: [{ trait: 'TRUMP_CARD', value: '1/1', power: CONFIG.oneOfOnePower }]
+        traitPowers: [{ trait: 'LEGENDARY', value: '1/1 Artwork', power: CONFIG.oneOfOnePower }]
       });
       continue;
     }

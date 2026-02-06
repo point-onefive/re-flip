@@ -14,6 +14,7 @@ const DECK_TO_COLLECTION: Record<number, string> = {
 interface BattleRevealModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onDecline?: () => void;
   player1Address: string;
   player2Address: string;
   player1TokenId: number;
@@ -24,6 +25,7 @@ interface BattleRevealModalProps {
   wagerAmount: bigint;
   deckId: number;
   currentUserAddress?: string;
+  opponentWantsRematch?: boolean;
 }
 
 type RevealPhase = "countdown" | "spinning" | "cards-revealed" | "power-revealed" | "winner" | "complete";
@@ -31,6 +33,7 @@ type RevealPhase = "countdown" | "spinning" | "cards-revealed" | "power-revealed
 export function BattleRevealModal({
   isOpen,
   onClose,
+  onDecline,
   player1Address,
   player2Address,
   player1TokenId,
@@ -41,6 +44,7 @@ export function BattleRevealModal({
   wagerAmount,
   deckId,
   currentUserAddress,
+  opponentWantsRematch,
 }: BattleRevealModalProps) {
   const [phase, setPhase] = useState<RevealPhase>("countdown");
   const [countdown, setCountdown] = useState(3);
@@ -93,8 +97,11 @@ export function BattleRevealModal({
 
   const truncateAddress = (addr: string) => {
     if (addr === "0x0000000000000000000000000000000000000000") return "—";
-    if (currentUserAddress && addr.toLowerCase() === currentUserAddress.toLowerCase()) return "You";
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+  };
+  
+  const isCurrentUserAddress = (addr: string) => {
+    return currentUserAddress && addr.toLowerCase() === currentUserAddress.toLowerCase();
   };
 
   const isTie = winner === "0x0000000000000000000000000000000000000000";
@@ -123,7 +130,7 @@ export function BattleRevealModal({
     label: string;
     address: string;
     tokenId: number;
-    image?: string;
+    image?: string | null | undefined;
     power: number;
     traitPowers: TraitPower[];
     isWinner: boolean;
@@ -144,12 +151,12 @@ export function BattleRevealModal({
       
       <div className="bg-gray-800 rounded-lg p-2">
         {/* Header */}
-        <div className="flex justify-between items-center mb-1">
-          <div>
-            <span className="text-gray-500 text-[10px]">{label}</span>
-            <div className="text-white font-mono text-xs">{truncateAddress(address)}</div>
+        <div className="mb-1">
+          <span className="text-gray-500 text-[10px]">{label}</span>
+          <div className="text-white font-mono text-xs whitespace-nowrap">
+            {truncateAddress(address)}
+            {isCurrentUserAddress(address) && <span className="text-purple-400 ml-1">(You)</span>}
           </div>
-          <div className="text-purple-400 font-bold text-xs">#{tokenId}</div>
         </div>
         
         {/* Card image - fixed size */}
@@ -159,7 +166,12 @@ export function BattleRevealModal({
               <div className="text-4xl animate-spin" style={{ animationDuration: "0.5s" }}>🎴</div>
             </div>
           ) : image ? (
-            <Image src={image} alt={`#${tokenId}`} fill className="object-cover" />
+            <>
+              <Image src={image} alt={`#${tokenId}`} fill className="object-cover" />
+              <div className="absolute bottom-1 right-1 bg-black/40 px-1.5 py-0.5 rounded text-white/80 font-bold text-[10px]">
+                #{tokenId}
+              </div>
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center">
               <span className="text-2xl">🖼️</span>
@@ -253,7 +265,7 @@ export function BattleRevealModal({
           />
           
           {/* VS */}
-          <div className="flex items-center h-[160px] sm:h-[180px]">
+          <div className="flex items-center self-center">
             <div className={`text-lg font-bold transition-colors duration-300 ${
               showWinner ? "text-purple-400" : "text-gray-600"
             }`}>
@@ -278,13 +290,30 @@ export function BattleRevealModal({
             Total Pot: <span className="text-white font-bold">{formatEther(wagerAmount * BigInt(2))} ETH</span>
           </div>
 
+          {/* Opponent wants rematch notification */}
+          {opponentWantsRematch && (
+            <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-2 mb-2 animate-pulse">
+              <div className="text-green-400 text-sm font-medium">🔄 Opponent wants a rematch!</div>
+            </div>
+          )}
+
           {phase === "complete" ? (
-            <button
-              onClick={onClose}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-8 rounded-lg transition-colors"
-            >
-              Continue to Lobby
-            </button>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={onClose}
+                className={`${opponentWantsRematch ? 'bg-green-600 hover:bg-green-700' : 'bg-purple-600 hover:bg-purple-700'} text-white font-semibold py-2 px-8 rounded-lg transition-colors`}
+              >
+                {opponentWantsRematch ? "✓ Accept Rematch →" : "Continue to Lobby"}
+              </button>
+              {opponentWantsRematch && onDecline && (
+                <button
+                  onClick={onDecline}
+                  className="bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-8 rounded-lg transition-colors"
+                >
+                  ✗ Decline
+                </button>
+              )}
+            </div>
           ) : (
             <div className="flex justify-center gap-1 h-9 items-center">
               <div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>

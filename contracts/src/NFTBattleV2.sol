@@ -135,6 +135,7 @@ contract NFTBattleV2 is VRFConsumerBaseV2Plus {
     event RematchRequested(uint256 indexed gameId, address indexed player);
     event RematchCreated(uint256 indexed oldGameId, uint256 indexed newGameId);
     event RematchCancelled(uint256 indexed gameId, address indexed player);
+    event VRFRescue(uint256 indexed gameId, address indexed rescuer);
 
     event EpochEnded(
         uint256 indexed epochId,
@@ -563,6 +564,34 @@ contract NFTBattleV2 is VRFConsumerBaseV2Plus {
         require(success, "Refund failed");
         
         emit RematchCancelled(_gameId, msg.sender);
+    }
+
+    /**
+     * @notice Rescue a game stuck in WaitingVRF state
+     * @dev Can only be called by a player after 1 hour timeout
+     * @param _gameId The game ID to rescue
+     */
+    function rescueStuckVRFGame(uint256 _gameId) external {
+        Game storage game = games[_gameId];
+        
+        require(game.status == GameStatus.WaitingVRF, "Game not stuck in VRF");
+        require(msg.sender == game.player1 || msg.sender == game.player2, "Not a player");
+        require(block.timestamp >= game.createdAt + 1 hours, "Must wait 1 hour before rescue");
+        
+        // Mark game as cancelled
+        game.status = GameStatus.Cancelled;
+        
+        // Refund both players
+        uint256 refundAmount = game.wagerAmount;
+        
+        (bool success1, ) = game.player1.call{value: refundAmount}("");
+        require(success1, "Player1 refund failed");
+        
+        (bool success2, ) = game.player2.call{value: refundAmount}("");
+        require(success2, "Player2 refund failed");
+        
+        emit VRFRescue(_gameId, msg.sender);
+        emit GameCancelled(_gameId);
     }
 
     // ============ Leaderboard System ============

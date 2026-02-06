@@ -8,7 +8,7 @@ import {
   useWaitForTransactionReceipt,
   useWatchContractEvent,
 } from "wagmi";
-import { formatEther, parseEther } from "viem";
+import { formatEther, parseEther, decodeEventLog } from "viem";
 import {
   nftBattleV2Abi,
   NFT_BATTLE_V2_ADDRESS,
@@ -33,9 +33,12 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   const [mounted, setMounted] = useState(false);
   const [showResultModal, setShowResultModal] = useState(false);
   const [showBattleReveal, setShowBattleReveal] = useState(false);
+  const [battleRevealComplete, setBattleRevealComplete] = useState(false);
   const hasShownReveal = useRef(false);
   const [rematchCountdown, setRematchCountdown] = useState<number | null>(null);
   const rematchTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [idleTime, setIdleTime] = useState(0); // Track time since game completed
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [transitionOverlay, setTransitionOverlay] = useState<{
     show: boolean;
     emoji: string;
@@ -46,6 +49,19 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Reset state when navigating to a new game
+  useEffect(() => {
+    setShowResultModal(false);
+    setShowBattleReveal(false);
+    setBattleRevealComplete(false);
+    hasShownReveal.current = false;
+    setRematchCountdown(null);
+    if (rematchTimerRef.current) clearTimeout(rematchTimerRef.current);
+    setIdleTime(0);
+    if (idleTimerRef.current) clearInterval(idleTimerRef.current);
+    setTransitionOverlay(null);
+  }, [gameId]);
 
   // Fetch game data with auto-polling
   const {
@@ -112,8 +128,28 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
     isPending: isRequesting,
   } = useWriteContract();
 
-  const { isLoading: isRematchConfirming, isSuccess: rematchSuccess } =
+  const { data: rematchReceipt, isLoading: isRematchConfirming, isSuccess: rematchSuccess } =
     useWaitForTransactionReceipt({ hash: rematchHash });
+
+  // Cancel rematch request (for refund when timer expires)
+  const {
+    data: cancelRematchHash,
+    writeContract: cancelRematchRequest,
+    isPending: isCancellingRematch,
+  } = useWriteContract();
+
+  const { isLoading: isCancelRematchConfirming, isSuccess: cancelRematchSuccess } =
+    useWaitForTransactionReceipt({ hash: cancelRematchHash });
+
+  // Rescue stuck VRF game (1 hour timeout)
+  const {
+    data: rescueHash,
+    writeContract: rescueStuckVRF,
+    isPending: isRescuing,
+  } = useWriteContract();
+
+  const { isLoading: isRescueConfirming, isSuccess: rescueSuccess } =
+    useWaitForTransactionReceipt({ hash: rescueHash });
 
   // Handle join success - just refetch to update the lobby view (don't show overlay)
   useEffect(() => {
@@ -136,29 +172,109 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
     }
   }, [cancelSuccess, router]);
 
-  // Handle rematch success - start 30 second countdown
+  // Handle cancel rematch success (refund received)
   useEffect(() => {
-    if (rematchSuccess) {
-      // Start 30 second countdown
+    if (cancelRematchSuccess) {
+      setTransitionOverlay({
+        show: true,
+        emoji: "💰",
+        title: "Rematch Cancelled",
+        subtitle: "Wager refunded. Returning to lobby..."
+      });
+      setTimeout(() => router.push("/"), 2000);
+    }
+  }, [cancelRematchSuccess, router]);
+
+  // Handle rescue success (both players refunded)
+  useEffect(() => {
+    if (rescueSuccess) {
+      setTransitionOverlay({
+        show: true,
+        emoji: "🛟",
+        title: "Funds Rescued!",
+        subtitle: "Both players refunded. Returning to lobby..."
+      });
+      setTimeout(() => router.push("/"), 2000);
+    }
+  }, [rescueSuccess, router]);
+
+  // Handle rematch success - check logs for RematchCreated, otherwise start countdown
+  useEffect(() => {
+    if (rematchSuccess && rematchReceipt) {
+      // Check if the transaction created a new game (both players requested)
+      const rematchCreatedLog = rematchReceipt.logs.find(log => {
+        try {
+          const decoded = decodeEventLog({
+            abi: nftBattleV2Abi,
+            data: log.data,
+            topics: log.topics,
+          });
+          return decoded.eventName === 'RematchCreated';
+        } catch {
+          return false;
+        }
+      });
+      
+      if (rematchCreatedLog) {
+        // Parse the new game ID and redirect
+        try {
+          const decoded = decodeEventLog({
+            abi: nftBattleV2Abi,
+            data: rematchCreatedLog.data,
+            topics: rematchCreatedLog.topics,
+          }) as any;
+          const newGameId = decoded.args.newGameId;
+          
+          // Clear countdown
+          setRematchCountdown(null);
+          if (rematchTimerRef.current) clearTimeout(rematchTimerRef.current);
+          
+          // Show migration overlay
+          setTransitionOverlay({
+            show: true,
+            emoji: "⚔️",
+            title: "Rematch Starting!",
+            subtitle: `Moving to Battle #${newGameId}...`
+          });
+          
+          // Navigate to new game
+          setTimeout(() => {
+            router.push(`/battle/${newGameId}`);
+          }, 1500);
+          return;
+        } catch (e) {
+          console.error('Error parsing RematchCreated event:', e);
+        }
+      }
+      
+      // No rematch created yet - just start countdown
       setRematchCountdown(30);
       refetch();
     }
-  }, [rematchSuccess, refetch]);
+  }, [rematchSuccess, rematchReceipt, refetch, router]);
 
   // Rematch countdown timer
   useEffect(() => {
     if (rematchCountdown === null) return;
     
     if (rematchCountdown <= 0) {
-      // Time expired - go back to lobby
+      // Time expired - cancel rematch request to get refund, then go to lobby
       setRematchCountdown(null);
+      
+      // Cancel the rematch request to get ETH back
+      cancelRematchRequest({
+        address: NFT_BATTLE_V2_ADDRESS,
+        abi: nftBattleV2Abi,
+        functionName: "cancelRematchRequest",
+        args: [BigInt(gameId)],
+      });
+      
       setTransitionOverlay({
         show: true,
         emoji: "⏰",
         title: "Rematch Expired",
-        subtitle: "Opponent didn't accept in time..."
+        subtitle: "Cancelling request & refunding..."
       });
-      setTimeout(() => router.push("/"), 2000);
       return;
     }
     
@@ -224,10 +340,10 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
       setTransitionOverlay(null);
       hasShownReveal.current = true;
       
-      // Wait 2 seconds to let players see both cards in lobby, then show battle reveal
+      // Wait 3 seconds to let players see both cards in lobby, then show battle reveal
       setTimeout(() => {
         setShowBattleReveal(true);
-      }, 2000);
+      }, 3000);
     }
   }, [game]);
 
@@ -278,13 +394,42 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
   const isCreator = isPlayer1;
   const isWinner = game?.winner.toLowerCase() === address?.toLowerCase();
   const isTie = game?.winner === "0x0000000000000000000000000000000000000000" && Number(game?.status) === GameStatus.Complete;
+  
+  // Rematch state
+  const opponentWantsRematch = game && (
+    (isPlayer1 && game.player2WantsRematch) || 
+    (isPlayer2 && game.player1WantsRematch)
+  );
+  const weWantRematch = game && (
+    (isPlayer1 && game.player1WantsRematch) || 
+    (isPlayer2 && game.player2WantsRematch)
+  );
 
   const canJoin = game && Number(game.status) === GameStatus.Open && !isCreator && isConnected;
   const canCancel = game && Number(game.status) === GameStatus.Open && isCreator;
   const canRematch = game && 
     Number(game.status) === GameStatus.Complete && 
     isParticipant &&
-    ((isPlayer1 && !game.player1WantsRematch) || (isPlayer2 && !game.player2WantsRematch));
+    !weWantRematch && // Can rematch if we haven't requested yet
+    battleRevealComplete; // Must wait for battle reveal to finish first
+
+  // Start idle timer after battle reveal completes (to show "opponent may have left" message)
+  useEffect(() => {
+    if (battleRevealComplete && !opponentWantsRematch && !weWantRematch) {
+      // Start counting idle time
+      idleTimerRef.current = setInterval(() => {
+        setIdleTime(prev => prev + 1);
+      }, 1000);
+      
+      return () => {
+        if (idleTimerRef.current) clearInterval(idleTimerRef.current);
+      };
+    } else {
+      // Reset if opponent requests or we request
+      if (idleTimerRef.current) clearInterval(idleTimerRef.current);
+      setIdleTime(0);
+    }
+  }, [battleRevealComplete, opponentWantsRematch, weWantRematch]);
 
   // Loading state
   if (!mounted || isLoading) {
@@ -317,6 +462,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
           isOpen={showBattleReveal}
           onClose={() => {
             setShowBattleReveal(false);
+            setBattleRevealComplete(true);
             setShowResultModal(true);
           }}
           player1Address={game.player1}
@@ -329,6 +475,8 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
           wagerAmount={game.wagerAmount}
           deckId={Number(game.deckId)}
           currentUserAddress={address}
+          opponentWantsRematch={!!opponentWantsRematch}
+          onDecline={() => router.push("/")}
         />
       )}
 
@@ -397,6 +545,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
             gameStatus={Number(game.status)}
             currentUserAddress={address}
             wantsRematch={game.player1WantsRematch}
+            hideWinnerUntilReveal={!battleRevealComplete}
           />
           
           {game.player2 !== "0x0000000000000000000000000000000000000000" ? (
@@ -410,6 +559,7 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
               gameStatus={Number(game.status)}
               currentUserAddress={address}
               wantsRematch={game.player2WantsRematch}
+              hideWinnerUntilReveal={!battleRevealComplete}
             />
           ) : (
             <div className="bg-gray-700/30 border border-dashed border-gray-600 rounded-lg p-3 text-center">
@@ -417,6 +567,15 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
             </div>
           )}
         </div>
+
+        {/* Battle Starting indicator - shows in lobby before reveal modal */}
+        {Number(game.status) === GameStatus.Complete && !battleRevealComplete && !showBattleReveal && (
+          <div className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-4 mt-3 text-center animate-pulse">
+            <div className="text-2xl mb-1">⚔️</div>
+            <div className="text-purple-300 font-bold text-lg">Battle Starting...</div>
+            <div className="text-gray-400 text-sm">Get ready!</div>
+          </div>
+        )}
       </div>
 
       {/* VRF Status */}
@@ -426,6 +585,28 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
             <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-purple-500"></div>
             <span className="text-purple-400 text-sm">Waiting for VRF randomness...</span>
           </div>
+          {/* Show rescue option after 1 hour */}
+          {isParticipant && (Date.now() / 1000 - Number(game.createdAt)) > 3600 && (
+            <div className="mt-2 pt-2 border-t border-purple-500/20">
+              <div className="text-yellow-400 text-xs mb-2">
+                ⚠️ VRF has not responded in over 1 hour. You can rescue your funds.
+              </div>
+              <button
+                onClick={() => {
+                  rescueStuckVRF({
+                    address: NFT_BATTLE_V2_ADDRESS,
+                    abi: nftBattleV2Abi,
+                    functionName: "rescueStuckVRFGame",
+                    args: [BigInt(gameId)],
+                  });
+                }}
+                disabled={isRescuing || isRescueConfirming}
+                className="w-full bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm"
+              >
+                {isRescuing ? "Confirm in Wallet..." : isRescueConfirming ? "Rescuing..." : "🛟 Rescue Funds"}
+              </button>
+            </div>
+          )}
         </div>
       )}
 
@@ -471,11 +652,11 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
         {canJoin && (
           <button
             onClick={handleJoinGame}
-            disabled={isJoining || isJoinConfirming}
+            disabled={isJoining || isJoinConfirming || !!joinHash}
             className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
             {isJoining ? "Confirm in Wallet..." : 
-             isJoinConfirming ? "Joining..." : 
+             (isJoinConfirming || joinHash) ? "Preparing Battle..." : 
              `Join Battle (${formatEther(game.wagerAmount)} ETH)`}
           </button>
         )}
@@ -493,15 +674,28 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
 
         {/* Rematch Button */}
         {canRematch && (
-          <button
-            onClick={handleRequestRematch}
-            disabled={isRequesting || isRematchConfirming}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors"
-          >
-            {isRequesting ? "Confirm in Wallet..." : 
-             isRematchConfirming ? "Requesting..." : 
-             `Request Rematch (${formatEther(game.wagerAmount)} ETH)`}
-          </button>
+          <div className="space-y-2">
+            <button
+              onClick={handleRequestRematch}
+              disabled={isRequesting || isRematchConfirming}
+              className={`w-full ${opponentWantsRematch ? 'bg-green-600 hover:bg-green-700' : 'bg-blue-600 hover:bg-blue-700'} disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded-lg transition-colors`}
+            >
+              {isRequesting ? "Confirm in Wallet..." : 
+               isRematchConfirming ? "Accepting..." : 
+               opponentWantsRematch 
+                 ? `✓ Accept Rematch (${formatEther(game.wagerAmount)} ETH)`
+                 : `Request Rematch (${formatEther(game.wagerAmount)} ETH)`}
+            </button>
+            {/* Decline button - only show when opponent requested */}
+            {opponentWantsRematch && (
+              <button
+                onClick={() => router.push("/")}
+                className="w-full bg-gray-700 hover:bg-gray-600 text-gray-300 font-semibold py-2 px-4 rounded-lg transition-colors"
+              >
+                ✗ Decline
+              </button>
+            )}
+          </div>
         )}
 
         {/* Waiting for opponent states */}
@@ -518,7 +712,23 @@ export function BattleGamePlayV2({ gameId }: BattleGamePlayV2Props) {
             isPlayer1={isPlayer1} 
             isPlayer2={isPlayer2}
             countdown={rematchCountdown}
+            idleTime={idleTime}
           />
+        )}
+
+        {/* Host new public game option - shown after battle reveal */}
+        {Number(game.status) === GameStatus.Complete && isParticipant && battleRevealComplete && (
+          <div className="border-t border-gray-700 pt-3 mt-2">
+            <Link 
+              href="/"
+              className="block w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-center"
+            >
+              🎮 Host New Public Game
+            </Link>
+            <p className="text-gray-500 text-xs text-center mt-1">
+              Or wait for opponent to request rematch
+            </p>
+          </div>
         )}
 
         {/* Error display */}
@@ -567,6 +777,7 @@ function PlayerCard({
   gameStatus,
   currentUserAddress,
   wantsRematch,
+  hideWinnerUntilReveal,
 }: {
   label: string;
   address: string;
@@ -577,27 +788,31 @@ function PlayerCard({
   gameStatus: number;
   currentUserAddress?: string;
   wantsRematch: boolean;
+  hideWinnerUntilReveal?: boolean;
 }) {
   const truncate = (addr: string) => {
     if (addr === "0x0000000000000000000000000000000000000000") return "—";
-    if (currentUserAddress && addr.toLowerCase() === currentUserAddress.toLowerCase()) return "You";
     return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
   };
 
+  // Only show winner styling after battle reveal completes
+  const showWinner = isWinner && gameStatus === GameStatus.Complete && !hideWinnerUntilReveal;
+
   return (
-    <div className={`bg-gray-700/50 rounded-lg p-2 ${isWinner && gameStatus === GameStatus.Complete ? 'ring-2 ring-green-500' : ''}`}>
+    <div className={`bg-gray-700/50 rounded-lg p-2 ${showWinner ? 'ring-2 ring-green-500' : ''}`}>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <span className="text-gray-400 text-xs">{label}:</span>
           <span className="font-mono text-white text-sm">{truncate(address)}</span>
-          {isCurrentUser && <span className="text-purple-400 text-xs">(You)</span>}
+          {isCurrentUser && <span className="text-purple-400 text-sm">(You)</span>}
         </div>
         <div className="flex items-center gap-2">
-          {gameStatus === GameStatus.Complete && power > 0 && (
+          {gameStatus === GameStatus.Complete && power > 0 && !hideWinnerUntilReveal && (
             <>
+              {showWinner && <span>👑</span>}
               <span className="text-gray-400 text-xs">#{tokenId}</span>
-              <span className={`text-sm font-bold ${isWinner ? 'text-green-400' : 'text-white'}`}>
-                {isWinner && '👑 '}{power}
+              <span className={`text-sm font-bold ${showWinner ? 'text-green-400' : 'text-white'}`}>
+                {power}
               </span>
             </>
           )}
@@ -608,7 +823,7 @@ function PlayerCard({
   );
 }
 
-function RematchStatus({ game, isPlayer1, isPlayer2, countdown }: { game: GameV2; isPlayer1: boolean; isPlayer2: boolean; countdown: number | null }) {
+function RematchStatus({ game, isPlayer1, isPlayer2, countdown, idleTime }: { game: GameV2; isPlayer1: boolean; isPlayer2: boolean; countdown: number | null; idleTime: number }) {
   const weRequestedRematch = (isPlayer1 && game.player1WantsRematch) || (isPlayer2 && game.player2WantsRematch);
   const opponentRequestedRematch = (isPlayer1 && game.player2WantsRematch) || (isPlayer2 && game.player1WantsRematch);
   
@@ -639,7 +854,7 @@ function RematchStatus({ game, isPlayer1, isPlayer2, countdown }: { game: GameV2
     return (
       <div className="bg-green-900/30 border border-green-500/30 rounded-lg p-3 text-center">
         <div className="text-green-400 font-medium">🔄 Opponent wants a rematch!</div>
-        <div className="text-gray-400 text-xs mt-1">Click "Request Rematch" to accept</div>
+        <div className="text-gray-400 text-xs mt-1">Click "Accept Rematch" below to start</div>
       </div>
     );
   }
@@ -648,6 +863,16 @@ function RematchStatus({ game, isPlayer1, isPlayer2, countdown }: { game: GameV2
     return (
       <div className="bg-purple-900/30 border border-purple-500/30 rounded-lg p-3 text-center animate-pulse">
         <div className="text-purple-400 font-medium">✅ Creating rematch...</div>
+      </div>
+    );
+  }
+  
+  // Show "opponent may have left" after 60 seconds of inactivity
+  if (idleTime >= 60 && !weRequestedRematch && !opponentRequestedRematch) {
+    return (
+      <div className="bg-gray-800/50 border border-gray-600/30 rounded-lg p-3 text-center">
+        <div className="text-gray-400 text-sm">💤 Opponent hasn&apos;t requested a rematch yet.</div>
+        <div className="text-gray-500 text-xs mt-1">They may have left. Consider hosting a new game!</div>
       </div>
     );
   }

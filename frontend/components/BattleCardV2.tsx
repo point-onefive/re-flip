@@ -16,6 +16,11 @@ export function BattleCardV2({ game, currentAddress, deckName = "Unknown" }: Bat
   const isCreator = currentAddress?.toLowerCase() === game.player1.toLowerCase();
   const isPlayer2 = currentAddress?.toLowerCase() === game.player2.toLowerCase();
   const isParticipant = isCreator || isPlayer2;
+  
+  // Calculate age of game
+  const gameAgeHours = (Date.now() / 1000 - Number(game.createdAt)) / 3600;
+  const isOldOpenGame = Number(game.status) === GameStatus.Open && gameAgeHours > 24;
+  const isStuckVRF = Number(game.status) === GameStatus.WaitingVRF && gameAgeHours > 1;
 
   const getStatusBadge = () => {
     switch (Number(game.status)) {
@@ -162,6 +167,20 @@ export function BattleCardV2({ game, currentAddress, deckName = "Unknown" }: Bat
           <div className="mt-4 pt-3 border-t border-gray-700">
             <span className="text-gray-400 text-sm">
               Waiting for challenger...
+            </span>
+            {isOldOpenGame && (
+              <div className="mt-2 text-xs text-yellow-500">
+                ⚠️ Game open &gt;24h - Consider cancelling to get refund
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Warning for stuck VRF */}
+        {isStuckVRF && isParticipant && (
+          <div className="mt-4 pt-3 border-t border-yellow-700/50 bg-yellow-900/20 -mx-3 sm:-mx-4 -mb-3 sm:-mb-4 px-3 sm:px-4 pb-3 sm:pb-4 rounded-b-xl">
+            <span className="text-yellow-400 text-sm font-medium">
+              ⚠️ VRF stuck &gt;1h - Click to rescue funds
             </span>
           </div>
         )}

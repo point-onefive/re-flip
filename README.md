@@ -90,7 +90,24 @@ Phase 4: WINNER (1 second)
 
 Phase 5: COMPLETE
   - "Continue to Lobby" button
-  - Rematch option available
+  - Rematch option available (30 second window)
+  - Accept/Decline buttons for opponent requests
+```
+
+### Rematch Flow
+
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ PLAYER REQUESTS │    │  OPPONENT SEES  │    │     RESULT      │
+│                 │    │                 │    │                 │
+│ - Click Rematch │───▶│ - "Accept" btn  │───▶│ - New game OR   │
+│ - 30s countdown │    │ - "Decline" btn │    │ - Refund issued │
+│ - Can cancel    │    │ - Timer visible │    │                 │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                                            │
+         ▼                                            ▼
+   Timer expires                              Both accepted:
+   = Auto-refund                              New game created!
 ```
 
 ### Trait Power Display
@@ -320,6 +337,11 @@ NEXT_PUBLIC_NETWORK="sepolia"  # or "mainnet"
 | **Local Image Caching** | ✅ | NFT images fetched on-demand |
 | **Battle Reveal Modal** | ✅ | Animated countdown + card reveal |
 | **Trait Power Display** | ✅ | Shows power per trait with rarity colors |
+| **Rematch Auto-Cancel** | ✅ | 30-second timer with automatic refund |
+| **Accept/Decline Rematch** | ✅ | Clear buttons for rematch requests |
+| **VRF Rescue Mechanism** | ✅ | Rescue stuck VRF games after 1 hour |
+| **Idle Timer** | ✅ | 60-second warning if opponent unresponsive |
+| **Old Game Warnings** | ✅ | Frontend warns about old/stuck games |
 
 ### 🔧 V2 Contract Functions
 
@@ -361,6 +383,9 @@ requestRematch(uint256 _gameId) payable
 
 // Cancel pending rematch request
 cancelRematchRequest(uint256 _gameId)
+
+// Rescue stuck VRF game (refunds both players)
+rescueStuckVRFGame(uint256 _gameId)  // After 1 hour timeout
 
 // ═══════════════════════════════════════════════════════════
 // READ FUNCTIONS
@@ -501,6 +526,8 @@ struct DeckCard {
 |---------|-------|-------|
 | Fee | 2.5% (250 basis points) | Of total pot |
 | VRF Threshold | 0.02 ETH | Games ≥ this use Chainlink VRF |
+| VRF Rescue Timeout | 1 hour | Time before VRF games can be rescued |
+| Rematch Timeout | 30 seconds | Auto-refund if not accepted |
 | Epoch Duration | 7 days | Lazy reset on first game after |
 | Min Wager for Points | 0.001 ETH | Minimum for leaderboard |
 | VRF Coordinator | `0x5C210eF41CD1a72de73bF76eC39637bB0d3d7BEE` | Base Sepolia |
@@ -1031,6 +1058,42 @@ In case of equal power levels, player 1 (game creator) wins. This is:
 
 ---
 
+## Fund Safety
+
+The contract is designed so **funds can never be permanently locked**. Every scenario has a recovery path:
+
+| Scenario | Risk | Recovery Mechanism |
+|----------|------|--------------------|
+| **Open game never joined** | Wager stuck forever | Player calls `cancelGame()` - full refund |
+| **VRF never responds** | Both wagers stuck | Either player calls `rescueStuckVRFGame()` after 1 hour |
+| **Rematch request ignored** | Requester's wager stuck | Auto-cancel on 30s timer expiry OR call `cancelRematchRequest()` |
+| **Opponent abandons mid-game** | N/A | Games execute atomically - can't abandon mid-battle |
+
+### VRF Rescue Function
+
+```solidity
+function rescueStuckVRFGame(uint256 _gameId) external {
+    // Requirements:
+    // - Game must be in WaitingVRF status
+    // - Caller must be player1 or player2
+    // - At least 1 hour since game creation
+    
+    // Actions:
+    // - Refunds both players their wager amount
+    // - Marks game as Cancelled
+    // - Emits VRFRescue event
+}
+```
+
+### Frontend Warnings
+
+The frontend proactively warns users about potentially stuck games:
+
+- ⚠️ **Open games >24 hours old**: "Consider cancelling for refund"
+- ⚠️ **VRF games >1 hour old**: "VRF may be stuck - rescue available"
+
+---
+
 ## Future Considerations
 
 ### Cross-Collection Battles
@@ -1083,6 +1146,7 @@ This section helps AI assistants understand the codebase quickly.
 | Game creation | `frontend/components/CreateBattleModalV2.tsx` | Uses deck ID |
 | Game gameplay | `frontend/components/BattleGamePlayV2.tsx` | V2 game logic + rematch |
 | **Battle reveal** | `frontend/components/BattleRevealModal.tsx` | Animated countdown + reveal |
+| **Game card UI** | `frontend/components/BattleCardV2.tsx` | Game cards with warnings |
 | Lobby display | `frontend/components/BattleLobbyContentV2.tsx` | 4-tab layout |
 | Recent games | `frontend/components/RecentGamesPanel.tsx` | Platform stats |
 | **Trait power data** | `frontend/lib/traitPowerData.ts` | Full deck (6271 tokens) |
@@ -1149,6 +1213,14 @@ PRIVATE_KEY=$DEPLOYER_PRIVATE_KEY forge script script/DeployNFTBattleV2.s.sol:De
 - **Battle Reveal Modal** - Animated countdown → card flip → power reveal sequence
 - **Trait Power Display** - Shows power per trait with rarity coloring (yellow/purple/green)
 - **30-second rematch window** - Extended from 15 seconds for better UX
+- **Rematch Accept/Decline** - Clear "Accept Rematch" and "Decline" buttons
+- **Rematch Auto-Cancel** - Timer expiry automatically refunds the requester
+- **VRF Rescue Function** - `rescueStuckVRFGame()` rescues funds after 1-hour VRF timeout
+- **Idle Timer** - 60-second warning shows "opponent may have left" message
+- **Old Game Warnings** - Frontend shows warnings for games >24h old or stuck in VRF >1h
+- **Crown positioning** - Winner crown shows left of NFT ID in overlay badge
+- **3-second battle pause** - Brief pause before reveal modal for smoother transition
+- **Preparing Battle state** - "Preparing Battle..." shown after join transaction confirms
 - **Min wager for leaderboard** - Set to 0.001 ETH
 
 ### V2 (February 2026)
