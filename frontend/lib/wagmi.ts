@@ -12,7 +12,7 @@ export const config = createConfig({
   connectors: [
     injected(),
     coinbaseWallet({
-      appName: "Re-Flip",
+      appName: "re:match",
       preference: "smartWalletOnly",
     }),
     walletConnect({

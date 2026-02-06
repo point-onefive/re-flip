@@ -23,12 +23,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Re-Flip | Coin Flip Game on Base",
-  description: "A two-player coin flip wagering game on Base blockchain",
+  title: "re:match | NFT Battle on Base",
+  description: "Battle using NFT-powered cards. Higher rarity wins!",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Re-Flip",
+    title: "re:match",
   },
 };
 

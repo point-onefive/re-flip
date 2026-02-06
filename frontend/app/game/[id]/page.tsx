@@ -15,7 +15,7 @@ const GamePageContent = dynamic(
           <div className="container mx-auto px-4 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-3xl">🪙</span>
-              <span className="text-xl font-bold">Re-Flip</span>
+              <span className="text-xl font-bold">re:match</span>
             </div>
             <div className="bg-gray-800 text-white text-sm py-2 px-4 rounded-lg animate-pulse">
               Loading...

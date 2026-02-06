@@ -1,4 +1,4 @@
-# 🎴 Re-Flip: NFT Battle
+# 🎴 re:match
 
 A PvP wagering game on Base blockchain where players battle using NFT-powered cards. Each card's strength is derived from trait rarity, creating a skill-based meta around collection knowledge while maintaining random card selection for fairness.
 
@@ -26,7 +26,7 @@ A PvP wagering game on Base blockchain where players battle using NFT-powered ca
 
 ## Overview
 
-Re-Flip NFT Battle is a simple, fast, and transparent wagering game where:
+re:match is a simple, fast, and transparent wagering game where:
 
 1. **Players create or join games** with ETH wagers
 2. **Each player receives a randomly drawn card** from a curated deck
@@ -232,7 +232,7 @@ This is pseudo-random using block data. Suitable for casual wagers but technical
 ## Project Architecture
 
 ```
-re-flip/
+re-match/
 ├── contracts/                    # Smart contracts (Foundry)
 │   └── src/
 │       ├── CoinFlip.sol         # Legacy coin flip game (deprecated)
@@ -574,7 +574,7 @@ Use:         Testing two-player flows
 
 ```bash
 git clone <repo-url>
-cd re-flip
+cd re-match
 
 # Frontend
 cd frontend && npm install

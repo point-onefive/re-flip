@@ -1,8 +1,8 @@
-# Base Coin Flip Game - Development Guide
+# Base Coin Flip Game - Development Guide (Legacy)
 
-> **Project:** Re-Flip - A two-player coin flip wagering game on Base
+> **Project:** re:match - NFT Battle wagering game on Base
 > **Generated:** February 4, 2026
-> **Based on:** 71 pages of Base documentation
+> **Note:** This guide is for the legacy CoinFlip contract. See main README for current NFTBattleV2.
 
 ---
 

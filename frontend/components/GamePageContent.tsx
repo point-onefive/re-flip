@@ -19,7 +19,7 @@ export function GamePageContent({ gameId }: GamePageContentProps) {
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
           <Link href="/" className="flex items-center gap-1 sm:gap-2 shrink-0">
             <span className="text-2xl sm:text-3xl">🪙</span>
-            <span className="text-lg sm:text-xl font-bold">Re-Flip</span>
+            <span className="text-lg sm:text-xl font-bold">re:match</span>
           </Link>
           <WalletConnect />
         </div>
