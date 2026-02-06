@@ -18,7 +18,6 @@ interface DeckMetadata {
   name: string;
   collection: string;
   description?: string;
-  getTokenURI: (tokenId: number) => string;
 }
 
 // Power tier definitions
@@ -35,14 +34,12 @@ function getTier(power: number) {
   return POWER_TIERS.find(t => power >= t.min && power <= t.max) || POWER_TIERS[5];
 }
 
-// Deck metadata with token URI patterns
+// Deck metadata (local cache only - no external API calls)
 const DECK_METADATA: Record<string, DeckMetadata> = {
   "1": {
     name: "re:generates",
     collection: "0x56dFE6ae26bf3043DC8Fdf33bF739B4fF4B3BC4A",
     description: "The re:generates collection - 200 unique NFTs with trait-based power levels. Rarer traits = higher power.",
-    getTokenURI: (tokenId: number) => 
-      `https://app.bueno.art/api/contract/JLK3PYMUlbiFqxCjWTj1F/chain/8453/metadata/${tokenId}`,
   }
 };
 
@@ -61,7 +58,6 @@ export default function DeckDetailPage() {
   const metadata = DECK_METADATA[deckId] || { 
     name: `Deck #${deckId}`, 
     collection: "Unknown",
-    getTokenURI: () => ""
   };
 
   // Load power map and cached metadata
